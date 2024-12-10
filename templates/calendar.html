@@ -15,16 +15,18 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'site.webmanifest' %}">
-    
+
 </head>
 <!-- Header Section -->
 {% include "header.html" %}
-<div class="container my-5">
-
-    <!-- Se esiste il prossimo match, mostra la card -->
+<div class="p-2 p-md-5 mb-4  text-body-emphasis" align="center" style="background-color: #630e0e;">
+    <div class="col-lg-6 px-0">
+        <h1 class="display-4 fst-italic text-white">F.C. Guardia Sanframondi</h1>
+        <p class="lead my-3"></p>
+        <!-- Se esiste il prossimo match, mostra la card -->
     {% if next_match %}
     <div class="card mb-4 shadow border-0">
-        <div class="card-header text-center text-white pompeian-red" >
+        <div class="card-header text-center text-white pompeian-red">
             <h4 class="mb-0">Prossimo Match</h4>
         </div>
         <div class="card-body text-center">
@@ -60,6 +62,11 @@
     {% else %}
     <p class="text-center text-muted">Non ci sono partite future.</p>
     {% endif %}
+    </div>
+</div>
+<div class="container my-5">
+
+    
 
     <h2 class="text-center mb-4">Calendario</h2>
     <div class="row">
