@@ -1,10 +1,12 @@
 <header class="pompeian-red">
+    {% load static %}
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg pompeian-red" >
         <div class="container-fluid">
             <!-- Logo -->
             <a class="navbar-brand" href="#">
-                <img src="your-logo.png" alt="Logo" height="40">
+                <img src="{% static 'android-chrome-512x512.png' %}" alt="Logo" height="50">
             </a>
 
             <!-- Toggler Button (for mobile) -->
@@ -113,4 +115,8 @@
         /* Per migliorare il contrasto */
     }
 </style>
+<!-- Bootstrap JS (opzionale, se hai bisogno di funzionalità JavaScript come i modali o il collapse) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+crossorigin="anonymous"></script>
 
