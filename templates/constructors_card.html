@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classifica Costruttori F1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'styles/f1.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Costruttori F1 2024</h2>
+    <div class="row">
+        {% for constructor in constructors %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white">
+                        <h5>{{ constructor.name }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Constructor ID:</strong> {{ constructor.constructorId }}</p>
+                        <p><strong>Nationalità:</strong> {{ constructor.nationality }}</p>
+                        <p><strong>Vittorie:</strong> {{ constructor.stats.wins }}</p>
+                        <p><strong>Podii:</strong> {{ constructor.stats.podiums }}</p>
+                        <p><strong>Pole Positions:</strong> {{ constructor.stats.poles }}</p>
+                        <p><strong>Campionati:</strong> {{ constructor.stats.championships }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

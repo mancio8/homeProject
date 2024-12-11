@@ -24,9 +24,17 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'calendar' %}">FC Guardia S.</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            F1
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'next_race' %}">Prossima Gara</a></li>
+                            <li><a class="dropdown-item" href="{% url 'drivers_card' %}">Statistiche piloti</a></li>
+                            <li><a class="dropdown-item" href="{% url 'homef1' %}">Classifica</a></li>
+                        </ul>
                     </li>
+                    
                     <li class="nav-item">
                         <a class="nav-link" href="#">Contact</a>
                     </li>

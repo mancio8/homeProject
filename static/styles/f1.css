@@ -1,0 +1,123 @@
+.Mercedes {
+  border: 2px solid #00d2be;
+}
+.Red {
+  border: 2px solid #1e41ff;
+}
+.Ferrari {
+  border: 2px solid #dc0000;
+}
+.McLaren {
+  border: 2px solid #ff8700;
+}
+.Aston {
+  border: 2px solid #006f62;
+}
+.Alpine {
+  border: 2px solid #0090ff;
+}
+.Sauber {
+  border: 2px solid #52e252;
+}
+.Haas {
+  border: 2px solid #d7d7d7;
+}
+.RB {
+  border: 2px solid #c8c8c8;
+}
+.Williams {
+  border: 2px solid #00bfff;
+}
+/* Colori per i piloti */
+.driver-leclerc {
+  background-color: #ffcc00; /* Giallo Ferrari */
+  color: #000; /* Testo nero */
+}
+
+.driver-sainz {
+  background-color: #dc0000; /* Rosso Ferrari */
+  color: #fff; /* Testo bianco */
+}
+
+.driver-bearman {
+  background-color: #dc0000; /* Rosso Ferrari */
+  color: #fff; /* Testo bianco */
+}
+
+/* Alpine */
+.driver-gasly,
+.driver-ocon,
+.driver-doohan {
+  background-color: #0090ff; /* Blu Alpine */
+  color: #fff;
+}
+
+/* AlphaTauri */
+.driver-tsunoda,
+.driver-ricciardo,
+.driver-lawson {
+  background-color: #2b4562; /* Blu scuro AlphaTauri */
+  color: #fff;
+}
+
+/* Williams */
+.driver-albon,
+.driver-sergeant,
+.driver-colapinto {
+  background-color: #005aff; /* Blu Williams */
+  color: #fff;
+}
+
+/* Haas */
+.driver-magnussen,
+.driver-hulkenberg {
+  background-color: #b6babd; /* Grigio Haas */
+  color: #000;
+}
+
+.driver-bottas,
+.driver-zhou {
+  background-color: #08e638; /* Rosso Alfa Romeo */
+  color: #fff;
+}
+
+/* Red Bull Racing */
+.driver-max_verstappen,
+.driver-perez {
+  background-color: #1e41ff; /* Blu Red Bull */
+  color: #fff;
+}
+
+.driver-hamilton {
+  background-color: #00d2be; /* Verde Mercedes */
+  color: #000; /* Testo nero */
+}
+.driver-russel {
+  background-color: #00d2be; /* Verde Mercedes */
+  color: #000; /* Testo nero */
+}
+
+.driver-norris {
+  background-color: #ff8700; /* Arancione McLaren */
+  color: #fff; /* Testo bianco */
+}
+
+.driver-piastri {
+  background-color: #ff8700; /* Arancione McLaren */
+  color: #fff; /* Testo bianco */
+}
+/* Aston Martin */
+.driver-alonso,
+.driver-stroll {
+  background-color: #006f62; /* Verde Aston Martin */
+  color: #fff;
+}
+
+/* Altre personalizzazioni generali */
+.table-striped tbody tr {
+  transition: background-color 0.3s;
+}
+
+.table-striped tbody tr:hover {
+  background-color: #f8f9fa;
+}
