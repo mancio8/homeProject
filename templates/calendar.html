@@ -57,6 +57,21 @@
                 <h6 class="font-weight-bold">{{ next_match.data }}</h6>
             </div>
         </div>
+        {% if next_match.weather %}
+            {% if next_match.weather.error %}
+                <p>Meteo: {{ next_match.weather.error }}</p>
+            {% else %}
+                <p>
+                    Meteo: {{ next_match.weather.description }} 
+                    ({{ next_match.weather.temperature }}°C)
+                    <img src="{{ next_match.weather.icon }}" 
+                         alt="Icona meteo" 
+                         style="vertical-align: middle;">
+                </p>
+            {% endif %}
+        {% else %}
+            <p>Meteo non disponibile</p>
+        {% endif %}
 
     </div>
     {% else %}
