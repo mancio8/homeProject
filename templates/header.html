@@ -21,9 +21,17 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'aggiungi_preferito' %}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'calendar' %}">FC Guardia S.</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            FC Guardia S.
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li> <a class="dropdown-item" href="{% url 'calendar' %}">Calendario</a></li>
+                            <li><a class="dropdown-item" href="{% url 'table_view' %}">Classifica</a></li>
+                          
+                        </ul>
                     </li>
+                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             F1

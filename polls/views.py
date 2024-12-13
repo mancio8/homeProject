@@ -147,16 +147,18 @@ def table_view(request):
     posizione = []  # Posizione in classifica
     squadra = []    # Nome della squadra
     punti = []      # Punti della squadra
+    partite = []    # Partite giocate
 
     for row in table.find_all("tr")[1:]:  # Salta l'intestazione
         cells = [cell.text.strip() for cell in row.find_all("td")]
-        if len(cells) >= 3:
+        if len(cells) >= 4:  # Assicurati che ci siano abbastanza celle
             posizione.append(cells[0])  # Posizione
             squadra.append(cells[1])    # Nome squadra
             punti.append(cells[2])      # Punti
+            partite.append(cells[3])    # Partite giocate
 
     # Combina i dati in un'unica lista di tuple
-    classifiche = list(zip(posizione, squadra, punti))
+    classifiche = list(zip(posizione, squadra, punti, partite))
     
     # Controllo del formato richiesto (HTML o CSV)
     formato = request.GET.get("format", "html")
@@ -173,3 +175,4 @@ def table_view(request):
     
     # Rendi i dati disponibili al template
     return render(request, "table_view.html", {"classifiche": classifiche})
+
