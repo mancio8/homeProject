@@ -144,12 +144,19 @@ def table_view(request):
     # Estrai i dati della tabella
     headers = [header.text.strip() for header in table.find_all("th")]
     rows = []
+    posizione = []  # Posizione in classifica
+    squadra = []    # Nome della squadra
+    punti = []      # Punti della squadra
+
     for row in table.find_all("tr")[1:]:  # Salta l'intestazione
         cells = [cell.text.strip() for cell in row.find_all("td")]
-        rows.append(cells)
-    
-    # Preparazione dei dati per il template
-    classifiche = {"headers": headers, "rows": rows}
+        if len(cells) >= 3:
+            posizione.append(cells[0])  # Posizione
+            squadra.append(cells[1])    # Nome squadra
+            punti.append(cells[2])      # Punti
+
+    # Combina i dati in un'unica lista di tuple
+    classifiche = list(zip(posizione, squadra, punti))
     
     # Controllo del formato richiesto (HTML o CSV)
     formato = request.GET.get("format", "html")
