@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classifiche F1</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'styles/f1.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    {% include "header.html" %}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title">Riepilogo Ferie e Permessi</h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h5>Dati Annuali</h5>
+                        <p><strong>Ferie totali all'anno:</strong> {{ ferie_totali_annuali }} ore</p>
+                        <p><strong>Permessi totali all'anno:</strong> {{ permessi_totali_annuali }} ore</p>
+                    </div>
+
+                    <hr>
+
+                    <div class="mb-4">
+                        <h5>Ferie e Permessi Utilizzati</h5>
+                        <p><strong>Ferie godute:</strong> {{ data.ferie_godute }} ore</p>
+                        <p><strong>Permessi goduti:</strong> {{ data.permessi_goduti }} ore</p>
+                    </div>
+
+                    <hr>
+
+                    <h4>Aggiungi Ore</h4>
+                    <form method="post" class="mt-3">
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="id_tipo" class="form-label">Tipo di ore</label>
+                                {{ form.tipo }}
+                            </div>
+                            <div class="col-md-6">
+                                <label for="id_ore" class="form-label">Ore</label>
+                                {{ form.ore }}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success mt-3">Aggiungi</button>
+                    </form>
+
+                    <hr>
+
+                    <h4>Reset</h4>
+                    <form action="{% url 'reset_ferie_permessi' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Reset Ferie e Permessi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

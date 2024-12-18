@@ -8,6 +8,9 @@ from datetime import datetime
 import requests
 from bs4 import BeautifulSoup
 import csv
+from django import forms
+from .forms import AggiungiOreForm
+
 
 # Percorso al file JSON
 JSON_FILE_PATH = 'data/preferiti.json'
@@ -173,3 +176,60 @@ def table_view(request):
     
     # Rendi i dati disponibili al template
     return render(request, "table_view.html", {"classifiche": classifiche})
+
+
+# Percorso del file JSON
+JSON_FILE = 'data/ferie_data.json'
+
+# Funzione per leggere i dati dal file JSON
+def read_ferie_data():
+    try:
+        with open(JSON_FILE, 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {"ferie_godute": 0, "permessi_goduti": 0}
+
+# Funzione per scrivere i dati nel file JSON
+def write_ferie_data(data):
+    with open(JSON_FILE, 'w') as f:
+        json.dump(data, f)
+
+# Riepilogo ferie e permessi
+def riepilogo_ferie_permessi(request):
+    data = read_ferie_data()
+
+    # Dati annuali calcolati
+    ferie_totali_annuali = 14.4 * 12  # 14.4 ore al mese
+    permessi_totali_annuali = 4.66 * 12  # 4.66 ore al mese
+
+    if request.method == 'POST':
+        form = AggiungiOreForm(request.POST)
+        if form.is_valid():
+            tipo = form.cleaned_data['tipo']
+            ore = form.cleaned_data['ore']
+
+            if tipo == 'ferie':
+                data['ferie_godute'] += ore
+            elif tipo == 'permessi':
+                data['permessi_goduti'] += ore
+
+            write_ferie_data(data)
+            return redirect('riepilogo')
+    else:
+        form = AggiungiOreForm()
+
+    return render(request, 'riepilogo.html', {
+        'data': data,
+        'ferie_totali_annuali': ferie_totali_annuali,
+        'permessi_totali_annuali': permessi_totali_annuali,
+        'form': form
+    })
+
+# Reset ferie e permessi
+def reset_ferie_permessi(request):
+    data = {
+        "ferie_godute": 0,
+        "permessi_goduti": 0
+    }
+    write_ferie_data(data)
+    return redirect('riepilogo')
