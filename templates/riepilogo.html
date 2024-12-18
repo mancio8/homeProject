@@ -5,9 +5,25 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classifiche F1</title>
+    <title>Riepilog Ferie</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{% static 'styles/f1.css' %}" rel="stylesheet">
+    <style>
+        @media print {
+    body {
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+    }
+
+    .btn {
+        display: none; /* Nascondi i bottoni durante la stampa */
+    }
+
+    #riepilogo {
+        margin-top: 20px;
+    }
+}
+
+    </style>
 </head>
 
 <body>
@@ -23,8 +39,8 @@
                 <div class="card-body">
                     <div class="mb-4">
                         <h5>Dati Annuali</h5>
-                        <p><strong>Ferie totali all'anno:</strong> {{ ferie_totali_annuali }} ore</p>
-                        <p><strong>Permessi totali all'anno:</strong> {{ permessi_totali_annuali }} ore</p>
+                        <p><strong>Ferie totali all'anno:</strong> {{ ferie_totali_annuali_ore }} ore / {{ ferie_totali_annuali_giorni }} giorni</p>
+                        <p><strong>Permessi totali all'anno:</strong> {{ permessi_totali_annuali_ore }} ore / {{ permessi_totali_annuali_giorni }} giorni</p>
                     </div>
 
                     <hr>
@@ -34,7 +50,12 @@
                         <p><strong>Ferie godute:</strong> {{ data.ferie_godute }} ore</p>
                         <p><strong>Permessi goduti:</strong> {{ data.permessi_goduti }} ore</p>
                     </div>
+                    <div class="mb-4">
+                        <h5>Ferie Rimanenti</h5>
+                            <p>Ferie rimanenti: {{ ferie_rimanenti_giorni|floatformat:2 }} giorni</p>
+                            <p>Permessi rimanenti: {{ permessi_rimanenti_giorni|floatformat:2 }} giorni</p>
 
+                    </div>
                     <hr>
 
                     <h4>Aggiungi Ore</h4>
@@ -60,12 +81,23 @@
                         {% csrf_token %}
                         <button type="submit" class="btn btn-danger">Reset Ferie e Permessi</button>
                     </form>
+                    
+                </div>
+                <div class="card-footer">
+                    <form method="post" action="{% url 'esporta_pdf' %}">
+                        {% csrf_token %}
+                        <a href="{% url 'esporta_pdf' %}" class="btn btn-primary">Esporta in PDF</a>
+
+                    </form>
+                    
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+
 </body>
 </html>

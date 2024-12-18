@@ -10,6 +10,8 @@ from bs4 import BeautifulSoup
 import csv
 from django import forms
 from .forms import AggiungiOreForm
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 
 # Percorso al file JSON
@@ -201,8 +203,19 @@ def riepilogo_ferie_permessi(request):
     data = read_ferie_data()
 
     # Dati annuali calcolati
-    ferie_totali_annuali = 14.4 * 12  # 14.4 ore al mese
-    permessi_totali_annuali = 4.66 * 12  # 4.66 ore al mese
+    ferie_totali_annuali_ore = 14.4 * 12  # 14.4 ore al mese
+    permessi_totali_annuali_ore = 4.66 * 12  # 4.66 ore al mese
+
+    # Converto le ferie totali annuali in giorni (8 ore per giorno lavorativo)
+    ferie_totali_annuali_giorni = ferie_totali_annuali_ore / 8
+    permessi_totali_annuali_giorni = permessi_totali_annuali_ore / 8
+
+    ferie_rimanenti_ore = ferie_totali_annuali_ore - data['ferie_godute']
+    permessi_rimanenti_ore = permessi_totali_annuali_ore - data['permessi_goduti']
+
+    # Conversione in giorni
+    ferie_rimanenti_giorni = ferie_rimanenti_ore / 8
+    permessi_rimanenti_giorni = permessi_rimanenti_ore / 8
 
     if request.method == 'POST':
         form = AggiungiOreForm(request.POST)
@@ -222,10 +235,15 @@ def riepilogo_ferie_permessi(request):
 
     return render(request, 'riepilogo.html', {
         'data': data,
-        'ferie_totali_annuali': ferie_totali_annuali,
-        'permessi_totali_annuali': permessi_totali_annuali,
+        'ferie_totali_annuali_ore': ferie_totali_annuali_ore,
+        'permessi_totali_annuali_ore': permessi_totali_annuali_ore,
+        'ferie_totali_annuali_giorni': ferie_totali_annuali_giorni,
+        'permessi_totali_annuali_giorni': permessi_totali_annuali_giorni,
+        'ferie_rimanenti_giorni' : ferie_rimanenti_giorni,
+        'permessi_rimanenti_giorni' : permessi_rimanenti_giorni,
         'form': form
     })
+
 
 # Reset ferie e permessi
 def reset_ferie_permessi(request):
@@ -235,3 +253,33 @@ def reset_ferie_permessi(request):
     }
     write_ferie_data(data)
     return redirect('riepilogo')
+
+
+def esporta_pdf(request):
+    # Crea una risposta HTTP con il contenuto PDF
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="riepilogo_ferie_permessi.pdf"'
+
+    # Crea un canvas PDF
+    c = canvas.Canvas(response, pagesize=letter)
+    width, height = letter  # Dimensioni pagina
+
+    # Dati
+    data = read_ferie_data()
+    ferie_totali_annuali_ore = 14.4 * 12
+    permessi_totali_annuali_ore = 4.66 * 12
+    ferie_godute_ore = data.get('ferie_godute', 0)
+    permessi_goduti_ore = data.get('permessi_goduti', 0)
+    ferie_rimanenti_ore = ferie_totali_annuali_ore - ferie_godute_ore
+    permessi_rimanenti_ore = permessi_totali_annuali_ore - permessi_goduti_ore
+
+    # Scrivi i dati nel PDF
+    c.drawString(100, height - 100, f"Riepilogo Ferie e Permessi")
+    c.drawString(100, height - 120, f"Ferie Utilizzate: {ferie_godute_ore} ore ({ferie_godute_ore / 8:.2f} giorni)")
+    c.drawString(100, height - 140, f"Permessi Utilizzati: {permessi_goduti_ore} ore ({permessi_goduti_ore / 8:.2f} giorni)")
+    c.drawString(100, height - 160, f"Ferie Rimanenti: {ferie_rimanenti_ore:.2f} ore ({ferie_rimanenti_ore / 8:.2f} giorni)")
+    c.drawString(100, height - 180, f"Permessi Rimanenti: {permessi_rimanenti_ore:.2f} ore ({permessi_rimanenti_ore / 8:.2f} giorni)")
+
+    # Salva e restituisci il PDF
+    c.save()
+    return response
