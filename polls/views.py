@@ -203,8 +203,8 @@ def riepilogo_ferie_permessi(request):
     data = read_ferie_data()
 
     # Dati annuali calcolati
-    ferie_totali_annuali_ore = 14.4 * 12  # 14.4 ore al mese
-    permessi_totali_annuali_ore = 4.66 * 12  # 4.66 ore al mese
+    ferie_totali_annuali_ore = 14.6 * 12  # 14.4 ore al mese
+    permessi_totali_annuali_ore = 5.33 * 12  # 4.66 ore al mese
 
     # Converto le ferie totali annuali in giorni (8 ore per giorno lavorativo)
     ferie_totali_annuali_giorni = ferie_totali_annuali_ore / 8
