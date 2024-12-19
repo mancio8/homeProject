@@ -266,8 +266,8 @@ def esporta_pdf(request):
 
     # Dati
     data = read_ferie_data()
-    ferie_totali_annuali_ore = 14.4 * 12
-    permessi_totali_annuali_ore = 4.66 * 12
+    ferie_totali_annuali_ore = 14.6 * 12
+    permessi_totali_annuali_ore = 5.33 * 12
     ferie_godute_ore = data.get('ferie_godute', 0)
     permessi_goduti_ore = data.get('permessi_goduti', 0)
     ferie_rimanenti_ore = ferie_totali_annuali_ore - ferie_godute_ore
