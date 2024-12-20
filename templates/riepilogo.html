@@ -79,7 +79,27 @@
                         
 
                     </div>
-
+                    <div class="container mt-4">
+                        <h4>Richiesta di Ferie</h4>
+                        <form>
+                    
+                            <!-- Data Inizio Ferie -->
+                            <div class="mb-3">
+                                <label for="data_inizio" class="form-label">Data inizio ferie</label>
+                                <input type="date" id="data_inizio" name="data_inizio" class="form-control" required>
+                            </div>
+                    
+                            <!-- Data Fine Ferie -->
+                            <div class="mb-3">
+                                <label for="data_fine" class="form-label">Data fine ferie</label>
+                                <input type="date" id="data_fine" name="data_fine" class="form-control" required>
+                            </div>
+                    
+                            <!-- Pulsante per Compilare la Richiesta -->
+                            <button type="button" id="compila_automaticamente" class="btn btn-primary">Compila automaticamente la richiesta</button>
+                    
+                        </form>
+                    </div>
 
 
                     <div class="card-footer">
@@ -144,7 +164,38 @@
 
     </div>
 
+<script>
+    document.getElementById('compila_automaticamente').addEventListener('click', function() {
+    // Recupero le date selezionate
+    var dataInizio = document.getElementById('data_inizio').value;
+    var dataFine = document.getElementById('data_fine').value;
+    
+    // Se le date sono selezionate
+    if (dataInizio && dataFine) {
+        // Crea il testo per la richiesta di ferie
+        var richiestaFerie = `Buongiorno,\n\nRichiedo ferie dal ${new Date(dataInizio).toLocaleDateString('it-IT')} al ${new Date(dataFine).toLocaleDateString('it-IT')}.\n\nGrazie per l'approvazione.\n\nVincenzo Mancinelli.`;
 
+        // Copia negli appunti
+        var textarea = document.createElement('textarea');
+        textarea.value = richiestaFerie;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+
+        // Notifica che la richiesta è stata copiata negli appunti
+        alert("La richiesta di ferie è stata copiata negli appunti!");
+
+        // Facoltativo: apri direttamente la mail
+        var mailtoLink = `mailto:g.ruggiero@soes.it?subject=Request%20Ferie&body=${encodeURIComponent(richiestaFerie)}&cc=w.miotto@soes.it`;
+
+        window.location.href = mailtoLink;
+    } else {
+        alert("Per favore seleziona le date di inizio e fine ferie.");
+    }
+});
+
+</script>
 
 </body>
 
