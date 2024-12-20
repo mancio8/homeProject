@@ -58,51 +58,47 @@
                         </div>
                         <hr>
 
-                        <h4>Aggiungi Ore</h4>
-                        <form method="post" class="mt-3">
-                            {% csrf_token %}
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="id_tipo" class="form-label">Tipo di ore</label>
-                                    {{ form.tipo }}
+                       
+                        <div class="container mt-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4>Aggiungi Ore</h4>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="id_ore" class="form-label">Ore</label>
-                                    {{ form.ore }}
+                                <div class="card-body">
+                                    <form method="post" class="mt-3">
+                                        {% csrf_token %}
+                                        <div class="row g-3">
+                                            <div class="col-md-6">
+                                                <label for="id_tipo" class="form-label">Tipo di ore</label>
+                                                <select id="id_tipo" name="tipo" class="form-select" required>
+                                                    
+                                                    <option value="ferie" selected>Ferie</option>
+                                                    <option value="permessi">Permessi</option>
+                                                   
+                                                    <!-- Aggiungi altre opzioni se necessario -->
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="id_ore" class="form-label">Ore</label>
+                                                <input type="number" id="id_ore" name="ore" class="form-control" required min="0">
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-success mt-3">Aggiungi</button>
+                                    </form>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-success mt-3">Aggiungi</button>
-                        </form>
-
+                        </div>
                         
 
                         
+                      
+                        
 
                     </div>
-                    <div class="container mt-4">
-                        <h4>Richiesta di Ferie</h4>
-                        <form>
-                    
-                            <!-- Data Inizio Ferie -->
-                            <div class="mb-3">
-                                <label for="data_inizio" class="form-label">Data inizio ferie</label>
-                                <input type="date" id="data_inizio" name="data_inizio" class="form-control" required>
-                            </div>
-                    
-                            <!-- Data Fine Ferie -->
-                            <div class="mb-3">
-                                <label for="data_fine" class="form-label">Data fine ferie</label>
-                                <input type="date" id="data_fine" name="data_fine" class="form-control" required>
-                            </div>
-                    
-                            <!-- Pulsante per Compilare la Richiesta -->
-                            <button type="button" id="compila_automaticamente" class="btn btn-primary">Compila automaticamente la richiesta</button>
-                    
-                        </form>
-                    </div>
+                   
 
 
-                    <div class="card-footer">
+                    <div class="card-footer mt-2">
                         <div class="d-flex justify-content-between align-items-center ">
                             <div>
                                
@@ -126,6 +122,33 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-md-8 offset-md-2 mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Richiesta di Ferie</h4>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <!-- Data Inizio Ferie -->
+                        <div class="mb-3">
+                            <label for="data_inizio" class="form-label">Data inizio ferie</label>
+                            <input type="date" id="data_inizio" name="data_inizio" class="form-control" required>
+                        </div>
+                
+                        <!-- Data Fine Ferie -->
+                        <div class="mb-3">
+                            <label for="data_fine" class="form-label">Data fine ferie</label>
+                            <input type="date" id="data_fine" name="data_fine" class="form-control" required>
+                        </div>
+                
+                        <!-- Pulsante per Compilare la Richiesta -->
+                        <button type="button" id="compila_automaticamente" class="btn btn-primary">Compila automaticamente la richiesta</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         <div class="row py-4">
             <div class="col-md-8 offset-md-2">
                 <div class="card shadow">
