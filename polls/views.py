@@ -4,7 +4,7 @@ import json
 from django.conf import settings
 from django.utils import timezone
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 import requests
 from bs4 import BeautifulSoup
 import csv
@@ -217,6 +217,27 @@ def riepilogo_ferie_permessi(request):
     ferie_rimanenti_giorni = ferie_rimanenti_ore / 8
     permessi_rimanenti_giorni = permessi_rimanenti_ore / 8
 
+    # Elenco delle festività del 2025
+    festivita = [
+        {"nome": "Capodanno", "data": datetime(2025, 1, 1)},
+        {"nome": "Epifania", "data": datetime(2025, 1, 6)},
+        {"nome": "Pasqua", "data": datetime(2025, 4, 20)},
+        {"nome": "Pasquetta", "data": datetime(2025, 4, 21)},
+        {"nome": "Festa della Liberazione", "data": datetime(2025, 4, 25)},
+        {"nome": "Festa del Lavoro", "data": datetime(2025, 5, 1)},
+        {"nome": "Festa della Repubblica", "data": datetime(2025, 6, 2)},
+        {"nome": "Ferragosto", "data": datetime(2025, 8, 15)},
+        {"nome": "Ognissanti", "data": datetime(2025, 11, 1)},
+        {"nome": "Immacolata Concezione", "data": datetime(2025, 12, 8)},
+        {"nome": "Natale", "data": datetime(2025, 12, 25)},
+        {"nome": "Santo Stefano", "data": datetime(2025, 12, 26)},
+    ]
+
+    # Aggiungi l'indicazione dei ponti
+    for festa in festivita:
+        giorno_settimana = festa["data"].weekday()  # 0=Lunedì, 1=Martedì, ..., 6=Domenica
+        festa["ponte"] = giorno_settimana in [1, 3]  # Ponte se Martedì o Giovedì
+
     if request.method == 'POST':
         form = AggiungiOreForm(request.POST)
         if form.is_valid():
@@ -239,9 +260,10 @@ def riepilogo_ferie_permessi(request):
         'permessi_totali_annuali_ore': permessi_totali_annuali_ore,
         'ferie_totali_annuali_giorni': ferie_totali_annuali_giorni,
         'permessi_totali_annuali_giorni': permessi_totali_annuali_giorni,
-        'ferie_rimanenti_giorni' : ferie_rimanenti_giorni,
-        'permessi_rimanenti_giorni' : permessi_rimanenti_giorni,
-        'form': form
+        'ferie_rimanenti_giorni': ferie_rimanenti_giorni,
+        'permessi_rimanenti_giorni': permessi_rimanenti_giorni,
+        'form': form,
+        'festivita': festivita,  # Aggiungi le festività al contesto
     })
 
 
