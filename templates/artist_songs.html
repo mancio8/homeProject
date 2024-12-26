@@ -1,36 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artisti e Canzoni</title>
+    <title>Karaoke</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Optional Custom Styles -->
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'fapple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'site.webmanifest' %}">
+
 </head>
-<body>
-    <h1>Artisti e Canzoni</h1>
+<!-- Header Section -->
+{% include "header.html" %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Artisti e Canzoni</h1>
 
-    <!-- Form di ricerca -->
-    <form method="get" action="">
-        <input type="text" name="q" placeholder="Cerca canzoni..." value="{{ query }}">
-        <button type="submit">Cerca</button>
-    </form>
+        <!-- Form di ricerca -->
+        <form method="get" action="" class="d-flex mb-4">
+            <input type="text" name="q" class="form-control me-2" placeholder="Cerca canzoni..." value="{{ query }}">
+            <button type="submit" class="btn btn-primary">Cerca</button>
+        </form>
 
-    <hr>
+        <hr>
 
-    <!-- Mostra i risultati -->
-    {% if artist_songs %}
-        {% for file_name, artists in artist_songs.items %}
-            <h2>File JSON: {{ file_name }}</h2>
-            {% for artist, songs in artists.items %}
-                <h3>{{ artist }}</h3>
-                <ul>
-                    {% for song in songs %}
-                        <li>{{ song }}</li>
-                    {% endfor %}
-                </ul>
-            {% endfor %}
-        {% endfor %}
-    {% else %}
-        <p>Nessun risultato trovato per "{{ query }}".</p>
-    {% endif %}
+        <!-- Mostra i risultati -->
+        {% if artist_songs %}
+            <div class="accordion" id="artistAccordion">
+                {% for file_name, artists in artist_songs.items %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading-{{ file_name|slugify }}">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ file_name|slugify }}" aria-expanded="true" aria-controls="collapse-{{ file_name|slugify }}">
+                                File JSON: {{ file_name }}
+                            </button>
+                        </h2>
+                        <div id="collapse-{{ file_name|slugify }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ file_name|slugify }}" data-bs-parent="#artistAccordion">
+                            <div class="accordion-body">
+                                {% for artist, songs in artists.items %}
+                                    <h5 class="mt-3">{{ artist }}</h5>
+                                    <ul class="list-group">
+                                        {% for song in songs %}
+                                            <li class="list-group-item">{{ song }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="text-danger">Nessun risultato trovato per "{{ query }}".</p>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS -->
+    
 </body>
 </html>
