@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisti e Canzoni</title>
+</head>
+<body>
+    <h1>Artisti e Canzoni</h1>
+
+    <!-- Form di ricerca -->
+    <form method="get" action="">
+        <input type="text" name="q" placeholder="Cerca canzoni..." value="{{ query }}">
+        <button type="submit">Cerca</button>
+    </form>
+
+    <hr>
+
+    <!-- Mostra i risultati -->
+    {% if artist_songs %}
+        {% for file_name, artists in artist_songs.items %}
+            <h2>File JSON: {{ file_name }}</h2>
+            {% for artist, songs in artists.items %}
+                <h3>{{ artist }}</h3>
+                <ul>
+                    {% for song in songs %}
+                        <li>{{ song }}</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+        {% endfor %}
+    {% else %}
+        <p>Nessun risultato trovato per "{{ query }}".</p>
+    {% endif %}
+</body>
+</html>

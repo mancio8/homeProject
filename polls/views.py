@@ -12,6 +12,7 @@ from django import forms
 from .forms import AggiungiOreForm
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+import os
 
 
 # Percorso al file JSON
@@ -305,3 +306,40 @@ def esporta_pdf(request):
     # Salva e restituisci il PDF
     c.save()
     return response
+
+
+def artist_songs_view(request):
+    # Cartella in cui si trovano i file JSON
+    json_folder = 'data/karaoke/'
+
+    # Carica i dati mantenendo separati i file JSON
+    json_data = {}
+    for file_name in os.listdir(json_folder):
+        if file_name.endswith('.json'):
+            file_path = os.path.join(json_folder, file_name)
+            with open(file_path, 'r', encoding='utf-8') as file:
+                json_data[file_name] = json.load(file)
+
+    # Ottieni il parametro di ricerca
+    query = request.GET.get('q', '')
+
+    # Filtra i risultati se è presente una query
+    filtered_songs = {}
+    if query:
+        for file_name, data in json_data.items():
+            for artist, songs in data.items():
+                # Cerca parzialmente nei titoli delle canzoni
+                matched_songs = [song for song in songs if query.lower() in song.lower()]
+                if matched_songs:
+                    if file_name not in filtered_songs:
+                        filtered_songs[file_name] = {}
+                    filtered_songs[file_name][artist] = matched_songs
+    else:
+        # Se non c'è una query, carica tutti i dati
+        filtered_songs = json_data
+
+    # Passa i dati al template
+    return render(request, 'artist_songs.html', {
+        'artist_songs': filtered_songs,
+        'query': query,
+    })
