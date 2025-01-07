@@ -1,0 +1,85 @@
+<!-- add_and_view_books.html -->
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Libri</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'styles/f1.css' %}" rel="stylesheet">
+
+
+    <style>
+        /* Aggiungi questa classe nel tuo file CSS */
+        .card-img-top-custom {
+            width: 128px;
+            height: 173px;
+            object-fit: cover;
+            margin: 0 auto;
+            /* Centra orizzontalmente */
+            display: block;
+            /* Assicurati che l'immagine sia un blocco per applicare il margin */
+        }
+    </style>
+
+
+</head>
+
+<body>
+    {% include "header.html" %}
+    <h1 class="text-center my-5">Libri LettI</h1>
+
+    <div class="container">
+        <!-- Modulo per aggiungere un nuovo libro -->
+        <form method="POST" action="{% url 'view_books' %}">
+            {% csrf_token %}
+            <div class="card shadow-lg mb-4">
+                <div class="card-body">
+                    <h5 class="card-title text-center mb-4">Aggiungi un Libro</h5>
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Titolo</label>
+                        <input type="text" class="form-control" id="title" name="title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="author" class="form-label">Autore</label>
+                        <input type="text" class="form-control" id="author" name="author" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="read_date" class="form-label">Data di Lettura</label>
+                        <input type="date" class="form-control" id="read_date" name="read_date" required>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg">Aggiungi</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <hr class="my-4">
+
+        <!-- Visualizzazione dei libri letti -->
+        <h2 class="text-center my-4">Libri LettI</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for book in books %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="{{ book.cover }}" class="card-img-top-custom" alt="Copertina">
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <p class="card-text"><strong>Autore:</strong> {{ book.author }}</p>
+                        <p class="card-text"><strong>Data di Lettura:</strong> {{ book.read_date }}</p>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">Non ci sono libri da visualizzare.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

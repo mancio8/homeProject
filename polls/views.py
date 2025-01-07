@@ -343,3 +343,59 @@ def artist_songs_view(request):
         'artist_songs': filtered_songs,
         'query': query,
     })
+
+def get_book_cover(title, author):
+    query = f"{title} {author}"
+    url = f"https://www.googleapis.com/books/v1/volumes?q={query}"
+    response = requests.get(url)
+    data = response.json()
+
+    if 'items' in data:
+        for item in data['items']:
+            if 'imageLinks' in item['volumeInfo']:
+                return item['volumeInfo']['imageLinks']['thumbnail']
+
+    return None
+
+
+
+
+
+
+def add_and_view_books(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        author = request.POST['author']
+        read_date = request.POST['read_date']
+
+        cover_url = get_book_cover(title, author)
+
+        book = {
+            'title': title,
+            'author': author,
+            'read_date': read_date,
+            'cover': cover_url if cover_url else 'URL non disponibile'
+        }
+
+        # Aggiungi il libro al file JSON
+        try:
+            with open('data/books.json', 'r') as file:
+                books = json.load(file)
+        except FileNotFoundError:
+            books = []
+
+        books.append(book)
+
+        with open('data/books.json', 'w') as file:
+            json.dump(books, file, indent=4)
+
+        return redirect('view_books')  # Dopo aver aggiunto il libro, ricarica la pagina
+
+    # Carica i libri dal file JSON per la visualizzazione
+    try:
+        with open('data/books.json', 'r') as file:
+            books = json.load(file)
+    except FileNotFoundError:
+        books = []
+
+    return render(request, 'view_books.html', {'books': books})
