@@ -363,6 +363,7 @@ def get_book_cover(title, author):
 
 
 def add_and_view_books(request):
+    # Gestione del POST per aggiungere un libro
     if request.method == 'POST':
         title = request.POST['title']
         author = request.POST['author']
@@ -398,4 +399,15 @@ def add_and_view_books(request):
     except FileNotFoundError:
         books = []
 
-    return render(request, 'view_books.html', {'books': books})
+    # Ottieni il parametro di ordinamento dalla richiesta (default 'title')
+    sort_by = request.GET.get('sort_by', 'title')
+
+    # Ordina i libri in base al parametro 'sort_by'
+    if sort_by == 'title':
+        books.sort(key=lambda x: x['title'])
+    elif sort_by == 'author':
+        books.sort(key=lambda x: x['author'])
+    elif sort_by == 'read_date':
+        books.sort(key=lambda x: x['read_date'])
+
+    return render(request, 'view_books.html', {'books': books, 'sort_by': sort_by})

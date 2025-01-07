@@ -60,25 +60,44 @@
 
         <hr class="my-4">
 
-        <!-- Visualizzazione dei libri letti -->
-        <h2 class="text-center my-4">Libri LettI</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for book in books %}
-            <div class="col">
-                <div class="card shadow-sm">
-                    <img src="{{ book.cover }}" class="card-img-top-custom" alt="Copertina">
+        <h1 class="text-center my-4">Libri Letti</h1>
 
-                    <div class="card-body">
-                        <h5 class="card-title">{{ book.title }}</h5>
-                        <p class="card-text"><strong>Autore:</strong> {{ book.author }}</p>
-                        <p class="card-text"><strong>Data di Lettura:</strong> {{ book.read_date }}</p>
-                    </div>
+<div class="container">
+    <!-- Form per ordinare i libri -->
+    <form method="GET" action="{% url 'view_books' %}">
+        {% csrf_token %}
+        <div class="mb-4">
+            <label for="sort-books" class="form-label">Ordina per:</label>
+            <select id="sort-books" name="sort_by" class="form-select" onchange="this.form.submit()">
+                <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Titolo</option>
+                <option value="author" {% if sort_by == 'author' %}selected{% endif %}>Autore</option>
+                <option value="read_date" {% if sort_by == 'read_date' %}selected{% endif %}>Data di Lettura</option>
+            </select>
+        </div>
+    </form>
+
+    <hr>
+
+   
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for book in books %}
+        <div class="col">
+            <div class="card shadow-sm">
+                <img src="{{ book.cover }}" class="card-img-top-custom" alt="Copertina">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text"><strong>Autore:</strong> {{ book.author }}</p>
+                    <p class="card-text"><strong>Data di Lettura:</strong> {{ book.read_date }}</p>
                 </div>
             </div>
-            {% empty %}
-            <p class="text-center">Non ci sono libri da visualizzare.</p>
-            {% endfor %}
         </div>
+        {% empty %}
+        <p class="text-center">Non ci sono libri da visualizzare.</p>
+        {% endfor %}
+    </div>
+</div>
+
     </div>
 </body>
 
