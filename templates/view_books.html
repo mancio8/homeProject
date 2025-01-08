@@ -62,41 +62,93 @@
 
         <h1 class="text-center my-4">Libri Letti</h1>
 
-<div class="container">
-    <!-- Form per ordinare i libri -->
-    <form method="GET" action="{% url 'view_books' %}">
-        {% csrf_token %}
-        <div class="mb-4">
-            <label for="sort-books" class="form-label">Ordina per:</label>
-            <select id="sort-books" name="sort_by" class="form-select" onchange="this.form.submit()">
-                <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Titolo</option>
-                <option value="author" {% if sort_by == 'author' %}selected{% endif %}>Autore</option>
-                <option value="read_date" {% if sort_by == 'read_date' %}selected{% endif %}>Data di Lettura</option>
-            </select>
-        </div>
-    </form>
+        <div class="container">
+            <!-- Form per ordinare i libri -->
+            <form method="GET" action="{% url 'view_books' %}">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="sort-books" class="form-label">Ordina per:</label>
+                    <select id="sort-books" name="sort_by" class="form-select" onchange="this.form.submit()">
+                        <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Titolo</option>
+                        <option value="author" {% if sort_by == 'author' %}selected{% endif %}>Autore</option>
+                        <option value="read_date" {% if sort_by == 'read_date' %}selected{% endif %}>Data di Lettura
+                        </option>
+                    </select>
+                </div>
+            </form>
 
-    <hr>
+            <hr>
 
-   
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for book in books %}
-        <div class="col">
-            <div class="card shadow-sm">
-                <img src="{{ book.cover }}" class="card-img-top-custom" alt="Copertina">
 
-                <div class="card-body">
-                    <h5 class="card-title">{{ book.title }}</h5>
-                    <p class="card-text"><strong>Autore:</strong> {{ book.author }}</p>
-                    <p class="card-text"><strong>Data di Lettura:</strong> {{ book.read_date }}</p>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for book in books %}
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="{{ book.cover }}" class="card-img-top-custom" alt="Copertina">
+
+                        <div class="card-body">
+                            <h5 class="card-title">{{ book.title }}</h5>
+                            <p class="card-text"><strong>Autore:</strong> {{ book.author }}</p>
+                            <p class="card-text"><strong>Data di Lettura:</strong> {{ book.read_date }}</p>
+                            
+                            <!-- Pulsante per aprire il Modale di modifica -->
+                            <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                    data-bs-target="#editModal{{ book.title|slugify }}">
+                                Modifica
+                            </button>
+                            <!-- Pulsante per eliminare il libro -->
+                <form action="{% url 'delete_book' book.title %}" method="post" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Sei sicuro di voler eliminare questo libro?')">Elimina</button>
+                </form>
+
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center">Non ci sono libri da visualizzare.</p>
+                {% endfor %}
+            </div>
+            <!-- Modale di modifica del libro -->
+            {% for book in books %}
+            <div class="modal fade" id="editModal{{ book.title|slugify }}" tabindex="-1"
+                aria-labelledby="editModalLabel{{ book.title|slugify }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel{{ book.title|slugify }}">Modifica il libro "{{ book.title }}"
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Form di modifica -->
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="title" value="{{ book.title }}">
+                                <img src="{{ book.cover }}" class="card-img-top-custom" alt="Copertina">
+                                <label for="author">Autore</label>
+                                <input type="text" class="form-control" id="author" name="author" value="{{ book.author }}"
+                                    required>
+
+                                <label for="read_date">Data di lettura</label>
+                                <input type="date" class="form-control" id="read_date" name="read_date" value="{{ book.read_date }}"
+                                    required>
+
+                                <label for="cover_url">URL Copertina (Immagine)</label>
+                                <input type="text" class="form-control" id="cover_url" name="cover_url" value="{{ book.cover }}">
+
+                                <button type="submit" name="edit_book" class="btn btn-primary">Salva modifiche</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
+            {% endfor %}
+
+
         </div>
-        {% empty %}
-        <p class="text-center">Non ci sono libri da visualizzare.</p>
-        {% endfor %}
-    </div>
-</div>
+
+
 
     </div>
 </body>

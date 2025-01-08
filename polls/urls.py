@@ -13,4 +13,5 @@ urlpatterns = [
     path('esporta_pdf/', views.esporta_pdf, name='esporta_pdf'),
     path('artisti/', views.artist_songs_view, name='artist_songs'),
     path('libri/', views.add_and_view_books, name='view_books'),
+    path('delete/<str:title>/', views.delete_book, name='delete_book'),
 ]

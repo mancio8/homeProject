@@ -363,8 +363,8 @@ def get_book_cover(title, author):
 
 
 def add_and_view_books(request):
-    # Gestione del POST per aggiungere un libro
-    if request.method == 'POST':
+    # Aggiungi il libro
+    if request.method == 'POST' and 'add_book' in request.POST:
         title = request.POST['title']
         author = request.POST['author']
         read_date = request.POST['read_date']
@@ -390,16 +390,41 @@ def add_and_view_books(request):
         with open('data/books.json', 'w') as file:
             json.dump(books, file, indent=4)
 
-        return redirect('view_books')  # Dopo aver aggiunto il libro, ricarica la pagina
+    # Modifica il libro
+    elif request.method == 'POST' and 'edit_book' in request.POST:
+        title = request.POST['title']
+        author = request.POST['author']
+        read_date = request.POST['read_date']
+        cover_url = request.POST['cover_url']
 
-    # Carica i libri dal file JSON per la visualizzazione
+        # Carica i libri dal file JSON
+        try:
+            with open('data/books.json', 'r') as file:
+                books = json.load(file)
+        except FileNotFoundError:
+            books = []
+
+        # Trova il libro da modificare
+        book_to_edit = next((book for book in books if book['title'] == title), None)
+
+        if book_to_edit:
+            book_to_edit['author'] = author
+            book_to_edit['read_date'] = read_date
+            book_to_edit['cover'] = cover_url if cover_url else book_to_edit['cover']
+
+            with open('data/books.json', 'w') as file:
+                json.dump(books, file, indent=4)
+
+        return redirect('view_books')
+
+    # Carica i libri dal file JSON
     try:
         with open('data/books.json', 'r') as file:
             books = json.load(file)
     except FileNotFoundError:
         books = []
 
-    # Ottieni il parametro di ordinamento dalla richiesta (default 'title')
+    # Ottieni il parametro di ordinamento
     sort_by = request.GET.get('sort_by', 'title')
 
     # Ordina i libri in base al parametro 'sort_by'
@@ -410,4 +435,31 @@ def add_and_view_books(request):
     elif sort_by == 'read_date':
         books.sort(key=lambda x: x['read_date'])
 
+    # Verifica se stiamo cercando di modificare un libro
+    edit_title = request.GET.get('edit')
+    if edit_title:
+        # Trova il libro da modificare
+        book_to_edit = next((book for book in books if book['title'] == edit_title), None)
+        if book_to_edit:
+            return render(request, 'view_books.html', {'books': books, 'sort_by': sort_by, 'edit_book': book_to_edit})
+
     return render(request, 'view_books.html', {'books': books, 'sort_by': sort_by})
+
+
+def delete_book(request, title):
+    # Carica i libri dal file JSON
+    try:
+        with open('data/books.json', 'r') as file:
+            books = json.load(file)
+    except FileNotFoundError:
+        books = []
+
+    # Trova e rimuovi il libro con il titolo specificato
+    books = [book for book in books if book['title'] != title]
+
+    # Salva il file JSON dopo aver rimosso il libro
+    with open('data/books.json', 'w') as file:
+        json.dump(books, file, indent=4)
+
+    # Reindirizza alla pagina dei libri dopo la rimozione
+    return redirect('view_books')

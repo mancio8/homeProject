@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+SESSION_COOKIE_SECURE = True  # Invia il cookie di sessione solo su HTTPS
+CSRF_COOKIE_SECURE = True  # Invia il cookie CSRF solo su HTTPS
+
 
 # Application definition
 
