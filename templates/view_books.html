@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Libri</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
     <link href="{% static 'styles/f1.css' %}" rel="stylesheet">
 
 
@@ -83,32 +85,43 @@
             <div class="row row-cols-1 row-cols-md-3 g-4">
                 {% for book in books %}
                 <div class="col">
-                    <div class="card shadow-sm">
-                        <img src="{{ book.cover }}" class="card-img-top-custom" alt="Copertina">
-
-                        <div class="card-body">
-                            <h5 class="card-title">{{ book.title }}</h5>
-                            <p class="card-text"><strong>Autore:</strong> {{ book.author }}</p>
-                            <p class="card-text"><strong>Data di Lettura:</strong> {{ book.read_date }}</p>
-                            
-                            <!-- Pulsante per aprire il Modale di modifica -->
-                            <button type="button" class="btn btn-warning" data-bs-toggle="modal"
-                                    data-bs-target="#editModal{{ book.title|slugify }}">
-                                Modifica
-                            </button>
-                            <!-- Pulsante per eliminare il libro -->
-                <form action="{% url 'delete_book' book.title %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Sei sicuro di voler eliminare questo libro?')">Elimina</button>
-                </form>
-
+                    <div class="card h-100 shadow-sm border-light rounded">
+                        <div class="row g-0">
+                            <div class="col-xl-4">
+                                <img src="{{ book.cover }}" class="card-img-top-custom" alt="Copertina" >
+                            </div>
+                            <div class="col-xl-8">
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title">{{ book.title }}</h5>
+                                    <p class="card-text"><strong>Autore:</strong> {{ book.author }}</p>
+                                    <p class="card-text"><strong>Data di Lettura:</strong> {{ book.read_date }}</p>
+            
+                                    <div class="mt-auto">
+                                        <!-- Pulsante per aprire il Modale di modifica -->
+                                        <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#editModal{{ book.title|slugify }}">
+                                            <i class="bi bi-pencil"></i> Modifica
+                                        </button>
+            
+                                        <!-- Pulsante per eliminare il libro -->
+                                        <form action="{% url 'delete_book' book.title %}" method="post" style="display:inline;">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Sei sicuro di voler eliminare questo libro?')">
+                                                <i class="bi bi-trash"></i> Elimina
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 {% empty %}
-                <p class="text-center">Non ci sono libri da visualizzare.</p>
+                <p class="text-center col-12">Non ci sono libri da visualizzare.</p>
                 {% endfor %}
             </div>
+            
             <!-- Modale di modifica del libro -->
             {% for book in books %}
             <div class="modal fade" id="editModal{{ book.title|slugify }}" tabindex="-1"
@@ -116,7 +129,8 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="editModalLabel{{ book.title|slugify }}">Modifica il libro "{{ book.title }}"
+                            <h5 class="modal-title" id="editModalLabel{{ book.title|slugify }}">Modifica il libro "{{
+                                book.title }}"
                             </h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -127,15 +141,16 @@
                                 <input type="hidden" name="title" value="{{ book.title }}">
                                 <img src="{{ book.cover }}" class="card-img-top-custom" alt="Copertina">
                                 <label for="author">Autore</label>
-                                <input type="text" class="form-control" id="author" name="author" value="{{ book.author }}"
-                                    required>
+                                <input type="text" class="form-control" id="author" name="author"
+                                    value="{{ book.author }}" required>
 
                                 <label for="read_date">Data di lettura</label>
-                                <input type="date" class="form-control" id="read_date" name="read_date" value="{{ book.read_date }}"
-                                    required>
+                                <input type="date" class="form-control" id="read_date" name="read_date"
+                                    value="{{ book.read_date }}" required>
 
                                 <label for="cover_url">URL Copertina (Immagine)</label>
-                                <input type="text" class="form-control" id="cover_url" name="cover_url" value="{{ book.cover }}">
+                                <input type="text" class="form-control" id="cover_url" name="cover_url"
+                                    value="{{ book.cover }}">
 
                                 <button type="submit" name="edit_book" class="btn btn-primary">Salva modifiche</button>
                             </form>
@@ -147,6 +162,7 @@
 
 
         </div>
+
 
 
 
