@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = ['https://home.vinceasr.duckdns.org']
+
+
 SESSION_COOKIE_SECURE = True  # Invia il cookie di sessione solo su HTTPS
 CSRF_COOKIE_SECURE = True  # Invia il cookie CSRF solo su HTTPS
 
