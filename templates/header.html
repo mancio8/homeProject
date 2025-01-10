@@ -19,42 +19,61 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'aggiungi_preferito' %}">Home</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'aggiungi_preferito' %}">
+                            <i class="bi bi-house"></i> Home
+                        </a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            FC Guardia S.
+                            <i class="bi bi-people"></i> FC Guardia S.
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li> <a class="dropdown-item" href="{% url 'calendar' %}">Calendario</a></li>
-                            <li><a class="dropdown-item" href="{% url 'table_view' %}">Classifica</a></li>
-                          
+                            <li><a class="dropdown-item" href="{% url 'calendar' %}">
+                                <i class="bi bi-calendar3"></i> Calendario
+                            </a></li>
+                            <li><a class="dropdown-item" href="{% url 'table_view' %}">
+                                <i class="bi bi-trophy"></i> Classifica
+                            </a></li>
                         </ul>
                     </li>
-                    
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            F1
+                            <i class="bi bi-flag"></i> F1
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{% url 'next_race' %}">Prossima Gara</a></li>
-                            <li><a class="dropdown-item" href="{% url 'drivers_card' %}">Statistiche piloti</a></li>
-                            <li><a class="dropdown-item" href="{% url 'homef1' %}">Classifica</a></li>
+                            <li><a class="dropdown-item" href="{% url 'next_race' %}">
+                                <i class="bi bi-stopwatch"></i> Prossima Gara
+                            </a></li>
+                            <li><a class="dropdown-item" href="{% url 'drivers_card' %}">
+                                <i class="bi bi-person-lines-fill"></i> Statistiche piloti
+                            </a></li>
+                            <li><a class="dropdown-item" href="{% url 'homef1' %}">
+                                <i class="bi bi-list"></i> Classifica
+                            </a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'artist_songs' %}">Karaoke</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'artist_songs' %}">
+                            <i class="bi bi-music-note-list"></i> Karaoke
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'riepilogo' %}">Ferie</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'riepilogo' %}">
+                            <i class="bi bi-umbrella"></i> Ferie
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'view_books' %}">Biblioteca</a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'view_books' %}">
+                            <i class="bi bi-bookshelf"></i> Biblioteca
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#">
+                            <i class="bi bi-envelope"></i> Contact
+                        </a>
                     </li>
                 </ul>
+                
             </div>
 
            

@@ -33,6 +33,66 @@ def get_next_race(request):
         latitude = circuit.get('Location', {}).get('lat', 'Non disponibile')
         longitude = circuit.get('Location', {}).get('long', 'Non disponibile')
         country = circuit.get('Location', {}).get('country', 'Non disponibile')
+        circuit_name = circuit.get('circuitName', 'Nome circuito non disponibile')
+
+        # Mapping manuale per ottenere l'immagine del circuito
+        circuit_images = {
+            'Albert Park Grand Prix Circuit': 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Albert_Park_Circuit_2021.svg/800px-Albert_Park_Circuit_2021.svg.png',
+            'Bahrain International Circuit': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Bahrain_International_Circuit--Grand_Prix_Layout.svg/1024px-Bahrain_International_Circuit--Grand_Prix_Layout.svg.png',
+            'Circuit de Barcelona-Catalunya': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Circuit_de_Catalunya_moto_2021.svg/1920px-Circuit_de_Catalunya_moto_2021.svg.png',
+            'Circuit de Monaco': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/Monte_Carlo_Formula_1_track_map.svg/1920px-Monte_Carlo_Formula_1_track_map.svg.png',
+            'Circuit Gilles Villeneuve': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Circuit_Gilles_Villeneuve.svg/1920px-Circuit_Gilles_Villeneuve.svg.png',
+            'Circuit of the Americas': 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Austin_circuit.svg/1920px-Austin_circuit.svg.png',
+            'Hungaroring': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Hungaroring.svg/1920px-Hungaroring.svg.png',
+            'Imola Circuit': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Imola_2009.svg/2560px-Imola_2009.svg.png',
+            'Interlagos': 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Aut%C3%B3dromo_Jos%C3%A9_Carlos_Pace_%28AKA_Interlagos%29_track_map.svg/2560px-Aut%C3%B3dromo_Jos%C3%A9_Carlos_Pace_%28AKA_Interlagos%29_track_map.svg.png',
+            'Jeddah Street Circuit': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Jeddah_Street_Circuit_2021.svg/1920px-Jeddah_Street_Circuit_2021.svg.png',
+            'Marina Bay Street Circuit': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Marina_Bay_circuit_2023.svg/1920px-Marina_Bay_circuit_2023.svg.png',
+            'Miami International Autodrome': 'https://example.com/miami.jpg',
+            'Monza Circuit': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Monza_Map-2021.png/1920px-Monza_Map-2021.png',
+            'Red Bull Ring': 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Circuit_Red_Bull_Ring.svg/1920px-Circuit_Red_Bull_Ring.svg.png',
+            'Shanghai International Circuit': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Shanghai_International_Racing_Circuit_track_map.svg/1920px-Shanghai_International_Racing_Circuit_track_map.svg.png',
+            'Silverstone Circuit': 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Circuit_Silverstone_2011.svg/1920px-Circuit_Silverstone_2011.svg.png',
+            'Sochi Autodrom': 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Circuit_Sochi.svg/1920px-Circuit_Sochi.svg.png',
+            'Spa-Francorchamps': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Spa-Francorchamps_of_Belgium.svg/1920px-Spa-Francorchamps_of_Belgium.svg.png',
+            'Suzuka Circuit': 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Suzuka_circuit_map--2005.svg/1920px-Suzuka_circuit_map--2005.svg.png',
+            'Yas Marina Circuit': 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Yas_Marina_Circuit.png/1920px-Yas_Marina_Circuit.png',
+            # Aggiungere altri circuiti se necessario
+        }
+        flag_images = {
+            'Australia': 'https://flagcdn.com/au.svg',
+            'Bahrain': 'https://flagcdn.com/bh.svg',
+            'China': 'https://flagcdn.com/cn.svg',
+            'Europe': 'https://flagcdn.com/eu.svg',  # Europe is a continent, not a country
+            'France': 'https://flagcdn.com/fr.svg',
+            'Germany': 'https://flagcdn.com/de.svg',
+            'Hungary': 'https://flagcdn.com/hu.svg',
+            'Italy': 'https://flagcdn.com/it.svg',
+            'Japan': 'https://flagcdn.com/jp.svg',
+            'Malaysia': 'https://flagcdn.com/my.svg',
+            'Mexico': 'https://flagcdn.com/mx.svg',
+            'Monaco': 'https://flagcdn.com/mc.svg',
+            'Netherlands': 'https://flagcdn.com/nl.svg',
+            'Saudi Arabia': 'https://flagcdn.com/sa.svg',
+            'Singapore': 'https://flagcdn.com/sg.svg',
+            'South Africa': 'https://flagcdn.com/za.svg',
+            'South Korea': 'https://flagcdn.com/kr.svg',
+            'Spain': 'https://flagcdn.com/es.svg',
+            'United Arab Emirates': 'https://flagcdn.com/ae.svg',
+            'United States': 'https://flagcdn.com/us.svg',
+            'United Kingdom': 'https://flagcdn.com/gb.svg',
+            'Canada': 'https://flagcdn.com/ca.svg',
+            'Austria': 'https://flagcdn.com/at.svg',
+            'Brazil': 'https://flagcdn.com/br.svg',
+            'Portugal': 'https://flagcdn.com/pt.svg',
+            'Russia': 'https://flagcdn.com/ru.svg',
+            'Turkey': 'https://flagcdn.com/tr.svg',
+            'Vietnam': 'https://flagcdn.com/vn.svg'
+        }
+
+
+        circuit_image_url = circuit_images.get(circuit_name, 'https://link-a-default-image.com/default.jpg')
+        flag_image = flag_images.get(country, 'https://example.com/flags/default_flag.png')
 
         context = {
             'race_name': race.get('raceName', 'Gara non disponibile'),
@@ -41,7 +101,9 @@ def get_next_race(request):
             'latitude': latitude,
             'longitude': longitude,
             'country': country,
-            'circuit_name': circuit.get('circuitName', 'Nome circuito non disponibile'),
+            'circuit_name': circuit_name,
+            'circuit_image_url': circuit_image_url,
+            'flag_image': flag_image,
         }
 
         return render(request, 'next_race.html', context)
@@ -51,6 +113,7 @@ def get_next_race(request):
 
     except Exception as e:
         return HttpResponse(f"<h1>Errore interno: {e}</h1>", status=500)
+
 
 
 def get_last_race_results(request):
