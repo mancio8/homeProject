@@ -392,6 +392,10 @@ def edit_book(book_to_edit, author, read_date, cover_url):
     book_to_edit['cover'] = cover_url if cover_url else book_to_edit['cover']
     return book_to_edit
 
+def download_books_json(request):
+    books = load_books()
+    return JsonResponse(books, safe=False)
+
 def add_and_view_books(request):
     books = load_books()
     sort_by = request.GET.get('sort_by', 'title')

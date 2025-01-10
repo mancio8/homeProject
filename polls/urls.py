@@ -14,4 +14,5 @@ urlpatterns = [
     path('artisti/', views.artist_songs_view, name='artist_songs'),
     path('libri/', views.add_and_view_books, name='view_books'),
     path('delete/<str:title>/', views.delete_book, name='delete_book'),
+    path('download_books_json/', views.download_books_json, name='download_books_json'),
 ]
