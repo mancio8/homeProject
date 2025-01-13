@@ -66,6 +66,10 @@
                 </select>
             </div>
         </form>
+        <!-- Button to trigger JSON download -->
+    <form method="GET" action="{% url 'download_books_json' %}">
+        <button type="submit" class="btn btn-primary">Download Books as JSON</button>
+    </form>
 
         <hr>
 
@@ -147,10 +151,7 @@
         </div>
         {% endfor %}
 
-    <!-- Button to trigger JSON download -->
-    <form method="GET" action="{% url 'download_books_json' %}">
-        <button type="submit" class="btn btn-primary">Download Books as JSON</button>
-    </form>
+    
     </div>
 
 
