@@ -22,9 +22,16 @@ def get_next_race(request):
         race = races[0]
 
         # Preparazione dati
-        race_date = datetime.fromisoformat(f"{race['date']}T{race['time']}").strftime('%A %d %B %Y %H:%M') if 'date' in race and 'time' in race else 'Data non disponibile'
+        race_date = (
+            datetime.fromisoformat(f"{race['date']}T{race['time']}".replace("Z", ""))  # Rimuove Z
+            .strftime('%A %d %B %Y %H:%M')
+            if 'date' in race and 'time' in race
+            else 'Data non disponibile'
+        )
+
         qual_date = (
-            datetime.fromisoformat(f"{race['Qualifying']['date']}T{race['Qualifying']['time']}").strftime('%A %d %B %Y %H:%M')
+            datetime.fromisoformat(f"{race['Qualifying']['date']}T{race['Qualifying']['time']}".replace("Z", ""))
+            .strftime('%A %d %B %Y %H:%M')
             if 'Qualifying' in race and 'date' in race['Qualifying'] and 'time' in race['Qualifying']
             else 'Orario non disponibile'
         )
