@@ -1,0 +1,35 @@
+<!-- add_and_view_books.html -->
+{% extends "base.html" %}
+
+{% block title %}Libri{% endblock %}
+
+{% block styles %}
+    <style>
+        .card-img-top-custom {
+            width: 128px;
+            height: 173px;
+            object-fit: cover;
+            margin: 0 auto;
+            display: block;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+{% include "header.html" %}
+    <!-- Hero Section -->
+    <section class="bg-primary text-white text-center py-5">
+        <div class="container">
+            <h1 class="display-4">Benvenuto nel nostro sito!</h1>
+            <p class="lead">Scopri di più sui nostri servizi e prodotti.</p>
+            <a href="#scopri" class="btn btn-light btn-lg">Scopri di più</a>
+        </div>
+    </section>
+
+    <!-- Contenuto -->
+    <section id="scopri" class="container my-5">
+        <h2>Chi siamo</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet libero et justo tincidunt sodales.</p>
+    </section>
+{% endblock %}
