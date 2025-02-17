@@ -1,0 +1,10 @@
+{
+    "evento1": {
+        "entrate": [
+            {"id": 3, "importo": 100, "descrizione": "Biglietti venduti", "data": "2024-04-05"}
+        ],
+        "uscite": [
+            {"id": 6, "importo": 80, "descrizione": "Noleggio impianto", "data": "2024-04-06"}
+        ]
+    }
+}

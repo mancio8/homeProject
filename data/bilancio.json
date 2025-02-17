@@ -1,0 +1,14 @@
+{
+    "2024": {
+        "entrate": [
+            {"id": 1, "importo": 500, "descrizione": "Tesseramenti", "data": "2024-01-10", "evento": null},
+            {"id": 2, "importo": 300, "descrizione": "Donazione", "data": "2024-02-15", "evento": null},
+            {"id": 3, "importo": 100, "descrizione": "Biglietti venduti", "data": "2024-04-05", "evento": "evento1"}
+        ],
+        "uscite": [
+            {"id": 4, "importo": 200, "descrizione": "Affitto sede", "data": "2024-03-01", "evento": null},
+            {"id": 5, "importo": 50, "descrizione": "Materiale", "data": "2024-03-15", "evento": null},
+            {"id": 6, "importo": 80, "descrizione": "Noleggio impianto", "data": "2024-04-06", "evento": "evento1"}
+        ]
+    }
+}
