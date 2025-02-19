@@ -13,7 +13,21 @@ def bilancio_annuale(request, anno):
     bilancio = carica_json(BILANCIO_FILE).get(str(anno), {"entrate": [], "uscite": []})
     saldo = round(sum(t["importo"] for t in bilancio["entrate"]) - sum(t["importo"] for t in bilancio["uscite"]), 2)
 
-    return render(request, "bilancio_annuale.html", {"anno": anno, "bilancio": bilancio, "saldo": saldo})
+    # Prepara i dati per il grafico
+    totale_entrate = sum(t["importo"] for t in bilancio["entrate"])
+    totale_uscite = sum(t["importo"] for t in bilancio["uscite"])
+
+    # Definisci le etichette per il grafico
+    labels = ['Entrate', 'Uscite']
+    data = [totale_entrate, totale_uscite]
+
+    return render(request, "bilancio_annuale.html", {
+        "anno": anno,
+        "bilancio": bilancio,
+        "saldo": saldo,
+        "labels": labels,
+        "data": data
+    })
 
 def bilancio_evento(request, evento):
     eventi = carica_json(EVENTI_FILE)
@@ -22,9 +36,24 @@ def bilancio_evento(request, evento):
         return HttpResponse("Evento non trovato", status=404)
     
     bilancio_evento = eventi[evento]
+
+    # Calcola il saldo per l'evento
     saldo = round(sum(t["importo"] for t in bilancio_evento["entrate"]) - sum(t["importo"] for t in bilancio_evento["uscite"]), 2)
 
-    return render(request, "bilancio_evento.html", {"evento": evento, "bilancio": bilancio_evento, "saldo": saldo})
+    # Prepara i dati per il grafico
+    totale_entrate = sum(t["importo"] for t in bilancio_evento["entrate"])
+    totale_uscite = sum(t["importo"] for t in bilancio_evento["uscite"])
+    labels = ["Entrate", "Uscite"]
+    data = [totale_entrate, totale_uscite]
+
+    # Passiamo i dati necessari al template
+    return render(request, "bilancio_evento.html", {
+        "evento": evento,
+        "bilancio": bilancio_evento,
+        "saldo": saldo,
+        "labels": labels,
+        "data": data
+    })
 
 def scarica_pdf(request, anno):
     bilancio = carica_json(BILANCIO_FILE).get(str(anno), {"entrate": [], "uscite": []})

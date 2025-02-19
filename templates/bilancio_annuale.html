@@ -15,9 +15,9 @@
         
         <!-- Pulsanti per il download PDF e CSV -->
         <div class="text-center mb-4">
-            <a href="{% url 'scarica_pdf' anno %}" class="btn btn-primary btn-lg mx-2">
-                Scarica PDF
-            </a>
+            <a href="https://drive.google.com/drive/folders/1DRhz-yutjNoKYaSm2OoY_o3ZSyDE-MNy" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-lg mx-2">
+                Guarda le fatture sul drive
+              </a>
             <a href="{% url 'scarica_bilancio_csv' anno %}" class="btn btn-success btn-lg mx-2">
                 📥 Scarica CSV
             </a>
@@ -95,6 +95,19 @@
         </form>
             </div>
         </div>
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <h3>Grafico Entrate vs Uscite</h3>
+            </div>
+            <div class="card-body text-center">
+                <canvas id="graficoEntrateUscite" width="400" height="200"></canvas>
+            </div>
+        </div>
+    
+    
+   
+
+    
         
         
 
@@ -109,6 +122,35 @@
                 window.location.href = url;  // Reindirizza alla nuova URL
             } else {
                 alert("Seleziona un evento!");
+            }
+        });
+    </script>
+    <script>
+        var ctx = document.getElementById('graficoEntrateUscite').getContext('2d');
+        var grafico = new Chart(ctx, {
+            type: 'bar',  // Tipo di grafico
+            data: {
+                labels: {{ labels|safe }},  // Etichette (Entrate, Uscite)
+                datasets: [{
+                    label: 'Totale Entrate e Uscite',
+                    data: {{ data|safe }},  // Dati (Totale Entrate, Totale Uscite)
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.2)',  // Colore per Entrate
+                        'rgba(255, 99, 132, 0.2)'   // Colore per Uscite
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',    // Colore bordo Entrate
+                        'rgba(255, 99, 132, 1)'     // Colore bordo Uscite
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
             }
         });
     </script>
