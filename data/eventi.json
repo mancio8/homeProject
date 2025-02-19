@@ -1,10 +1,73 @@
 {
-    "evento1": {
+    "mascherarci24": {
         "entrate": [
-            {"id": 3, "importo": 100, "descrizione": "Biglietti venduti", "data": "2024-04-05"}
+            {
+                "data": "2025-02-17",
+                "descrizione": "Sponsor",
+                "importo": 560.0
+            }
         ],
         "uscite": [
-            {"id": 6, "importo": 80, "descrizione": "Noleggio impianto", "data": "2024-04-06"}
+            {
+                "data": "2025-02-17",
+                "descrizione": "Accessori EscapeRoom",
+                "importo": 50.0
+            },
+            {
+                "data": "2025-02-05",
+                "descrizione": "Costumi EscapeRoom",
+                "importo": 82.0
+            },
+            {
+                "data": "2025-01-28",
+                "descrizione": "Accessori EscapeRoom",
+                "importo": 225.0
+            },
+            {
+                "data": "2025-02-17",
+                "descrizione": "Accessori EscapeRoom",
+                "importo": 7.94
+            },
+            {
+                "data": "2025-02-17",
+                "descrizione": "Accessori EscapeRoom",
+                "importo": 3.24
+            },
+            {
+                "data": "2025-02-17",
+                "descrizione": "Accessori EscapeRoom",
+                "importo": 17.98
+            },
+            {
+                "data": "2025-02-17",
+                "descrizione": "Accessori EscapeRoom",
+                "importo": 14.58
+            },
+            {
+                "data": "2025-02-17",
+                "descrizione": "Accessori EscapeRoom",
+                "importo": 7.47
+            },
+            {
+                "data": "2025-02-17",
+                "descrizione": "Accessori EscapeRoom",
+                "importo": 8.64
+            },
+            {
+                "data": "2025-02-17",
+                "descrizione": "Accessori EscapeRoom",
+                "importo": 8.75
+            },
+            {
+                "data": "2025-02-17",
+                "descrizione": "Inserzioni Instagram",
+                "importo": 28.0
+            },
+            {
+                "data": "2025-02-19",
+                "descrizione": "Fattura EsseD\u00ec",
+                "importo": 194.0
+            }
         ]
     }
 }

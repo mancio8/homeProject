@@ -1,63 +1,78 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <title>Gestione Bilancio</title>
-</head>
-<body class="container mt-5">
-    <h1>Gestione Bilancio</h1>
+{% extends "base.html" %}
 
-    <form method="post" class="mb-4">
-        {% csrf_token %}
-        <div class="mb-3">
-            <label class="form-label">Tipo</label>
-            <select name="tipo" class="form-control" required>
-                <option value="entrata">Entrata</option>
-                <option value="uscita">Uscita</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Data</label>
-            <input type="date" name="data" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Descrizione</label>
-            <input type="text" name="descrizione" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Importo (€)</label>
-            <input type="number" step="0.01" name="importo" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Evento (opzionale)</label>
-            <select name="evento" class="form-control">
-                <option value="">Nessuno</option>
-                {% for evento in eventi.keys %}
-                    <option value="{{ evento }}">{{ evento }}</option>
-                {% endfor %}
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary">Aggiungi</button>
-    </form>
+{% block title %}Gestione Bilancio{% endblock %}
 
-    <h2>Bilancio Attuale</h2>
-    <h3>Entrate</h3>
-    <ul class="list-group">
-        {% for e in bilancio.entrate %}
-            <li class="list-group-item">{{ e.data }} - {{ e.descrizione }}: €{{ e.importo }}</li>
-        {% endfor %}
-    </ul>
+{% block styles %}
+   <!-- Puoi aggiungere stili personalizzati qui -->
+{% endblock %}
 
-    <h3>Uscite</h3>
-    <ul class="list-group">
-        {% for u in bilancio.uscite %}
-            <li class="list-group-item">{{ u.data }} - {{ u.descrizione }}: €{{ u.importo }}</li>
-        {% endfor %}
-    </ul>
+{% block content %}
+<!-- Header Section -->
+{% include "header.html" %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Gestione Bilancio</h1>
 
-    <h2>Saldo: €{{ totale_entrate | floatformat:2 }} - €{{ totale_uscite | floatformat:2 }} = €{{ saldo | floatformat:2 }}</h2>
+        <!-- Form per aggiungere entrate e uscite -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3>Aggiungi Entrata o Uscita</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label class="form-label" for="tipo">Tipo</label>
+                        <select name="tipo" id="tipo" class="form-control" required>
+                            <option value="entrata">Entrata</option>
+                            <option value="uscita">Uscita</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="data">Data</label>
+                        <input type="date" name="data" id="data" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="descrizione">Descrizione</label>
+                        <input type="text" name="descrizione" id="descrizione" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="importo">Importo (€)</label>
+                        <input type="number" step="0.01" name="importo" id="importo" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="evento">Evento (opzionale)</label>
+                        <select name="evento" id="evento" class="form-control">
+                            <option value="">Nessuno</option>
+                            {% for evento in eventi.keys %}
+                                <option value="{{ evento }}">{{ evento }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Aggiungi</button>
+                </form>
+            </div>
+        </div>
 
-    <a href="{% url 'bilancio_annuale' 2024 %}" class="btn btn-secondary mt-3">Visualizza Bilancio Annuale</a>
-</body>
-</html>
+        <!-- Form per aggiungere un nuovo evento -->
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <h3>Aggiungi Nuovo Evento</h3>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="nuovo_evento" class="form-label">Nuovo evento:</label>
+                        <input type="text" name="nuovo_evento" id="nuovo_evento" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-success w-100">Aggiungi Evento</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Link al bilancio annuale -->
+        <div class="text-center">
+            <a href="{% url 'bilancio_annuale' 2024 %}" class="btn btn-secondary mt-3">Visualizza Bilancio Annuale</a>
+        </div>
+    </div>
+{% endblock %}

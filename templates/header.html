@@ -1,11 +1,11 @@
 <header class="pompeian-red">
     {% load static %}
-
+    
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg pompeian-red" >
+    <nav class="navbar navbar-expand-lg pompeian-red" role="navigation">
         <div class="container-fluid">
             <!-- Logo -->
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="#" aria-label="Go to home page">
                 <img src="{% static 'android-chrome-512x512.png' %}" alt="Logo" height="70">
             </a>
 
@@ -23,11 +23,13 @@
                             <i class="bi bi-house"></i> Home
                         </a>
                     </li>
+
+                    <!-- FC Guardia S. Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownGuardia" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="navbarDropdownGuardia">
                             <i class="bi bi-people"></i> FC Guardia S.
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownGuardia">
                             <li><a class="dropdown-item" href="{% url 'calendar' %}">
                                 <i class="bi bi-calendar3"></i> Calendario
                             </a></li>
@@ -36,11 +38,13 @@
                             </a></li>
                         </ul>
                     </li>
+
+                    <!-- F1 Dropdown -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownF1" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="navbarDropdownF1">
                             <i class="bi bi-flag"></i> F1
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownF1">
                             <li><a class="dropdown-item" href="{% url 'next_race' %}">
                                 <i class="bi bi-stopwatch"></i> Prossima Gara
                             </a></li>
@@ -52,114 +56,59 @@
                             </a></li>
                         </ul>
                     </li>
+
+                    <!-- Karaoke -->
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'artist_songs' %}">
                             <i class="bi bi-music-note-list"></i> Karaoke
                         </a>
                     </li>
+
+                    <!-- Ferie -->
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'riepilogo' %}">
                             <i class="bi bi-umbrella"></i> Ferie
                         </a>
                     </li>
+
+                    <!-- Biblioteca -->
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'view_books' %}">
                             <i class="bi bi-bookshelf"></i> Biblioteca
                         </a>
                     </li>
+
+                    <!-- Bilancio Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBilancio" role="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="navbarDropdownBilancio">
+                            <i class="bi bi-bar-chart"></i> Bilancio
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBilancio">
+                            <li><a class="dropdown-item" href="{% url 'bilancio_annuale' anno=2025 %}">
+                                <i class="bi bi-calendar-check"></i> Bilancio Annuale
+                            </a></li>
+                            <li><a class="dropdown-item" href="{% url 'gestione_bilancio' %}">
+                                <i class="bi bi-gear"></i> Gestione Bilancio
+                            </a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Contact -->
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <i class="bi bi-envelope"></i> Contact
                         </a>
                     </li>
                 </ul>
-                
             </div>
-
-           
         </div>
     </nav>
 </header>
 
-<style>
-    body {
-        background-color: #f8f9fa;
-        /* Background color */
-        font-family: 'Arial', sans-serif;
-    }
-
-    .card {
-        border-radius: 15px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .card-img-top {
-        width: 50px;
-        /* Dimensione icona */
-        height: 50px;
-        /* Dimensione icona */
-        object-fit: cover;
-        border-radius: 50%;
-        /* Rende l'immagine rotonda */
-        margin: 0 auto 15px auto;
-        /* Centra l'immagine */
-        display: block;
-    }
-
-    .container {
-        padding-top: 50px;
-    }
-
-    h1,
-    h2 {
-        color: #343a40;
-        font-weight: bold;
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        border: none;
-    }
-
-    .btn-primary:hover {
-        background-color: #0056b3;
-    }
-
-    .card-body {
-        padding: 20px;
-    }
-
-    .form-control {
-        border-radius: 10px;
-    }
-
-    /* Griglia personalizzata */
-    .card-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 15px;
-    }
-
-    .navbar,
-    .navbar-nav .nav-link,
-    .navbar-brand {
-        color: white !important;
-    }
-
-    .pompeian-red {
-        background-color: #b22222;
-        color: white;
-        /* Per migliorare il contrasto */
-    }
-</style>
-<!-- Bootstrap JS (opzionale, se hai bisogno di funzionalità JavaScript come i modali o il collapse) -->
+<!-- External JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 crossorigin="anonymous"></script>
 
+<!-- Styles -->
+<link href="{% static 'styles/styles.css' %}" rel="stylesheet">

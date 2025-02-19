@@ -1,29 +1,115 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <title>Bilancio {{ anno }}</title>
-</head>
-<body class="container mt-5">
-    <h1>Bilancio Annuale {{ anno }}</h1>
-    <a href="{% url 'scarica_pdf' anno %}" class="btn btn-primary mb-3">Scarica PDF</a>
-    <a href="{% url 'scarica_bilancio_csv' anno %}" class="btn btn-success">📥 Scarica CSV</a>
+{% extends "base.html" %}
 
-    <h3>Entrate</h3>
-    <ul class="list-group">
-        {% for e in bilancio.entrate %}
-            <li class="list-group-item">{{ e.data }} - {{ e.descrizione }}: €{{ e.importo }}</li>
-        {% endfor %}
-    </ul>
+{% block title %}Bilancio Annuale{% endblock %}
 
-    <h3>Uscite</h3>
-    <ul class="list-group">
-        {% for u in bilancio.uscite %}
-            <li class="list-group-item">{{ u.data }} - {{ u.descrizione }}: €{{ u.importo }}</li>
-        {% endfor %}
-    </ul>
+{% block styles %}
+   <!-- Puoi aggiungere i tuoi stili personalizzati qui -->
+{% endblock %}
 
-    <h2 class="mt-3">Saldo: €{{ saldo }}</h2>
-</body>
-</html>
+{% block content %}
+<!-- Header Section -->
+{% include "header.html" %}
+    <div class="container mt-5">
+        
+        <h1 class="mb-4 text-center">Bilancio Annuale {{ anno }}</h1>
+        
+        <!-- Pulsanti per il download PDF e CSV -->
+        <div class="text-center mb-4">
+            <a href="{% url 'scarica_pdf' anno %}" class="btn btn-primary btn-lg mx-2">
+                Scarica PDF
+            </a>
+            <a href="{% url 'scarica_bilancio_csv' anno %}" class="btn btn-success btn-lg mx-2">
+                📥 Scarica CSV
+            </a>
+        </div>
+
+        <!-- Entrate Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3>Entrate</h3>
+            </div>
+            <div class="card-body">
+                {% if bilancio.entrate %}
+                    <ul class="list-group">
+                        {% for e in bilancio.entrate %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>{{ e.data }} - {{ e.descrizione }}: €{{ e.importo }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted">Nessuna entrata registrata.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Uscite Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-danger text-white">
+                <h3>Uscite</h3>
+            </div>
+            <div class="card-body">
+                {% if bilancio.uscite %}
+                    <ul class="list-group">
+                        {% for u in bilancio.uscite %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>{{ u.data }} - {{ u.descrizione }}: €{{ u.importo }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted">Nessuna uscita registrata.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Saldo Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <h3>Saldo Annuale</h3>
+            </div>
+            <div class="card-body text-center">
+                <h2 class="display-4">€{{ saldo }}</h2>
+                <p class="lead">Il saldo totale dell'anno, calcolato come Entrate - Uscite.</p>
+            </div>
+        </div>
+        
+        <!-- Saldo Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h3>Bilancio Eventi</h3>
+            </div>
+            <div class="card-body text-center">
+                <!-- Form per scegliere l'evento -->
+        <form id="eventoForm" method="get">
+            <div class="mb-3">
+                <label for="evento" class="form-label">Seleziona Evento</label>
+                <select name="evento" id="evento" class="form-select" required>
+                    <option value="">Scegli Evento</option>
+                    <option value="mascherarci24">Mascherarci 24</option>
+                    
+                    <!-- Aggiungi altri eventi qui -->
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Visualizza Bilancio</button>
+        </form>
+            </div>
+        </div>
+        
+        
+
+    </div>
+    <script>
+        document.getElementById('eventoForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Previene l'invio del form
+            var evento = document.getElementById('evento').value;  // Ottieni il valore selezionato
+            if (evento) {
+                // Costruisci l'URL dinamicamente
+                var url = '/polls/bilancio/evento/' + evento + '/';
+                window.location.href = url;  // Reindirizza alla nuova URL
+            } else {
+                alert("Seleziona un evento!");
+            }
+        });
+    </script>
+{% endblock %}

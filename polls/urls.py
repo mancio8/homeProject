@@ -1,6 +1,7 @@
 from django.urls import path
 
 from . import views
+from . import bilancio_views
 
 urlpatterns = [
     path("", views.index, name="index"),
@@ -15,9 +16,11 @@ urlpatterns = [
     path('libri/', views.add_and_view_books, name='view_books'),
     path('delete/<str:title>/', views.delete_book, name='delete_book'),
     path('download_books_json/', views.download_books_json, name='download_books_json'),
-    path('bilancio/<int:anno>/', views.bilancio_annuale, name="bilancio_annuale"),
-    path('bilancio/evento/<str:evento>/', views.bilancio_evento, name="bilancio_evento"),
-    path('bilancio/<int:anno>/scarica/', views.scarica_pdf, name="scarica_pdf"),
-    path('bilancio/gestione/', views.gestione_bilancio, name="gestione_bilancio"),
-    path("bilancio/<int:anno>/download_csv/", views.scarica_bilancio_csv, name="scarica_bilancio_csv"),
+    path('bilancio/<int:anno>/', bilancio_views.bilancio_annuale, name="bilancio_annuale"),
+    path('bilancio/evento/<str:evento>/', bilancio_views.bilancio_evento, name="bilancio_evento"),
+    path('bilancio/<int:anno>/scarica/', bilancio_views.scarica_pdf, name="scarica_pdf"),
+    path('bilancio/gestione/', bilancio_views.gestione_bilancio, name="gestione_bilancio"),
+    path("bilancio/<int:anno>/download_csv/", bilancio_views.scarica_bilancio_csv, name="scarica_bilancio_csv"),
+    path('bilancio/evento/<str:evento>/scarica-bilancio-csv/', bilancio_views.scarica_bilancio_evento_csv, name='scarica_bilancio_evento_csv'),
+    
 ]

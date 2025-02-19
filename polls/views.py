@@ -13,11 +13,14 @@ from .forms import AggiungiOreForm
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import os
-from .utils import  genera_pdf
 
 
-# Percorso al file JSON
+
+
+# Percorso del file JSON
+JSON_FILE = 'data/ferie_data.json'
 JSON_FILE_PATH = 'data/preferiti.json'
+
 
 def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
@@ -184,8 +187,7 @@ def table_view(request):
     return render(request, "table_view.html", {"classifiche": classifiche})
 
 
-# Percorso del file JSON
-JSON_FILE = 'data/ferie_data.json'
+
 
 # Funzione per leggere i dati dal file JSON
 def read_ferie_data():
@@ -459,132 +461,22 @@ def delete_book(request, title):
 
 
 
-def bilancio_annuale(request, anno):
-    bilancio = carica_json("data/bilancio.json").get(str(anno), {"entrate": [], "uscite": []})
-    #print(bilancio)  # Debug: controlliamo il JSON caricato
-    saldo = sum(t["importo"] for t in bilancio["entrate"]) - sum(t["importo"] for t in bilancio["uscite"])
-    return render(request, "bilancio_annuale.html", {"anno": anno, "bilancio": bilancio, "saldo": saldo})
-
-
-def bilancio_evento(request, evento):
-    eventi = carica_json("data/eventi.json")
-    
-    if evento not in eventi:
-        return HttpResponse("Evento non trovato", status=404)
-    
-    bilancio_evento = eventi[evento]
-    saldo = sum(t["importo"] for t in bilancio_evento["entrate"]) - sum(t["importo"] for t in bilancio_evento["uscite"])
-    
-    return render(request, "bilancio_evento.html", {"evento": evento, "bilancio": bilancio_evento, "saldo": saldo})
-
-def scarica_pdf(request, anno):
-    bilancio = carica_json("data/bilancio.json").get(str(anno), {"entrate": [], "uscite": []})
-    pdf_buffer = genera_pdf(bilancio, anno)
-    response = HttpResponse(pdf_buffer, content_type="application/pdf")
-    response["Content-Disposition"] = f'attachment; filename="bilancio_{anno}.pdf"'
-    return response
 
 
 
 
-BILANCIO_FILE = "data/bilancio.json"
-EVENTI_FILE = "data/eventi.json"
 
-def carica_json(file_path):
-    print(f"Tentativo di apertura del file: {file_path}")  # Debug
-    if os.path.exists(file_path):
-        print("File trovato!")  # Debug
-        with open(file_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            print("Dati caricati:", data)  # Debug
-            return data
-    print("File non trovato, restituisco default.")  # Debug
-    return {"entrate": [], "uscite": []}
 
-def salva_json(file_path, data):
-    with open(file_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4)
 
-def gestione_bilancio(request):
-    bilancio = carica_json(BILANCIO_FILE)
-    eventi = carica_json(EVENTI_FILE)
 
-    if request.method == "POST":
-        tipo = request.POST.get("tipo")
-        data = request.POST.get("data")
-        descrizione = request.POST.get("descrizione")
-        importo = float(request.POST.get("importo"))
-        evento = request.POST.get("evento")  
 
-        nuova_transazione = {"data": data, "descrizione": descrizione, "importo": importo}
 
-        if tipo == "entrata":
-            bilancio["entrate"].append(nuova_transazione)
-        else:
-            bilancio["uscite"].append(nuova_transazione)
 
-        if evento and evento in eventi:
-            if tipo == "entrata":
-                eventi[evento]["entrate"].append(nuova_transazione)
-            else:
-                eventi[evento]["uscite"].append(nuova_transazione)
 
-        salva_json(BILANCIO_FILE, bilancio)
-        salva_json(EVENTI_FILE, eventi)
-        
-        return redirect("gestione_bilancio")
 
-    # **CALCOLA TOTALE PRIMA DI PASSARE I DATI AL TEMPLATE**
-    totale_entrate = sum(item["importo"] for item in bilancio["entrate"])
-    totale_uscite = sum(item["importo"] for item in bilancio["uscite"])
-    saldo = totale_entrate - totale_uscite
 
-    return render(request, "gestione_bilancio.html", {
-        "bilancio": bilancio,
-        "eventi": eventi,
-        "totale_entrate": totale_entrate,
-        "totale_uscite": totale_uscite,
-        "saldo": saldo
-    })
 
-def scarica_bilancio_csv(request, anno):
-    bilancio = carica_json(BILANCIO_FILE).get(str(anno), {"entrate": [], "uscite": []})
 
-    response = HttpResponse(content_type="text/csv")
-    response["Content-Disposition"] = f'attachment; filename="bilancio_{anno}.csv"'
 
-    writer = csv.writer(response, delimiter=";")  # Usa ";" per compatibilità Excel
 
-    # Intestazione
-    writer.writerow(["Bilancio", anno])
-    writer.writerow(["Data", "Descrizione", "Importo", "", "Data", "Descrizione", "Importo"])
-    writer.writerow(["Entrate", "", "", "", "Uscite", "", ""])
 
-    # Determiniamo il numero massimo di righe per allineare entrate e uscite
-    max_righe = max(len(bilancio["entrate"]), len(bilancio["uscite"]))
-
-    # Scriviamo i dati allineati
-    for i in range(max_righe):
-        entrata = bilancio["entrate"][i] if i < len(bilancio["entrate"]) else {"data": "", "descrizione": "", "importo": ""}
-        uscita = bilancio["uscite"][i] if i < len(bilancio["uscite"]) else {"data": "", "descrizione": "", "importo": ""}
-        
-        writer.writerow([
-            entrata["data"], entrata["descrizione"], entrata["importo"], "",
-            uscita["data"], uscita["descrizione"], uscita["importo"]
-        ])
-
-    # Calcoliamo i totali
-    totale_entrate = sum(t["importo"] for t in bilancio["entrate"])
-    totale_uscite = sum(t["importo"] for t in bilancio["uscite"])
-    saldo_finale = totale_entrate - totale_uscite
-
-    # Riga di separazione
-    writer.writerow(["-" * 10, "", "", "", "-" * 10, "", ""])
-
-    # Totali
-    writer.writerow(["Totale Entrate", "", totale_entrate, "", "Totale Uscite", "", totale_uscite])
-
-    # Saldo finale
-    writer.writerow(["Saldo Finale", "", saldo_finale])
-
-    return response

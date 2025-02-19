@@ -6,10 +6,9 @@ from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 
-DATA_DIR = 'data'
 
 def carica_json(file_name):
-    file_path = DATA_DIR + file_name
+    file_path =  file_name
     with open(file_path, 'r', encoding='utf-8') as file:
         return json.load(file)
 
@@ -30,3 +29,15 @@ def genera_pdf(bilancio, anno):
     p.save()
     buffer.seek(0)
     return buffer
+
+
+def scarica_pdf(request, anno):
+    bilancio = carica_json("data/bilancio.json").get(str(anno), {"entrate": [], "uscite": []})
+    pdf_buffer = genera_pdf(bilancio, anno)
+    response = HttpResponse(pdf_buffer, content_type="application/pdf")
+    response["Content-Disposition"] = f'attachment; filename="bilancio_{anno}.pdf"'
+    return response
+
+def salva_json(file_path, data):
+    with open(file_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4)
