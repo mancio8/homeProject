@@ -180,7 +180,7 @@ def get_driver_info(request, driver_id):
 # Function to get all drivers from the API for the 2024 season
 def get_all_drivers(request):
     # Step 1: Fetch all drivers' information for the 2024 season
-    url = 'https://api.jolpi.ca/ergast/f1/2024/drivers.json'
+    url = 'https://api.jolpi.ca/ergast/f1/2025/drivers.json'
     response = requests.get(url)
     data = response.json()
     
@@ -224,7 +224,7 @@ def get_driver_stats(driver_id):
     championships = 0
 
     # Step 1: Get results for the 2024 season
-    season = "2024"
+    season = "2025"
     season_response = requests.get(f'https://api.jolpi.ca/ergast/f1/{season}/drivers/{driver_id}/results.json')
     season_data = season_response.json()
     races = season_data['MRData']['RaceTable']['Races']
@@ -267,7 +267,7 @@ def get_driver_stats(driver_id):
 # Function to get all constructors from the API for the 2024 season
 def get_all_constructors(request):
     # Step 1: Fetch all constructors' information for the 2024 season
-    url = 'https://api.jolpi.ca/ergast/f1/2024/constructors.json'
+    url = 'https://api.jolpi.ca/ergast/f1/2025/constructors.json'
     response = requests.get(url)
     data = response.json()
 
@@ -311,7 +311,7 @@ def get_constructor_stats(constructor_id):
     championships = 0
 
     # Step 1: Get results for the 2024 season
-    season = "2024"
+    season = "2025"
     season_response = requests.get(f'https://api.jolpi.ca/ergast/f1/{season}/constructors/{constructor_id}/results.json')
     season_data = season_response.json()
     races = season_data['MRData']['RaceTable']['Races']
@@ -352,8 +352,8 @@ def get_constructor_stats(constructor_id):
 
 def home(request):
     # API URLs
-    driver_url = 'https://api.jolpi.ca/ergast/f1/2024/driverStandings.json'
-    constructor_url = 'https://api.jolpi.ca/ergast/f1/2024/constructorStandings.json'
+    driver_url = 'https://api.jolpi.ca/ergast/f1/2025/driverStandings.json'
+    constructor_url = 'https://api.jolpi.ca/ergast/f1/2025/constructorStandings.json'
     last_race_url = 'https://api.jolpi.ca/ergast/f1/current/last/results.json'
 
     try:
