@@ -39,7 +39,7 @@ def podcast_view(request):
         "podcast3": "https://feeds.megaphone.fm/storiedibrand",
         "podcast4": "https://feed.podbean.com/tuktuk/feed.xml",
         "podcast5": "https://media.rss.com/latornanza/feed.xml",
-        "podcast6": "https://feeds.megaphone.fm/GLT8247080596",
+        
         
     }
     
