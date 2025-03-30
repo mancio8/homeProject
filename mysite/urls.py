@@ -23,4 +23,5 @@ urlpatterns = [
     path("polls/", include("polls.urls")),
     path('f1/', include('f1.urls')),
     path('', views.index, name='index'),
+    path("podcast/", views.podcast_view, name="podcast"),
 ]

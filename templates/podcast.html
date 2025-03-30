@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podcast</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-4">
+
+    <h1 class="text-center">🎙 Podcast</h1>
+
+    <!-- Selettore feed -->
+    <form method="GET" class="text-center my-3">
+        <label for="feed-select" class="form-label">Scegli un podcast:</label>
+        <select id="feed-select" name="feed" class="form-select d-inline-block w-auto" onchange="this.form.submit()">
+            {% for key, url in feeds.items %}
+                <option value="{{ key }}" {% if key == selected_feed %}selected{% endif %}>{{ key|capfirst }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <!-- Immagine podcast -->
+    <div class="text-center my-4">
+        <img src="{{ podcast_image }}" alt="Podcast Image" class="img-fluid rounded shadow-lg" style="max-width: 200px;">
+    </div>
+
+    <!-- Lista episodi -->
+    <div class="row">
+        {% for ep in episodes %}
+        <div class="col-12 mb-4">
+            <div class="card shadow d-flex flex-column flex-md-row">
+                <!-- Immagine episodio -->
+                <div class="col-md-4">
+                    <img src="{{ ep.image_url }}" class="img-fluid rounded-start w-100" alt="{{ ep.title }}" style="height: 200px; object-fit: cover;">
+                </div>
+
+                <!-- Corpo della card -->
+                <div class="col-md-8 d-flex flex-column justify-content-between p-3">
+                    <div>
+                        <h5 class="card-title">{{ ep.title }}</h5>
+                        <p class="text-muted">{{ ep.date }}</p>
+                        <p class="card-text">{{ ep.description|safe|truncatechars:200 }}</p>
+                    </div>
+                    <div id="audio-container-{{ forloop.counter }}">
+                        <button class="btn btn-primary w-100" onclick="loadAudio(this, '{{ ep.audio_url }}')">
+                            ▶ Play
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">Nessun episodio disponibile.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Script per caricare audio dinamicamente -->
+    <script>
+        function loadAudio(button, audioUrl) {
+            const container = button.parentElement;
+
+            // Nasconde il pulsante
+            button.style.display = "none";
+
+            // Crea l'elemento audio
+            const audio = document.createElement("audio");
+            audio.controls = true;
+            audio.className = "w-100";
+            
+            const source = document.createElement("source");
+            source.src = audioUrl;
+            source.type = "audio/mpeg";
+            
+            audio.appendChild(source);
+            container.appendChild(audio);
+        }
+    </script>
+
+</body>
+</html>
