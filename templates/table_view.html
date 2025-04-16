@@ -5,25 +5,103 @@
 
 {% block styles %}
 <style>
-    /* Highlight the first row with a gold background */
-    .table-warning {
-        background-color: #FFD700; /* Gold color */
-    }
-
-    /* Highlight the second to fifth rows with a light blue background */
-    .table-info {
-        background-color: #d1ecf1; /* Light blue color */
-    }
-
-    /* Optional: Add border radius to the table */
-    .table {
-        border-radius: 8px;
+    .classification-card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
         overflow: hidden;
     }
 
-    /* Optional: Change the hover effect for rows */
+    .card-header {
+        background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        color: white;
+        border-bottom: none;
+        padding: 1.25rem;
+    }
+
+    .card-header h4 {
+        font-weight: 600;
+        margin: 0;
+        font-size: 1.5rem;
+    }
+
+    .table-responsive {
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .table {
+        margin-bottom: 0;
+        font-size: 0.95rem;
+    }
+
+    .table thead th {
+        background-color: #f8f9fa;
+        border-bottom: 2px solid #dee2e6;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+        color: #6c757d;
+    }
+
+    .table tbody tr {
+        transition: all 0.2s ease;
+    }
+
     .table tbody tr:hover {
-        background-color: #f8f9fa; /* Light gray on hover */
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        background-color: #f8f9fa;
+    }
+
+    /* First place styling */
+    .first-place {
+        background-color: rgba(255, 215, 0, 0.15);
+        border-left: 4px solid #FFD700;
+    }
+
+    /* Podium places (2nd and 3rd) */
+    .podium-place {
+        background-color: rgba(192, 192, 192, 0.1);
+        border-left: 4px solid #C0C0C0;
+    }
+
+    /* Top 5 places */
+    .top-five {
+        background-color: rgba(205, 127, 50, 0.05);
+        border-left: 4px solid #CD7F32;
+    }
+
+    /* Position indicator */
+    .position-cell {
+        font-weight: 600;
+        color: #495057;
+        width: 60px;
+    }
+
+    .team-cell {
+        font-weight: 500;
+    }
+
+    .points-cell {
+        font-weight: 600;
+        color: #1e3c72;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 576px) {
+        .card-header {
+            padding: 1rem;
+        }
+        
+        .card-header h4 {
+            font-size: 1.25rem;
+        }
+        
+        .table {
+            font-size: 0.85rem;
+        }
     }
 </style>
 {% endblock %}
@@ -31,37 +109,43 @@
 {% block content %}
 {% include "header.html" %}
 <div class="container mt-4">
-    <div class="card">
+    <div class="card classification-card">
         <div class="card-header">
-            <h4>Classifica</h4>
+            <div class="d-flex justify-content-between align-items-center">
+                <h4><i class="fas fa-trophy me-2"></i>Classifica</h4>
+                <small class="text-white-50">Aggiornata al {% now "j F Y" %}</small>
+            </div>
         </div>
-        <div class="card-body">
-            <!-- Scrollable table for small screens -->
+        <div class="card-body p-0">
             <div class="table-responsive">
-                <table class="table table-sm fs-6">
+                <table class="table table-hover mb-0">
                     <thead>
                         <tr>
-                            <th>Posizione</th>
+                            <th class="ps-4">#</th>
                             <th>Squadra</th>
-                            <th>Punti</th>
-                            <th>PT</th>
+                            <th class="text-end pe-4">Punti</th>
+                            <th class="text-end pe-4">PT</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for pos, sq, pt, pg in classifiche %}
-                        <tr class="{% if forloop.first %}table-success{% endif %}">
-                            <td>{{ pos }}</td>
-                            <td>{{ sq }}</td>
-                            <td>{{ pt }}</td>
-                            <td>{{ pg }}</td>
+                        <tr class="{% if forloop.first %}first-place{% elif forloop.counter <= 3 %}podium-place{% elif forloop.counter <= 5 %}top-five{% endif %}">
+                            <td class="position-cell ps-4">{{ pos }}</td>
+                            <td class="team-cell">{{ sq }}</td>
+                            <td class="points-cell text-end">{{ pt }}</td>
+                            <td class="text-end pe-4">{{ pg }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
         </div>
+        <div class="card-footer bg-light">
+            <small class="text-muted">
+                <i class="fas fa-info-circle me-1"></i>
+                Classifica aggiornata automaticamente dopo ogni partita
+            </small>
+        </div>
     </div>
 </div>
-
 {% endblock %}
-

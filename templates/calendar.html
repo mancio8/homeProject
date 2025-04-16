@@ -1,123 +1,268 @@
-<!-- calendar.html -->
 {% extends "base.html" %} 
 
-{% block title %}Calendario{% endblock %}  
+{% block title %}Calendario Partite | F.C. Guardia Sanframondi{% endblock %}  
+
+{% block styles %}
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #630e0e 0%, #8a1a1a 100%);
+        padding: 3rem 1rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" opacity="0.05"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="white"/></svg>');
+        background-size: 30px 30px;
+    }
+    
+    .club-title {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        text-shadow: 3px 3px 6px rgba(221, 224, 13, 0.918);
+        position: relative;
+    }
+    
+    .next-match-card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+        transition: transform 0.3s ease;
+    }
+    
+    .next-match-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .match-header {
+        background: linear-gradient(to right, #b22222, #d9534f);
+        color: white;
+        padding: 1rem;
+    }
+    
+    .team-logo {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+    
+    .team-logo:hover {
+        transform: scale(1.1);
+    }
+    
+    .vs-text {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #630e0e;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .match-date {
+        background-color: #f8f9fa;
+        border-radius: 20px;
+        padding: 0.5rem 1rem;
+        display: inline-block;
+        font-weight: 600;
+    }
+    
+    .weather-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        background-color: rgba(255,255,255,0.9);
+        padding: 0.5rem;
+        border-radius: 20px;
+        margin-top: 1rem;
+    }
+    
+    .calendar-title {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 2rem;
+    }
+    
+    .calendar-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(to right, #630e0e, #b22222);
+    }
+    
+    .match-card {
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+    
+    .match-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    .match-card-body {
+        padding: 1.5rem;
+        background: white;
+    }
+    
+    .small-team-logo {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+    }
+    
+    .team-name {
+        font-weight: 600;
+        color: #333;
+    }
+    
+    .match-time {
+        background-color: #f8f9fa;
+        color: #630e0e;
+        font-weight: 600;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+    }
+    
+    .no-matches {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 2rem;
+        text-align: center;
+    }
+    
+    @media (max-width: 768px) {
+        .team-logo {
+            width: 60px;
+            height: 60px;
+        }
+        
+        .vs-text {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<!-- Header Section -->
 {% include "header.html" %}
-<div
-  class="p-2 p-md-5 mb-4 text-body-emphasis"
-  align="center"
-  style="background-color: #630e0e"
->
-  <div class="col-lg-6 px-0">
-    <h1 class="display-4 fst-italic text-white">F.C. Guardia Sanframondi</h1>
-    <p class="lead my-3"></p>
-    <!-- Se esiste il prossimo match, mostra la card -->
-    {% if next_match %}
-    <div class="card mb-4 shadow border-0">
-      <div class="card-header text-center text-white pompeian-red">
-        <h4 class="mb-0">Prossimo Match</h4>
-      </div>
-      <div class="card-body text-center">
-        <div class="row align-items-center">
-          <!-- Squadra 1 -->
-          <div class="col-5 text-right">
-            <img
-              src="{{ next_match.team1_logo }}"
-              alt="{{ next_match.team1 }} logo"
-              class="rounded-circle mb-2"
-              style="width: 80px; height: 80px"
-            />
-            <h5 class="font-weight-bold">{{ next_match.team1 }}</h5>
-          </div>
-
-          <!-- Versus -->
-          <div class="col-2">
-            <span class="text-muted font-weight-bold" style="font-size: 1.5rem"
-              >VS</span
-            >
-          </div>
-
-          <!-- Squadra 2 -->
-          <div class="col-5 text-left">
-            <img
-              src="{{ next_match.team2_logo }}"
-              alt="{{ next_match.team2 }} logo"
-              class="rounded-circle mb-2"
-              style="width: 80px; height: 80px"
-            />
-            <h5 class="font-weight-bold">{{ next_match.team2 }}</h5>
-          </div>
+<!-- Hero Section -->
+<section class="hero-section text-center text-white">
+    <div class="container position-relative">
+        <h1 class="club-title text-dark display-4 mb-4">F.C. Guardia Sanframondi</h1>
+        
+        <!-- Prossimo Match -->
+        {% if next_match %}
+        <div class="next-match-card mx-auto" style="max-width: 600px;">
+            <div class="match-header text-center">
+                <h4 class="mb-0"><i class="fas fa-calendar-alt me-2"></i>Prossimo Match</h4>
+            </div>
+            <div class="card-body py-4">
+                <div class="row align-items-center">
+                    <!-- Squadra Casa -->
+                    <div class="col-md-5 text-center">
+                        <img src="{{ next_match.team1_logo }}" alt="{{ next_match.team1 }}" class="team-logo mb-2">
+                        <h5 class="team-name mt-2">{{ next_match.team1 }}</h5>
+                    </div>
+                    
+                    <!-- VS -->
+                    <div class="col-md-2 text-center">
+                        <div class="vs-text">VS</div>
+                    </div>
+                    
+                    <!-- Squadra Ospite -->
+                    <div class="col-md-5 text-center">
+                        <img src="{{ next_match.team2_logo }}" alt="{{ next_match.team2 }}" class="team-logo mb-2">
+                        <h5 class="team-name mt-2">{{ next_match.team2 }}</h5>
+                    </div>
+                </div>
+                
+                <!-- Data e Ora -->
+                <div class="text-center mt-4">
+                    <div class="match-date">
+                        <i class="far fa-clock me-2"></i>{{ next_match.data }}
+                    </div>
+                </div>
+                
+                <!-- Meteo -->
+                {% if next_match.weather %}
+                    {% if next_match.weather.error %}
+                        <div class="weather-info mt-3">
+                            <i class="fas fa-cloud-sun"></i>
+                            <span>Meteo non disponibile</span>
+                        </div>
+                    {% else %}
+                        <div class="weather-info mt-3">
+                            <img src="{{ next_match.weather.icon }}" alt="Icona meteo" width="24">
+                            <span>{{ next_match.weather.description }} ({{ next_match.weather.temperature }}°C)</span>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="weather-info mt-3">
+                        <i class="fas fa-cloud-sun"></i>
+                        <span>Meteo non disponibile</span>
+                    </div>
+                {% endif %}
+            </div>
         </div>
-
-        <!-- Data della partita -->
-        <div class="mt-3">
-          <span class="text-muted">Data e ora:</span>
-          <h6 class="font-weight-bold">{{ next_match.data }}</h6>
-        </div>
-      </div>
-      {% if next_match.weather %} 
-        {% if next_match.weather.error %}
-            <p>Meteo: {{ next_match.weather.error }}</p>
         {% else %}
-            <p>
-                Meteo: {{ next_match.weather.description }} ({{ next_match.weather.temperature }}°C)
-                <img
-                src="{{ next_match.weather.icon }}"
-                alt="Icona meteo"
-                style="vertical-align: middle"
-                />
-            </p>
-        {% endif %}
-       {% else %}
-        <p>Meteo non disponibile</p>
-      {% endif %}
-    </div>
-    {% else %}
-    <p class="text-center text-muted">Non ci sono partite future.</p>
-    {% endif %}
-  </div>
-</div>
-<div class="container my-5">
-  <h2 class="text-center mb-4">Calendario</h2>
-  <div class="row">
-    {% for match in matches %}
-    <div class="col-md-4 mb-4">
-      <div class="card shadow-sm" style="border-color: #b22222">
-        <div class="card-body">
-          <!-- Card per la squadra 1 -->
-          <div class="d-flex align-items-center mb-3">
-            <img
-              src="{{ match.team1_logo }}"
-              alt="{{ match.team1 }} logo"
-              class="rounded-circle"
-              style="width: 50px; height: 50px"
-            />
-            <span class="ms-3 font-weight-bold">{{ match.team1 }}</span>
-          </div>
-
-          <!-- Data della partita -->
-          <div class="text-center mb-3">
-            <span class="text-muted">{{ match.data }}</span>
-          </div>
-
-          <!-- Card per la squadra 2 -->
-          <div class="d-flex align-items-center">
-            <img
-              src="{{ match.team2_logo }}"
-              alt="{{ match.team2 }} logo"
-              class="rounded-circle"
-              style="width: 50px; height: 50px"
-            />
-            <span class="ms-3 font-weight-bold">{{ match.team2 }}</span>
-          </div>
+        <div class="no-matches mx-auto" style="max-width: 600px;">
+            <h5><i class="far fa-calendar-times me-2"></i>Nessun match in programma</h5>
         </div>
-      </div>
+        {% endif %}
     </div>
-    {% endfor %}
-  </div>
-</div>
+</section>
 
+<!-- Calendario Partite -->
+<div class="container py-5">
+    <h2 class="calendar-title text-center">Calendario Partite</h2>
+    
+    <div class="row">
+        {% for match in matches %}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="match-card h-100">
+                <div class="match-card-body">
+                    <!-- Squadra Casa -->
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="{{ match.team1_logo }}" alt="{{ match.team1 }}" class="small-team-logo">
+                        <span class="team-name ms-3">{{ match.team1 }}</span>
+                    </div>
+                    
+                    <!-- Data e Ora -->
+                    <div class="text-center my-3">
+                        <span class="match-time">
+                            <i class="far fa-clock me-1"></i>{{ match.data }}
+                        </span>
+                    </div>
+                    
+                    <!-- Squadra Ospite -->
+                    <div class="d-flex align-items-center">
+                        <img src="{{ match.team2_logo }}" alt="{{ match.team2 }}" class="small-team-logo">
+                        <span class="team-name ms-3">{{ match.team2 }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}

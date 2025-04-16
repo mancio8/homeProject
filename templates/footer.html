@@ -1,58 +1,168 @@
-<footer class="bg-primary text-white text-center text-lg-start py-4">
-    <!-- Grid container -->
-    <div class="container">
-      <!--Grid row-->
+<footer class="footer-section bg-dark pt-5 pb-3">
+  <div class="container">
       <div class="row">
-        <!--Grid column-->
-        <div class="col-lg-6 col-md-12 mb-4">
-          <h5 class="text-uppercase">Footer Content</h5>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque
-            ea quis molestias. Fugiat pariatur maxime quis culpa corporis vitae
-            repudiandae aliquam voluptatem veniam, est atque cumque eum delectus
-            sint!
-          </p>
-        </div>
-        <!--Grid column-->
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4">
-          <h5 class="text-uppercase">Links</h5>
-          <ul class="list-unstyled">
-            <li>
-              <a href="{% url 'aggiungi_preferito' %}" class="text-white">Home</a>
-            </li>
-            <li>
-              <a href="{% url 'calendar' %}" class="text-white">Calendario</a>
-            </li>
-            <li>
-              <a href="{% url 'table_view' %}" class="text-white">Classifica</a>
-            </li>
-            <li>
-              <a href="{% url 'next_race' %}" class="text-white">Prossima Gara</a>
-            </li>
-            <li>
-              <a href="{% url 'drivers_card' %}" class="text-white">Statistiche piloti</a>
-            </li>
-            <li>
-              <a href="{% url 'homef1' %}" class="text-white">Classifica F1</a>
-            </li>
-            <li>
-              <a href="{% url 'artist_songs' %}" class="text-white">Karaoke</a>
-            </li>
-            <li><a href="{% url 'riepilogo' %}" class="text-white">Ferie</a></li>
-            <li><a href="{% url 'view_books' %}" class="text-white">Biblioteca</a></li>
-          </ul>
-        </div>
-        <!--Grid column-->
+          <!-- About Column -->
+          <div class="col-lg-5 col-md-6 mb-4 mb-md-0">
+              <div class="footer-brand d-flex align-items-center mb-3">
+                  <img src="https://via.placeholder.com/40" alt="Logo" class="me-2" style="height: 40px;">
+                  <h4 class="text-white mb-0">F.C. Guardia Sanframondi</h4>
+              </div>
+              <p class="text-white-50">
+                  Il punto di riferimento per tutti i tifosi del F.C. Guardia Sanframondi. 
+                  Segui il nostro team attraverso calendari, classifiche e statistiche aggiornate.
+              </p>
+              <div class="social-icons mt-4">
+                  <a href="#" class="text-white me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                  <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                  <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                  <a href="#" class="text-white"><i class="fab fa-youtube fa-lg"></i></a>
+              </div>
+          </div>
+
+          <!-- Quick Links Column -->
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+              <h5 class="text-uppercase text-white mb-4">Navigazione</h5>
+              <ul class="list-unstyled footer-links">
+                  <li class="mb-2">
+                      <a href="{% url 'aggiungi_preferito' %}" class="text-white-50 hover-white d-flex align-items-center">
+                          <i class="fas fa-chevron-right me-2 small"></i> Home
+                      </a>
+                  </li>
+                  <li class="mb-2">
+                      <a href="{% url 'calendar' %}" class="text-white-50 hover-white d-flex align-items-center">
+                          <i class="fas fa-chevron-right me-2 small"></i> Calendario
+                      </a>
+                  </li>
+                  <li class="mb-2">
+                      <a href="{% url 'table_view' %}" class="text-white-50 hover-white d-flex align-items-center">
+                          <i class="fas fa-chevron-right me-2 small"></i> Classifica
+                      </a>
+                  </li>
+                  <li class="mb-2">
+                      <a href="{% url 'next_race' %}" class="text-white-50 hover-white d-flex align-items-center">
+                          <i class="fas fa-chevron-right me-2 small"></i> Prossima Gara
+                      </a>
+                  </li>
+              </ul>
+          </div>
+
+          <!-- Additional Links Column -->
+          <div class="col-lg-4 col-md-6">
+              <h5 class="text-uppercase text-white mb-4">Altre Sezioni</h5>
+              <div class="row">
+                  <div class="col-6">
+                      <ul class="list-unstyled footer-links">
+                          <li class="mb-2">
+                              <a href="{% url 'drivers_card' %}" class="text-white-50 hover-white d-flex align-items-center">
+                                  <i class="fas fa-chevron-right me-2 small"></i> Statistiche
+                              </a>
+                          </li>
+                          <li class="mb-2">
+                              <a href="{% url 'homef1' %}" class="text-white-50 hover-white d-flex align-items-center">
+                                  <i class="fas fa-chevron-right me-2 small"></i> F1
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="col-6">
+                      <ul class="list-unstyled footer-links">
+                          <li class="mb-2">
+                              <a href="{% url 'artist_songs' %}" class="text-white-50 hover-white d-flex align-items-center">
+                                  <i class="fas fa-chevron-right me-2 small"></i> Karaoke
+                              </a>
+                          </li>
+                          <li class="mb-2">
+                              <a href="{% url 'view_books' %}" class="text-white-50 hover-white d-flex align-items-center">
+                                  <i class="fas fa-chevron-right me-2 small"></i> Biblioteca
+                              </a>
+                          </li>
+                          <li class="mb-2">
+                              <a href="{% url 'riepilogo' %}" class="text-white-50 hover-white d-flex align-items-center">
+                                  <i class="fas fa-chevron-right me-2 small"></i> Ferie
+                              </a>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
       </div>
-      <!--Grid row-->
-    </div>
-    <!-- Grid container -->
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-      © 2020 Copyright:
-      <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-    </div>
-    <!-- Copyright -->
-  </footer>
+
+      <hr class="my-4 bg-secondary">
+
+      <!-- Copyright -->
+      <div class="row align-items-center">
+          <div class="col-md-6 text-center text-md-start">
+              <p class="text-white-50 mb-0">
+                  © 2023 F.C. Guardia Sanframondi. Tutti i diritti riservati.
+              </p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+              <a href="#" class="text-white-50 me-3 small">Privacy Policy</a>
+              <a href="#" class="text-white-50 me-3 small">Termini di Servizio</a>
+              <a href="#" class="text-white-50 small">Contattaci</a>
+          </div>
+      </div>
+  </div>
+</footer>
+
+<style>
+  .footer-section {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      position: relative;
+      overflow: hidden;
+  }
   
+  .footer-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #b22222, #630e0e);
+  }
+  
+  .footer-links a {
+      transition: all 0.3s ease;
+      text-decoration: none;
+  }
+  
+  .footer-links a:hover {
+      color: #fff !important;
+      transform: translateX(5px);
+  }
+  
+  .social-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+  }
+  
+  .social-icons a:hover {
+      background: #b22222;
+      transform: translateY(-3px);
+  }
+  
+  .hover-white:hover {
+      color: white !important;
+  }
+  
+  @media (max-width: 768px) {
+      .footer-section {
+          text-align: center;
+      }
+      
+      .footer-brand {
+          justify-content: center;
+      }
+      
+      .footer-links li a {
+          justify-content: center;
+      }
+  }
+</style>

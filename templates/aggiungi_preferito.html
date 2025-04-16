@@ -1,86 +1,227 @@
-<!-- aggiungi_preferito.html -->
 {% extends "base.html" %}
 
-{% block title %}Aggiungi Preferito{% endblock %}
+{% block title %}I Tuoi Preferiti | F.C. Guardia Sanframondi{% endblock %}
 
 {% block styles %}
+<style>
+    .favorites-container {
+        padding: 2rem 0;
+    }
     
+    .section-title {
+        position: relative;
+        margin-bottom: 2.5rem;
+        text-align: center;
+        font-weight: 700;
+    }
+    
+    .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: linear-gradient(to right, #630e0e, #b22222);
+    }
+    
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+    
+    .favorite-card {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        transition: all 0.3s ease;
+        height: 100%;
+    }
+    
+    .favorite-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    .favorite-card a {
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    .favorite-card-img {
+        height: 180px;
+        object-fit: cover;
+        width: 100%;
+        transition: transform 0.3s ease;
+    }
+    
+    .favorite-card:hover .favorite-card-img {
+        transform: scale(1.03);
+    }
+    
+    .favorite-card-body {
+        padding: 1.5rem;
+    }
+    
+    .favorite-card-title {
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #333;
+        transition: color 0.2s ease;
+    }
+    
+    .favorite-card:hover .favorite-card-title {
+        color: #b22222;
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: 3rem;
+        background-color: #f8f9fa;
+        border-radius: 12px;
+        grid-column: 1 / -1;
+    }
+    
+    .empty-state-icon {
+        font-size: 3rem;
+        color: #adb5bd;
+        margin-bottom: 1rem;
+    }
+    
+    .add-favorite-btn {
+        display: block;
+        margin: 0 auto;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        border: 2px solid #b22222;
+        color: #b22222;
+        background: transparent;
+        transition: all 0.3s ease;
+        border-radius: 30px;
+    }
+    
+    .add-favorite-btn:hover {
+        background: #b22222;
+        color: white;
+        transform: translateY(-2px);
+    }
+    
+    .modal-content {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+    
+    .modal-header {
+        background: linear-gradient(to right, #630e0e, #b22222);
+        color: white;
+    }
+    
+    .form-control {
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ddd;
+    }
+    
+    .form-control:focus {
+        border-color: #b22222;
+        box-shadow: 0 0 0 0.25rem rgba(178, 34, 34, 0.25);
+    }
+    
+    .submit-btn {
+        background: linear-gradient(to right, #630e0e, #b22222);
+        border: none;
+        padding: 0.75rem;
+        font-weight: 600;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(178, 34, 34, 0.3);
+    }
+    
+    @media (max-width: 768px) {
+        .card-container {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
 {% endblock %}
 
 {% block content %}
 {% include "header.html" %}
 
-<div class="container">
+<div class="container favorites-container">
+    <h2 class="section-title">I Tuoi Preferiti</h2>
 
-
-
-
-    <h2 class="text-center mb-4">I tuoi Preferiti</h2>
-
-    <!-- Mostra i preferiti come card -->
+    <!-- Grid dei preferiti -->
     <div class="card-container">
         {% for preferito in preferiti %}
-        <div class="card" style="cursor: pointer;">
-            <!-- Il link ora avvolge tutta la card -->
-            <a href="{{ preferito.url }}" target="_blank" class="text-decoration-none">
-                <!-- Icona immagine preferito -->
-                <img src="{{ preferito.immagine }}" class="card-img-top" alt="{{ preferito.titolo }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ preferito.titolo }}</h5>
-                    
+        <div class="favorite-card">
+            <a href="{{ preferito.url }}" target="_blank" class="d-block h-100">
+                <img src="{{ preferito.immagine }}" class="favorite-card-img" alt="{{ preferito.titolo }}">
+                <div class="favorite-card-body">
+                    <h5 class="favorite-card-title">{{ preferito.titolo }}</h5>
                 </div>
             </a>
         </div>
         {% empty %}
-        <div class="col-12 text-center">
-            <p class="lead">Non ci sono preferiti salvati.</p>
+        <div class="empty-state">
+            <div class="empty-state-icon">
+                <i class="far fa-star"></i>
+            </div>
+            <h5>Nessun preferito salvato</h5>
+            <p class="text-muted">Aggiungi i tuoi link preferiti per averli sempre a portata di mano</p>
         </div>
         {% endfor %}
     </div>
-    <!-- Add Favorite Button -->
-     <div class="row py-4">
-        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addFavoriteModal">
-            Aggiungi Preferito
-        </button>
-     </div>
-    
 
+    <!-- Bottone Aggiungi Preferito -->
+    <button type="button" class="add-favorite-btn" data-bs-toggle="modal" data-bs-target="#addFavoriteModal">
+        <i class="fas fa-plus me-2"></i>Aggiungi Preferito
+    </button>
 
-    <!-- Modal for Adding Favorite -->
-    <div class="modal fade" id="addFavoriteModal" tabindex="-1" aria-labelledby="addFavoriteModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
+    <!-- Modal Aggiungi Preferito -->
+    <div class="modal fade" id="addFavoriteModal" tabindex="-1" aria-labelledby="addFavoriteModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addFavoriteModalLabel">Aggiungi un Nuovo Preferito</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="addFavoriteModalLabel">
+                        <i class="fas fa-bookmark me-2"></i>Aggiungi Preferito
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- Form per aggiungere un nuovo preferito -->
-                    <form method="POST" class="mb-5">
+                    <form method="POST">
                         {% csrf_token %}
                         <div class="mb-3">
-                            <label for="titolo" class="form-label">Titolo:</label>
-                            <input type="text" id="titolo" name="titolo" class="form-control" required>
+                            <label for="titolo" class="form-label">Titolo</label>
+                            <input type="text" class="form-control" id="titolo" name="titolo" placeholder="Inserisci un titolo" required>
                         </div>
-
+                        
                         <div class="mb-3">
-                            <label for="immagine" class="form-label">URL Immagine:</label>
-                            <input type="url" id="immagine" name="immagine" class="form-control" required>
+                            <label for="immagine" class="form-label">URL Immagine</label>
+                            <input type="url" class="form-control" id="immagine" name="immagine" placeholder="https://example.com/image.jpg" required>
                         </div>
-
+                        
                         <div class="mb-3">
-                            <label for="url" class="form-label">URL Preferito:</label>
-                            <input type="url" id="url" name="url" class="form-control" required>
+                            <label for="url" class="form-label">URL Link</label>
+                            <input type="url" class="form-control" id="url" name="url" placeholder="https://example.com" required>
                         </div>
-
-                        <button type="submit" class="btn btn-primary w-100">Aggiungi Preferito</button>
+                        
+                        <button type="submit" class="submit-btn w-100">
+                            <i class="fas fa-save me-2"></i>Salva Preferito
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
-
-
     </div>
 </div>
 {% endblock %}
