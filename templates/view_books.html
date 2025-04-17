@@ -53,22 +53,35 @@
         margin-bottom: 0.3rem;
     }
     
-    /* Card libro */
+    /* Card libro - Layout verticale */
     .book-card {
         border-radius: 10px;
         margin-bottom: 1rem;
         box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    
+    .book-cover-container {
+        padding: 1rem 1rem 0 1rem;
+        text-align: center;
     }
     
     .book-cover {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-        border-bottom: 1px solid #eee;
+        width: auto;
+        height: 200px; /* Altezza aumentata */
+        max-width: 100%;
+        object-fit: contain;
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
     
     .book-body {
         padding: 1rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
     }
     
     .book-title {
@@ -150,7 +163,7 @@
     /* Layout colonne */
     @media (max-width: 576px) {
         .book-cover {
-            height: 120px;
+            height: 180px; /* Leggermente più piccola su mobile */
         }
         
         .book-body {
@@ -187,6 +200,10 @@
                 <div class="mb-3">
                     <label for="read_date" class="form-label">Data Lettura</label>
                     <input type="date" class="form-control" id="read_date" name="read_date" required>
+                </div>
+                <div class="mb-3">
+                    <label for="cover_url" class="form-label">URL Copertina</label>
+                    <input type="url" class="form-control" id="cover_url" name="cover_url" placeholder="Incolla URL immagine verticale">
                 </div>
                 <button type="submit" name="add_book" class="btn btn-primary w-100">
                     <i class="fas fa-book-medical me-2"></i>Aggiungi
@@ -226,16 +243,18 @@
     <!-- Lista Libri -->
     <div class="row">
         {% for book in books %}
-        <div class="col-12 col-sm-6 mb-3">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
             <div class="book-card">
-                <img src="{{ book.cover }}" class="book-cover" alt="Copertina {{ book.title }}">
+                <div class="book-cover-container">
+                    <img src="{{ book.cover }}" class="book-cover" alt="Copertina {{ book.title }}">
+                </div>
                 <div class="book-body">
                     <h5 class="book-title">{{ book.title }}</h5>
                     <p class="book-author">{{ book.author }}</p>
                     <p class="book-date">
                         <i class="far fa-calendar-alt me-2"></i>{{ book.read_date }}
                     </p>
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-between mt-auto">
                         <!-- Pulsante Modifica -->
                         <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#editModal{{ book.title|slugify }}">
@@ -283,7 +302,7 @@
                     {% csrf_token %}
                     <input type="hidden" name="title" value="{{ book.title }}">
                     <div class="text-center mb-3">
-                        <img src="{{ book.cover }}" style="max-height: 150px; width: auto;" alt="Copertina">
+                        <img src="{{ book.cover }}" style="height: 200px; width: auto;" alt="Copertina">
                     </div>
                     <div class="mb-3">
                         <label for="author" class="form-label">Autore</label>
@@ -298,7 +317,7 @@
                     <div class="mb-3">
                         <label for="cover_url" class="form-label">URL Copertina</label>
                         <input type="text" class="form-control" id="cover_url" name="cover_url"
-                            value="{{ book.cover }}" placeholder="Incolla URL immagine">
+                            value="{{ book.cover }}" placeholder="Incolla URL immagine verticale">
                     </div>
                     <button type="submit" name="edit_book" class="btn btn-primary w-100">
                         <i class="fas fa-save me-2"></i>Salva
