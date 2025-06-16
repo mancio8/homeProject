@@ -1,169 +1,129 @@
 <!-- add_and_view_books.html -->
 {% extends "base.html" %}
 
-{% block title %}Libri{% endblock %}
+{% block title %}Itinerario Sardegna{% endblock %}
 
 {% block styles %}
-    
+<style>
+  .card-title {
+    font-weight: bold;
+  }
+  .card-text {
+    font-size: 1rem;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
-<!-- Header Section -->
 {% include "header.html" %}
-    
 
-  <div class="container py-5">
-    <h1 class="text-center mb-5">Itinerario Vacanza in Sardegna – 23-30 Giugno</h1>
+<div class="container py-5">
+  <h1 class="text-center mb-5 display-5">Itinerario Vacanza in Sardegna – 23-30 Giugno</h1>
 
-    <div class="row gy-4">
-      <!-- Giorno 1 -->
-      <div class="col-12">
-        <div class="card shadow-sm border-start border-primary border-5">
-          <div class="card-body">
-            <h5 class="card-title">23 Giugno – Arrivo a Castelsardo</h5>
-            <p class="card-text">Giorno di viaggio. Sistemazione in hotel o appartamento a Castelsardo. Passeggiata nel centro storico e cena tipica.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Giorno 2 -->
-      <div class="col-12">
-        <div class="card shadow-sm border-start border-primary border-5">
-          <div class="card-body">
-            <h5 class="card-title">24 Giugno – Stintino e La Pelosa</h5>
-            <p class="card-text">
-              Giornata dedicata alla splendida spiaggia di <strong>La Pelosa</strong> (Stintino – circa 1h 30min). Mare caraibico e sabbia finissima. Visita opzionale al Museo della Tonnara.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Giorno 3 -->
-      <div class="col-12">
-        <div class="card shadow-sm border-start border-primary border-5">
-          <div class="card-body">
-            <h5 class="card-title">25 Giugno – Castelsardo e Lu Bagnu</h5>
-            <p class="card-text">
-              Mattina con visita al Castello dei Doria e centro storico di Castelsardo. Pomeriggio relax nella spiaggia di Lu Bagnu.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Giorno 4 -->
-      <div class="col-12">
-        <div class="card shadow-sm border-start border-primary border-5">
-          <div class="card-body">
-            <h5 class="card-title">26 Giugno – Isola Rossa e La Marinedda</h5>
-            <p class="card-text">
-              Giornata a <strong>La Marinedda</strong>, splendida spiaggia vicino a Isola Rossa (1h 10min). Ideale per relax e snorkeling. Possibile visita serale a Trinità d’Agultu.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Giorno 5 -->
-      <div class="col-12">
-        <div class="card shadow-sm border-start border-primary border-5">
-          <div class="card-body">
-            <h5 class="card-title">27 Giugno – Costa Paradiso e Li Cossi</h5>
-            <p class="card-text">
-              Trekking facile e bagno alla suggestiva <strong>spiaggia di Li Cossi</strong>, incastonata tra le rocce rosse della Costa Paradiso. Natura selvaggia e acqua cristallina.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Giorno 6 -->
-      <div class="col-12">
-        <div class="card shadow-sm border-start border-primary border-5">
-          <div class="card-body">
-            <h5 class="card-title">28 Giugno – Capo Testa e Cala Spinosa</h5>
-            <p class="card-text">
-              Escursione a <strong>Cala Spinosa</strong> presso Capo Testa (Santa Teresa Gallura – 1h 40min). Scogliere spettacolari, acque limpide e paesaggi mozzafiato.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Giorno 7 -->
-      <div class="col-12">
-        <div class="card shadow-sm border-start border-primary border-5">
-          <div class="card-body">
-            <h5 class="card-title">29 Giugno – Relax vicino Castelsardo</h5>
-            <p class="card-text">Ultimo giorno di relax. Suggerite: Baia Ostina, San Pietro a Mare, oppure ritorno a Lu Bagnu.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Giorno 8 -->
-      <div class="col-12">
-        <div class="card shadow-sm border-start border-primary border-5">
-          <div class="card-body">
-            <h5 class="card-title">30 Giugno – Partenza</h5>
-            <p class="card-text">Mattinata libera. Partenza e rientro. Fine della vacanza.</p>
-          </div>
+  <div class="row gy-4">
+    <!-- Giorno 1 -->
+    <div class="col-12">
+      <div class="card shadow border-start border-4 border-primary">
+        <div class="card-body">
+          <h5 class="card-title">23 Giugno – Arrivo a Castelsardo</h5>
+          <p class="card-text">Giorno di viaggio. Sistemazione in hotel o appartamento a Castelsardo. Passeggiata nel centro storico e cena tipica.</p>
         </div>
       </div>
     </div>
 
-    <!-- Sezione alternative -->
-    <hr class="my-5">
-    <h2 class="text-center mb-4">5 Itinerari Alternativi</h2>
-    <p class="text-center">Idee aggiuntive in caso di maltempo o cambio programma.</p>
-
-    <div class="row gy-4 mt-4">
-      <div class="col-12">
-        <div class="card shadow-sm border-start border-success border-5">
-          <div class="card-body">
-            <h5 class="card-title">Aggius e Valle della Luna</h5>
-            <p class="card-text">Trekking tra rocce granitiche, paesaggi lunari e panorami incredibili. Ideale per chi ama la natura incontaminata.</p>
-          </div>
+    <!-- Giorno 2 -->
+    <div class="col-12">
+      <div class="card shadow border-start border-4 border-primary">
+        <div class="card-body">
+          <h5 class="card-title">24 Giugno – Castelsardo e Lu Bagnu</h5>
+          <p class="card-text">Mattina con visita al Castello dei Doria e centro storico. Pomeriggio relax nella spiaggia di Lu Bagnu.</p>
         </div>
       </div>
+    </div>
 
-      <div class="col-12">
-        <div class="card shadow-sm border-start border-success border-5">
-          <div class="card-body">
-            <h5 class="card-title">Monte d'Accoddi (Sassari)</h5>
-            <p class="card-text">Unico sito archeologico tipo ziggurat in Europa. Facile da raggiungere, perfetto per una mattinata culturale.</p>
-          </div>
+    <!-- Giorno 3 -->
+    <div class="col-12">
+      <div class="card shadow border-start border-4 border-primary">
+        <div class="card-body">
+          <h5 class="card-title">25 Giugno – Isola Rossa e La Marinedda</h5>
+          <p class="card-text">Giornata a <strong>La Marinedda</strong>, vicino a Isola Rossa (1h 10min). Perfetta per relax e snorkeling. Visita serale a Trinità d’Agultu.</p>
         </div>
       </div>
+    </div>
 
-      <div class="col-12">
-        <div class="card shadow-sm border-start border-success border-5">
-          <div class="card-body">
-            <h5 class="card-title">Badesi Mare</h5>
-            <p class="card-text">Spiaggia libera con dune e mare sempre ventilato. Ottimo per famiglie o per giornate senza troppi spostamenti.</p>
-          </div>
+    <!-- Giorno 4 -->
+    <div class="col-12">
+      <div class="card shadow border-start border-4 border-primary">
+        <div class="card-body">
+          <h5 class="card-title">26 Giugno – Costa Paradiso e Li Cossi</h5>
+          <p class="card-text">Trekking facile e bagno alla suggestiva <strong>Li Cossi</strong>, tra rocce rosse e acqua cristallina.</p>
         </div>
       </div>
+    </div>
 
-      <div class="col-12">
-        <div class="card shadow-sm border-start border-success border-5">
-          <div class="card-body">
-            <h5 class="card-title">Alghero</h5>
-            <p class="card-text">Centro storico, bastioni, cucina catalana e spiagge come Le Bombarde o Mugoni. Escursione di giornata piena.</p>
-          </div>
+    <!-- Giorno 5 -->
+    <div class="col-12">
+      <div class="card shadow border-start border-4 border-primary">
+        <div class="card-body">
+          <h5 class="card-title">27 Giugno – Stintino e La Pelosa</h5>
+          <p class="card-text">Giornata alla celebre spiaggia di <strong>La Pelosa</strong> (1h 30min). Mare trasparente e sabbia bianca. Possibile visita al Museo della Tonnara.</p>
         </div>
       </div>
+    </div>
 
-      <div class="col-12">
-        <div class="card shadow-sm border-start border-success border-5">
-          <div class="card-body">
-            <h5 class="card-title">Gita in barca all’Isola dell’Asinara</h5>
-            <p class="card-text">Partenza da Stintino. Natura selvaggia, asinelli bianchi, cale incontaminate. Necessaria prenotazione.</p>
-          </div>
+    <!-- Giorno 6 -->
+    <div class="col-12">
+      <div class="card shadow border-start border-4 border-primary">
+        <div class="card-body">
+          <h5 class="card-title">28 Giugno – Capo Testa e Cala Spinosa</h5>
+          <p class="card-text">Escursione a <strong>Cala Spinosa</strong> (Capo Testa, Santa Teresa Gallura – 1h 40min). Paesaggi mozzafiato e scogliere spettacolari.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Giorno 7 -->
+    <div class="col-12">
+      <div class="card shadow border-start border-4 border-primary">
+        <div class="card-body">
+          <h5 class="card-title">29 Giugno – Relax vicino Castelsardo</h5>
+          <p class="card-text">Giornata libera. Consigliate: Baia Ostina, San Pietro a Mare, oppure di nuovo Lu Bagnu.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Giorno 8 -->
+    <div class="col-12">
+      <div class="card shadow border-start border-4 border-primary">
+        <div class="card-body">
+          <h5 class="card-title">30 Giugno – Partenza</h5>
+          <p class="card-text">Mattinata libera. Rientro previsto nel pomeriggio.</p>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Itinerari alternativi -->
+  <hr class="my-5">
+  <h2 class="text-center mb-4">5 Itinerari Alternativi</h2>
+  <p class="text-center">Idee aggiuntive in caso di maltempo o cambio programma.</p>
+
+  <div class="row gy-4 mt-4">
+    {% for alt in [
+      ("Aggius e Valle della Luna", "Trekking tra rocce granitiche e paesaggi lunari."),
+      ("Monte d'Accoddi (Sassari)", "Unico sito tipo ziggurat in Europa. Perfetto per una mattinata culturale."),
+      ("Badesi Mare", "Spiaggia libera con dune e mare ventilato. Ideale per famiglie."),
+      ("Alghero", "Centro storico, bastioni, cucina catalana e spiagge come Le Bombarde."),
+      ("Gita in barca all’Isola dell’Asinara", "Partenza da Stintino. Natura incontaminata e asinelli bianchi.")
+    ] %}
+    <div class="col-12">
+      <div class="card shadow border-start border-4 border-success">
+        <div class="card-body">
+          <h5 class="card-title">{{ alt[0] }}</h5>
+          <p class="card-text">{{ alt[1] }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
-
-
-
-
-
-
-
