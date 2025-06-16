@@ -1,14 +1,104 @@
 [
     {
-        "title": "La profezia dell'armadillo",
+        "title": "Cronache di spogliatoio",
+        "author": "Giulio Incagli",
+        "read_date": "2025-03-14",
+        "cover": "http://books.google.com/books/content?id=SkEgEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    {
+        "title": "Dimentica il mio nome",
         "author": "Zerocalcare",
         "read_date": "2025-01-01",
-        "cover": "http://books.google.com/books/content?id=XD12DgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        "cover": "http://books.google.com/books/content?id=wwOmBgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    {
+        "title": "Dodici",
+        "author": "Zerocalcare",
+        "read_date": "2025-01-02",
+        "cover": "https://books.google.it/books/publisher/content?id=rQimBgAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&imgtk=AFLRE73GcUs2bw7mD0_NuaqFC5fvMgifqku0XZTVUP4LRB9Vdlwn6ui1KKDd_K1oKgEQcghazmUHL40DWgp7tnMD0twwDTKwrKeShExb5pmSRBHSSfm2sm2UJ-Y-4eo_ljSLhNybXJzI"
+    },
+    {
+        "title": "Ducks",
+        "author": "Kate Beaton",
+        "read_date": "2025-05-30",
+        "cover": "http://books.google.com/books/content?id=j4GEEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    {
+        "title": "I Riti di Guardia tra cronaca e storia: Domande e Risposte",
+        "author": "Vincenzo Di Crosta",
+        "read_date": "2025-01-01",
+        "cover": "https://m.media-amazon.com/images/I/71R62Oy7iHL._SL1500_.jpg"
     },
     {
         "title": "Kobane Calling",
         "author": "Zerocalcare",
         "read_date": "2025-01-07",
         "cover": "http://books.google.com/books/content?id=b4DDCwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    {
+        "title": "L'elenco telefonico degli accolli",
+        "author": "Zerocalcare",
+        "read_date": "2025-01-01",
+        "cover": "http://books.google.com/books/content?id=c0Z_CgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    {
+        "title": "La profezia dell'armadillo",
+        "author": "Zerocalcare",
+        "read_date": "2025-01-01",
+        "cover": "http://books.google.com/books/content?id=XD12DgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    {
+        "title": "La terra dei figli",
+        "author": "Gipi",
+        "read_date": "2025-01-08",
+        "cover": "http://books.google.com/books/content?id=XR6L0AEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    {
+        "title": "Macerie Prime",
+        "author": "Zerocalcare",
+        "read_date": "2025-01-08",
+        "cover": "https://books.google.it/books/publisher/content?id=69o9DwAAQBAJ&hl=it&pg=PP1&img=1&zoom=3&sig=ACfU3U22mQO-4_t9RIvAobJVfz1l4OsD4A&w=128"
+    },
+    {
+        "title": "Macerie Prime - Sei mesi dopo",
+        "author": "Zerocalcare",
+        "read_date": "2025-01-08",
+        "cover": "http://books.google.com/books/content?id=Yx3GtgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    {
+        "title": "Quando muori resta a me",
+        "author": "Zerocalcare",
+        "read_date": "2025-05-27",
+        "cover": "http://books.google.com/books/content?id=zn-y0AEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+    },
+    {
+        "title": "Sulla strada giusta",
+        "author": "Francesco Grandis",
+        "read_date": "2025-01-08",
+        "cover": "http://books.google.com/books/content?id=H29YDgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    {
+        "title": "Troppo facile amarti in vacanza",
+        "author": "Giacomo Keison Bevilacqua",
+        "read_date": "2025-01-08",
+        "cover": "http://books.google.com/books/content?id=X4wtEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    {
+        "title": "Un non so che d'alato: Storie e visioni dal Tour de France 2024 ",
+        "author": "Bidon Ciclismo allo stato liquido",
+        "read_date": "2025-03-18",
+        "cover": "https://m.media-amazon.com/images/I/61HbnhrzflL._SL1500_.jpg"
+    },
+    {
+        "title": "Un polpo alla gola",
+        "author": "Zerocalcare",
+        "read_date": "2025-01-08",
+        "cover": "http://books.google.com/books/content?id=JVKxBgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    {
+        "title": " Le guerre di Lucas",
+        "author": "Laurent Hopman",
+        "read_date": "2025-06-14",
+        "cover": "http://books.google.com/books/content?id=F1gFEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
     }
 ]

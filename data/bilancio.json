@@ -8,24 +8,64 @@
             {
                 "data": "2025-02-17",
                 "descrizione": "Sponsor",
-                "importo": 560.0
+                "importo": 560
+            },
+            {
+                "data": "2025-01-01",
+                "descrizione": "Saldo 2024",
+                "importo": 650
+            },
+            {
+                "data": "2025-03-02",
+                "descrizione": "Iscrizioni Escape Room",
+                "importo": 510
+            },
+            {
+                "data": "2025-03-02",
+                "descrizione": "Tesseramento",
+                "importo": 125
+            },
+            {
+                "data": "2025-02-02",
+                "descrizione": "Saldo 2024",
+                "importo": 260
+            },
+            {
+                "data": "2025-03-02",
+                "descrizione": "Cassa Bar",
+                "importo": 955
+            },
+            {
+                "data": "2025-03-03",
+                "descrizione": "Reso Essed\u00ec",
+                "importo": 207
+            },
+            {
+                "data": "2025-01-01",
+                "descrizione": "Sponsor Giochi d'estate 24",
+                "importo": 980
+            },
+            {
+                "data": "2025-05-11",
+                "descrizione": "Magliette",
+                "importo": 1090
             }
         ],
         "uscite": [
             {
                 "data": "2025-02-17",
                 "descrizione": "Accessori EscapeRoom",
-                "importo": 50.0
+                "importo": 50
             },
             {
                 "data": "2025-02-05",
                 "descrizione": "Costumi EscapeRoom",
-                "importo": 82.0
+                "importo": 82
             },
             {
                 "data": "2025-01-28",
                 "descrizione": "Accessori EscapeRoom",
-                "importo": 225.0
+                "importo": 225
             },
             {
                 "data": "2025-02-17",
@@ -65,15 +105,95 @@
             {
                 "data": "2025-02-17",
                 "descrizione": "Inserzioni Instagram",
-                "importo": 28.0
+                "importo": 28
             },
             {
                 "data": "2025-02-19",
                 "descrizione": "Fattura EsseD\u00ec",
-                "importo": 194.0
+                "importo": 194
+            },
+            {
+                "data": "2025-03-02",
+                "descrizione": "Musica evento",
+                "importo": 700
+            },
+            {
+                "data": "2025-03-02",
+                "descrizione": "SIAE",
+                "importo": 110
+            },
+            {
+                "data": "2025-03-02",
+                "descrizione": "Spese gruppo musicale",
+                "importo": 45
+            },
+            {
+                "data": "2025-03-02",
+                "descrizione": "Fattura essedi",
+                "importo": 587
+            },
+            {
+                "data": "2025-03-07",
+                "descrizione": "Tessere UISP",
+                "importo": 63
+            },
+            {
+                "data": "2025-04-02",
+                "descrizione": "Borracce",
+                "importo": 150
+            },
+            {
+                "data": "2025-04-02",
+                "descrizione": "Premi Bicincitt\u00e0",
+                "importo": 16
+            },
+            {
+                "data": "2025-04-02",
+                "descrizione": "Pec",
+                "importo": 12
+            },
+            {
+                "data": "2025-04-23",
+                "descrizione": "Carta per stampare logo",
+                "importo": 12
+            },
+            {
+                "data": "2025-05-10",
+                "descrizione": "Manifesti",
+                "importo": 30
+            },
+            {
+                "data": "2025-05-10",
+                "descrizione": "Sosta Ristoro",
+                "importo": 127
+            },
+            {
+                "data": "2025-05-09",
+                "descrizione": "Sponsorizzazione ",
+                "importo": 14
+            },
+            {
+                "data": "2025-05-10",
+                "descrizione": "Enel",
+                "importo": 75
+            },
+            {
+                "data": "2025-06-16",
+                "descrizione": "Manutenzione Giardino",
+                "importo": 250.0
             }
         ]
     },
     "entrate": {},
-    "uscite": {}
+    "uscite": {},
+    "5": {
+        "entrate": [],
+        "uscite": [
+            {
+                "data": "0005-02-16",
+                "descrizione": "Manutenzione Giardino",
+                "importo": 250.0
+            }
+        ]
+    }
 }

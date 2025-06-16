@@ -6,7 +6,14 @@ def index(request):
     return render(request, 'index.html')
 
 def sardegna(request):
-    return render(request, 'sardegna.html')
+    alternativi = [
+      ("Aggius e Valle della Luna", "Trekking tra rocce granitiche e paesaggi lunari."),
+      ("Monte d'Accoddi (Sassari)", "Unico sito tipo ziggurat in Europa. Perfetto per una mattinata culturale."),
+      ("Badesi Mare", "Spiaggia libera con dune e mare ventilato. Ideale per famiglie."),
+      ("Alghero", "Centro storico, bastioni, cucina catalana e spiagge come Le Bombarde."),
+      ("Gita in barca all’Isola dell’Asinara", "Partenza da Stintino. Natura incontaminata e asinelli bianchi.")
+  	]
+    return render(request, 'sardegna.html', {'alternativi': alternativi})
 
 def parse_rss_feed(url):
     response = requests.get(url)

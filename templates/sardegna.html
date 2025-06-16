@@ -108,18 +108,12 @@
   <p class="text-center">Idee aggiuntive in caso di maltempo o cambio programma.</p>
 
   <div class="row gy-4 mt-4">
-    {% for alt in [
-      ("Aggius e Valle della Luna", "Trekking tra rocce granitiche e paesaggi lunari."),
-      ("Monte d'Accoddi (Sassari)", "Unico sito tipo ziggurat in Europa. Perfetto per una mattinata culturale."),
-      ("Badesi Mare", "Spiaggia libera con dune e mare ventilato. Ideale per famiglie."),
-      ("Alghero", "Centro storico, bastioni, cucina catalana e spiagge come Le Bombarde."),
-      ("Gita in barca all’Isola dell’Asinara", "Partenza da Stintino. Natura incontaminata e asinelli bianchi.")
-    ] %}
+    {% for alt in alternativi %}
     <div class="col-12">
       <div class="card shadow border-start border-4 border-success">
         <div class="card-body">
-          <h5 class="card-title">{{ alt[0] }}</h5>
-          <p class="card-text">{{ alt[1] }}</p>
+          <h5 class="card-title">{{ alt.0 }}</h5>
+          <p class="card-text">{{ alt.1 }}</p>
         </div>
       </div>
     </div>
