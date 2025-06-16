@@ -5,6 +5,9 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'index.html')
 
+def sardegna(request):
+    return render(request, 'sardegna.html')
+
 def parse_rss_feed(url):
     response = requests.get(url)
     root = ET.fromstring(response.content)
