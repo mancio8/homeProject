@@ -7,12 +7,17 @@ def index(request):
 
 def sardegna(request):
     alternativi = [
-      ("Aggius e Valle della Luna", "Trekking tra rocce granitiche e paesaggi lunari."),
-      ("Monte d'Accoddi (Sassari)", "Unico sito tipo ziggurat in Europa. Perfetto per una mattinata culturale."),
-      ("Badesi Mare", "Spiaggia libera con dune e mare ventilato. Ideale per famiglie."),
-      ("Alghero", "Centro storico, bastioni, cucina catalana e spiagge come Le Bombarde."),
-      ("Gita in barca all’Isola dell’Asinara", "Partenza da Stintino. Natura incontaminata e asinelli bianchi.")
-  	]
+        ("Aggius e Valle della Luna", "Trekking tra rocce granitiche e paesaggi lunari."),
+        ("Monte d'Accoddi (Sassari)", "Unico sito tipo ziggurat in Europa. Perfetto per una mattinata culturale."),
+        ("Badesi Mare", "Spiaggia libera con dune e mare ventilato. Ideale per famiglie."),
+        ("Alghero", "Centro storico, bastioni, cucina catalana e spiagge come Le Bombarde."),
+        ("Gita in barca all’Isola dell’Asinara", "Partenza da Stintino. Natura incontaminata e asinelli bianchi."),
+        ("Spiaggia di Cala Sarraina", "Cala selvaggia con sabbia rossa e fondali cristallini. Ideale per relax e snorkeling."),
+        ("Le Bombarde – Alghero", "Spiaggia attrezzata con sabbia dorata e mare limpido. Molto frequentata d'estate."),
+        ("Spiaggia di Porto Ferro", "Spiaggia scenografica con sabbia ambrata e torri aragonesi. Amata da surfisti."),
+        ("Cala Sabina – Golfo Aranci", "Cala tranquilla con acque turchesi e contesto naturalistico. Perfetta per una giornata rilassante.")
+    ]
+
     return render(request, 'sardegna.html', {'alternativi': alternativi})
 
 def parse_rss_feed(url):
