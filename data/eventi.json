@@ -157,7 +157,149 @@
         ]
     },
     "giochiestate25": {
-        "entrate": [],
-        "uscite": []
+        "entrate": [
+            {
+                "data": "2025-07-01",
+                "descrizione": "reso Fattura Cofrancesco ",
+                "importo": 100
+            },
+            {
+                "data": "2025-01-01",
+                "descrizione": "Sponsor Giochi d'estate 25",
+                "importo": 880
+            },
+            {
+                "data": "2025-07-30",
+                "descrizione": "Incassi serate",
+                "importo": 8800
+            }
+        ],
+        "uscite": [
+            {
+                "data": "2025-07-03",
+                "descrizione": "Locandine",
+                "importo": 50
+            },
+            {
+                "data": "2025-07-06",
+                "descrizione": "gomma piuma",
+                "importo": 30
+            },
+            {
+                "data": "2025-07-07",
+                "descrizione": "Sponsorizzazzione",
+                "importo": 21
+            },
+            {
+                "data": "2025-07-15",
+                "descrizione": "Accessori Cucina",
+                "importo": 160
+            },
+            {
+                "data": "2025-07-15",
+                "descrizione": "abbuoti",
+                "importo": 400
+            },
+            {
+                "data": "2025-07-16",
+                "descrizione": "Palloni",
+                "importo": 29
+            },
+            {
+                "data": "2025-07-15",
+                "descrizione": "Materiale vario cinese",
+                "importo": 30
+            },
+            {
+                "data": "2025-07-15",
+                "descrizione": "Fattura Cofrancesco (Cucina)",
+                "importo": 848
+            },
+            {
+                "data": "2025-07-15",
+                "descrizione": "Carta Lavagna",
+                "importo": 10
+            },
+            {
+                "data": "2025-07-16",
+                "descrizione": "Spese varie cucina",
+                "importo": 74
+            },
+            {
+                "data": "2025-07-21",
+                "descrizione": "condimenti",
+                "importo": 179
+            },
+            {
+                "data": "2025-07-31",
+                "descrizione": "Carne (Cucina)",
+                "importo": 440
+            },
+            {
+                "data": "2025-07-01",
+                "descrizione": "Ferramenta",
+                "importo": 340
+            },
+            {
+                "data": "2025-07-01",
+                "descrizione": "coppe",
+                "importo": 170
+            },
+            {
+                "data": "2025-07-01",
+                "descrizione": "tipografia",
+                "importo": 70
+            },
+            {
+                "data": "2025-07-01",
+                "descrizione": "Carne (Cucina)",
+                "importo": 200
+            },
+            {
+                "data": "2025-07-01",
+                "descrizione": "panini (cucina)",
+                "importo": 230
+            },
+            {
+                "data": "2025-07-01",
+                "descrizione": "carboni (cucina)",
+                "importo": 70
+            },
+            {
+                "data": "2025-06-26",
+                "descrizione": "abbuoti (cucina)",
+                "importo": 50
+            },
+            {
+                "data": "2025-07-01",
+                "descrizione": "Fattura Cofrancesco (Cucina)",
+                "importo": 496
+            },
+            {
+                "data": "2025-07-01",
+                "descrizione": "Fattura Cofrancesco (Cucina)",
+                "importo": 881
+            },
+            {
+                "data": "2025-07-01",
+                "descrizione": "Spese varie cucina (cucina)",
+                "importo": 95
+            },
+            {
+                "data": "2025-07-02",
+                "descrizione": "Spese varie cucina (cucina)",
+                "importo": 36
+            },
+            {
+                "data": "2025-07-30",
+                "descrizione": "Spese varie cucina (cucina)",
+                "importo": 69
+            },
+            {
+                "data": "2025-07-31",
+                "descrizione": "bicchieri (Cucina)",
+                "importo": 50
+            }
+        ]
     }
 }

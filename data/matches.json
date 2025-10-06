@@ -1,141 +1,183 @@
 [
   {
     "team1": "F.C. GUARDIA SANFR.",
-    "team2": "AZZURRA PAUPISI NEXT",
-    "data": "03/11/24 14:30",
+    "team2": "FOOTB.CLUB MONTEFALCONE",
+    "data": "02/11/25 14:30",
     "lat": 41.2564,
     "lon": 14.5985
-  },
-  {
-    "team1": "BONEA",
-    "team2": "F.C. GUARDIA SANFR.",
-    "data": "10/11/24 14:30",
-    "lat": 41.0563,
-    "lon": 14.6112
   },
   {
     "team1": "F.C. GUARDIA SANFR.",
-    "team2": "MOIANO",
-    "data": "17/11/24 14:30",
+    "team2": "ACADEMY PESCO SANNITA",
+    "data": "09/11/25 14:30",
     "lat": 41.2564,
     "lon": 14.5985
-  },
-  {
-    "team1": "FRASSO TELESINO",
-    "team2": "F.C. GUARDIA SANFR.",
-    "data": "24/11/24 14:30",
-    "lat": 41.2098,
-    "lon": 14.4818
-  },
-  {
-    "team1": "F.C. GUARDIA SANFR.",
-    "team2": "G. LUCIANO PANNARANO",
-    "data": "01/12/24 14:30",
-    "lat": 41.2564,
-    "lon": 14.5985
-  },
-  {
-    "team1": "ALBA DURAZZANO",
-    "team2": "F.C. GUARDIA SANFR.",
-    "data": "08/12/24 15:00",
-    "lat": 41.0651,
-    "lon": 14.4972
-  },
-  {
-    "team1": "F.C. GUARDIA SANFR.",
-    "team2": "POL. APOLLOSA",
-    "data": "15/12/24 14:30",
-    "lat": 41.2564,
-    "lon": 14.5985
-  },
-  {
-    "team1": "VALLE TELESINA",
-    "team2": "F.C. GUARDIA SANFR.",
-    "data": "21/12/24 14:30",
-    "lat": 41.2225,
-    "lon": 14.5295
-  },
-  {
-    "team1": "F.C. GUARDIA SANFR.",
-    "team2": "REAL DUGENTA",
-    "data": "05/01/25 14:30",
-    "lat": 41.2564,
-    "lon": 14.5985
-  },
-  {
-    "team1": "FALCHI CAUTANO",
-    "team2": "F.C. GUARDIA SANFR.",
-    "data": "19/01/25 15:00",
-    "lat": 41.1124,
-    "lon": 14.5973
   },
   {
     "team1": "AZZURRA PAUPISI NEXT",
     "team2": "F.C. GUARDIA SANFR.",
-    "data": "26/01/25 15:00",
-    "lat": 41.1506,
-    "lon": 14.6396
-  },
-  {
-    "team1": "F.C. GUARDIA SANFR.",
-    "team2": "BONEA",
-    "data": "02/02/25 15:00",
+    "data": "16/11/25 14:30",
     "lat": 41.2564,
     "lon": 14.5985
   },
   {
-    "team1": "MOIANO",
-    "team2": "F.C. GUARDIA SANFR.",
-    "data": "08/02/25 14:30",
-    "lat": 41.0623,
-    "lon": 14.6407
-  },
-  {
     "team1": "F.C. GUARDIA SANFR.",
-    "team2": "FRASSO TELESINO",
-    "data": "16/02/25 15:00",
+    "team2": "ATLETICO FOIANO",
+    "data": "23/11/25 14:30",
     "lat": 41.2564,
     "lon": 14.5985
   },
   {
-    "team1": "G. LUCIANO PANNARANO",
+    "team1": "ATLETICO CAMPOLI M",
     "team2": "F.C. GUARDIA SANFR.",
-    "data": "23/02/25 15:00",
-    "lat": 41.0022,
-    "lon": 14.7227
-  },
-  {
-    "team1": "F.C. GUARDIA SANFR.",
-    "team2": "ALBA DURAZZANO",
-    "data": "02/03/25 15:00",
+    "data": "30/11/25 14:30",
     "lat": 41.2564,
     "lon": 14.5985
   },
   {
-    "team1": "POL. APOLLOSA",
-    "team2": "F.C. GUARDIA SANFR.",
-    "data": "09/03/25 15:00",
-    "lat": 41.1194,
-    "lon": 14.6514
-  },
-  {
     "team1": "F.C. GUARDIA SANFR.",
-    "team2": "VALLE TELESINA",
-    "data": "16/03/25 15:00",
+    "team2": "ANTONIO TEDINO FOGLIANISE",
+    "data": "07/12/25 14:30",
     "lat": 41.2564,
     "lon": 14.5985
   },
   {
-    "team1": "REAL DUGENTA",
+    "team1": "S.GIORGIOLAMOLARA 1992",
     "team2": "F.C. GUARDIA SANFR.",
-    "data": "22/03/25 14:00",
-    "lat": 41.1057,
-    "lon": 14.4686
+    "data": "14/12/25 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
   },
   {
     "team1": "F.C. GUARDIA SANFR.",
-    "team2": "FALCHI CAUTANO",
-    "data": "06/04/25 16:00",
+    "team2": "A.C. BASELICE",
+    "data": "21/12/25 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "POLISPORTIVA FAICCHIO",
+    "team2": "F.C. GUARDIA SANFR.",
+    "data": "11/01/26 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "F.C. GUARDIA SANFR.",
+    "team2": "VENERE 2021 A.S.D.",
+    "data": "18/01/26 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "UNION CERRETO SANNITA",
+    "team2": "F.C. GUARDIA SANFR.",
+    "data": "12/10/25 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "F.C. GUARDIA SANFR.",
+    "team2": "SPORTING PAGO VEIANO 2011",
+    "data": "19/10/25 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "G.S. PIETRELCINA",
+    "team2": "F.C. GUARDIA SANFR.",
+    "data": "26/10/25 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "FOOTB.CLUB MONTEFALCONE",
+    "team2": "F.C. GUARDIA SANFR.",
+    "data": "15/02/26 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "ACADEMY PESCO SANNITA",
+    "team2": "F.C. GUARDIA SANFR.",
+    "data": "22/02/26 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "F.C. GUARDIA SANFR.",
+    "team2": "AZZURRA PAUPISI NEXT",
+    "data": "01/03/26 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "ATLETICO FOIANO",
+    "team2": "F.C. GUARDIA SANFR.",
+    "data": "08/03/26 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "F.C. GUARDIA SANFR.",
+    "team2": "ATLETICO CAMPOLI M",
+    "data": "15/03/26 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "ANTONIO TEDINO FOGLIANISE",
+    "team2": "F.C. GUARDIA SANFR.",
+    "data": "22/03/26 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "F.C. GUARDIA SANFR.",
+    "team2": "S.GIORGIOLAMOLARA 1992",
+    "data": "29/03/26 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "A.C. BASELICE",
+    "team2": "F.C. GUARDIA SANFR.",
+    "data": "12/04/26 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "F.C. GUARDIA SANFR.",
+    "team2": "POLISPORTIVA FAICCHIO",
+    "data": "19/04/26 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "VENERE 2021 A.S.D.",
+    "team2": "F.C. GUARDIA SANFR.",
+    "data": "26/04/26 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "F.C. GUARDIA SANFR.",
+    "team2": "UNION CERRETO SANNITA",
+    "data": "25/01/26 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "SPORTING PAGO VEIANO 2011",
+    "team2": "F.C. GUARDIA SANFR.",
+    "data": "01/02/26 14:30",
+    "lat": 41.2564,
+    "lon": 14.5985
+  },
+  {
+    "team1": "F.C. GUARDIA SANFR.",
+    "team2": "G.S. PIETRELCINA",
+    "data": "08/02/26 14:30",
     "lat": 41.2564,
     "lon": 14.5985
   }

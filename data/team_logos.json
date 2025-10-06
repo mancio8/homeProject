@@ -1,47 +1,94 @@
 [
-    {
-      "team": "ALBA DURAZZANO",
-      "logo": "https://content-s3.tuttocampo.it/Teams/Original/1236761.png?v=3&_gl=1*xkx0rk*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Mjg3MC41LjEuMTczMDI4NDU5Ny40My4wLjA."
-    },
-    {
-      "team": "AZZURRA PAUPISI NEXT",
-      "logo": "https://content-s3.tuttocampo.it/Teams/Original/931841.png?v=5&_gl=1*ef96gz*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Mjg3MC41LjEuMTczMDI4NDYzNy4zLjAuMA.."
-    },
-    {
-      "team": "BONEA",
-      "logo": "https://content-s3.tuttocampo.it/Teams/Original/1029534.png?v=1&_gl=1*jx3d29*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Mjg3MC41LjEuMTczMDI4NDY4OS42MC4wLjA."
-    },
-    {
-      "team": "F.C. GUARDIA SANFR.",
-      "logo": "https://content-s3.tuttocampo.it/Teams/Original/1007985.png?v=4&_gl=1*4qx18c*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Mjg3MC41LjEuMTczMDI4NDcxMy4zNi4wLjA."
-    },
-    {
-      "team": "FALCHI CAUTANO",
-      "logo": "https://content-s3.tuttocampo.it/Teams/Original/1252117.png?v=1&_gl=1*1mrse1n*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Mjg3MC41LjEuMTczMDI4NDc2NC41OS4wLjA."
-    },
-    {
-      "team": "FRASSO TELESINO",
-      "logo": "https://content-s3.tuttocampo.it/Teams/Original/1045496.png?v=1&_gl=1*1ewgklf*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Njc4OS42LjEuMTczMDI4Njc5MC41OS4wLjA."
-    },
-    {
-      "team": "G. LUCIANO PANNARANO",
-      "logo": "https://content-s3.tuttocampo.it/Teams/Original/1235291.png?v=1&_gl=1*1j79mii*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Njc4OS42LjEuMTczMDI4NjgzOS4xMC4wLjA."
-    },
-    {
-      "team": "MOIANO",
-      "logo": "https://content-s3.tuttocampo.it/Teams/Original/1086325.png?v=4&_gl=1*rz3bsj*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Njc4OS42LjEuMTczMDI4Njg4OC42MC4wLjA."
-    },
-    {
-      "team": "POL. APOLLOSA",
-      "logo": "https://content-s3.tuttocampo.it/Teams/Original/620005.png?v=8&_gl=1*l4sxls*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Njc4OS42LjEuMTczMDI4NjkyMS4yNy4wLjA."
-    },
-    {
-      "team": "REAL DUGENTA",
-      "logo": "https://content-s3.tuttocampo.it/Teams/Original/1066053.png?v=3&_gl=1*bndidg*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Njc4OS42LjEuMTczMDI4Njk1OS41OS4wLjA."
-    },
-    {
-      "team": "VALLE TELESINA",
-      "logo": "https://content-s3.tuttocampo.it/Teams/Original/1234792.png?v=1&_gl=1*1y0yph*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Njc4OS42LjEuMTczMDI4Njk5OC4yMC4wLjA."
-    }
-  ]
-  
+  {
+    "team": "ALBA DURAZZANO",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1236761.png?v=3&_gl=1*xkx0rk*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Mjg3MC41LjEuMTczMDI4NDU5Ny40My4wLjA."
+  },
+  {
+    "team": "AZZURRA PAUPISI NEXT",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/931841.png?v=5&_gl=1*ef96gz*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Mjg3MC41LjEuMTczMDI4NDYzNy4zLjAuMA.."
+  },
+  {
+    "team": "BONEA",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1029534.png?v=1&_gl=1*jx3d29*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Mjg3MC41LjEuMTczMDI4NDY4OS42MC4wLjA."
+  },
+  {
+    "team": "F.C. GUARDIA SANFR.",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1007985.png?v=4&_gl=1*4qx18c*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Mjg3MC41LjEuMTczMDI4NDcxMy4zNi4wLjA."
+  },
+  {
+    "team": "FALCHI CAUTANO",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1252117.png?v=1&_gl=1*1mrse1n*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Mjg3MC41LjEuMTczMDI4NDc2NC41OS4wLjA."
+  },
+  {
+    "team": "FRASSO TELESINO",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1045496.png?v=1&_gl=1*1ewgklf*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Njc4OS42LjEuMTczMDI4Njc5MC41OS4wLjA."
+  },
+  {
+    "team": "G. LUCIANO PANNARANO",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1235291.png?v=1&_gl=1*1j79mii*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Njc4OS42LjEuMTczMDI4NjgzOS4xMC4wLjA."
+  },
+  {
+    "team": "MOIANO",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1086325.png?v=4&_gl=1*rz3bsj*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Njc4OS42LjEuMTczMDI4Njg4OC42MC4wLjA."
+  },
+  {
+    "team": "POL. APOLLOSA",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/620005.png?v=8&_gl=1*l4sxls*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Njc4OS42LjEuMTczMDI4NjkyMS4yNy4wLjA."
+  },
+  {
+    "team": "REAL DUGENTA",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1066053.png?v=3&_gl=1*bndidg*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Njc4OS42LjEuMTczMDI4Njk1OS41OS4wLjA."
+  },
+  {
+    "team": "VALLE TELESINA",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1234792.png?v=1&_gl=1*1y0yph*_ga*NzM3NjA1MjMzLjE3Mjc0NDgyMTY.*_ga_K7D43T92X5*MTczMDI4Njc4OS42LjEuMTczMDI4Njk5OC4yMC4wLjA."
+  },
+  {
+    "team": "ACADEMY PESCO SANNITA",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1080068.png?v=4&_gl=1*1rctnfz*_ga*MTU4ODU5OTYzMC4xNzUxNDUxMzg1*_ga_K7D43T92X5*czE3NTk3NTA4NjEkbzExJGcxJHQxNzU5NzUxMTk0JGo3JGwwJGgw"
+  },
+  {
+    "team": "A.C. BASELICE",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/620750.png?v=2&_gl=1*c7248i*_ga*MTU4ODU5OTYzMC4xNzUxNDUxMzg1*_ga_K7D43T92X5*czE3NTk3NTA4NjEkbzExJGcxJHQxNzU5NzUxMjkxJGo0NyRsMCRoMA.."
+  },
+  {
+    "team": "ANTONIO TEDINO FOGLIANISE",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1045861.png?v=1&_gl=1*1nyspjm*_ga*MTU4ODU5OTYzMC4xNzUxNDUxMzg1*_ga_K7D43T92X5*czE3NTk3NTA4NjEkbzExJGcxJHQxNzU5NzUxMjYxJGoxMiRsMCRoMA.."
+  },
+  {
+    "team": "ATLETICO CAMPOLI M",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/921964.png?v=4&_gl=1*1adzuvu*_ga*MTU4ODU5OTYzMC4xNzUxNDUxMzg1*_ga_K7D43T92X5*czE3NTk3NTA4NjEkbzExJGcxJHQxNzU5NzUxMjI2JGo0NyRsMCRoMA.."
+  },
+  {
+    "team": "ATLETICO FOIANO",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1008635.png?v=1&_gl=1*1phfu55*_ga*MTU4ODU5OTYzMC4xNzUxNDUxMzg1*_ga_K7D43T92X5*czE3NTk3NTA4NjEkbzExJGcxJHQxNzU5NzUxMjEzJGo2MCRsMCRoMA.."
+  },
+  {
+    "team": "FOOTB.CLUB MONTEFALCONE",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1045863.png?v=3&_gl=1*9gxyhz*_ga*MTU4ODU5OTYzMC4xNzUxNDUxMzg1*_ga_K7D43T92X5*czE3NTk3NTA4NjEkbzExJGcxJHQxNzU5NzUxMTY1JGozNiRsMCRoMA.."
+  },
+  {
+    "team": "G.S. PIETRELCINA",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1069059.png?v=2&_gl=1*fmrht6*_ga*MTU4ODU5OTYzMC4xNzUxNDUxMzg1*_ga_K7D43T92X5*czE3NTk3NTA4NjEkbzExJGcxJHQxNzU5NzUxMDQzJGoxMiRsMCRoMA.."
+  },
+  {
+    "team": "POLISPORTIVA FAICCHIO",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1007983.png?v=2&_gl=1*39m64n*_ga*MTU4ODU5OTYzMC4xNzUxNDUxMzg1*_ga_K7D43T92X5*czE3NTk3NTA4NjEkbzExJGcxJHQxNzU5NzUxMzA3JGozMSRsMCRoMA.."
+  },
+  {
+    "team": "S.GIORGIOLAMOLARA 1992",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1029037.png?v=3&_gl=1*bndri0*_ga*MTU4ODU5OTYzMC4xNzUxNDUxMzg1*_ga_K7D43T92X5*czE3NTk3NTA4NjEkbzExJGcxJHQxNzU5NzUxMjc4JGo2MCRsMCRoMA.."
+  },
+  {
+    "team": "SPORTING PAGO VEIANO 2011",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/935362.png?v=1&_gl=1*vti4ou*_ga*MTU4ODU5OTYzMC4xNzUxNDUxMzg1*_ga_K7D43T92X5*czE3NTk3NTA4NjEkbzExJGcxJHQxNzU5NzUxMDEzJGo0MiRsMCRoMA.."
+  },
+  {
+    "team": "UNION CERRETO SANNITA",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1045859.png?v=3&_gl=1*5rykui*_ga*MTU4ODU5OTYzMC4xNzUxNDUxMzg1*_ga_K7D43T92X5*czE3NTk3NTA4NjEkbzExJGcxJHQxNzU5NzUwOTI5JGo2MCRsMCRoMA.."
+  },
+  {
+    "team": "VENERE 2021 A.S.D.",
+    "logo": "https://content-s3.tuttocampo.it/Teams/Original/1007803.png?v=1&_gl=1*wad6cr*_ga*MTU4ODU5OTYzMC4xNzUxNDUxMzg1*_ga_K7D43T92X5*czE3NTk3NTA4NjEkbzExJGcxJHQxNzU5NzUxMzI5JGo5JGwwJGgw"
+  }
+]
