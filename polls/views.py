@@ -137,7 +137,7 @@ def calendario(request):
 
 def table_view(request):
     # URL della pagina da cui effettuare il web scraping
-    url = "https://benevento.iamcalcio.it/classifiche/188/3a-categoria-girone-b/"
+    url = "https://benevento.iamcalcio.it/classifiche/104/2a-categoria-girone-d/"
     
     # Recupera il contenuto della pagina
     response = requests.get(url)

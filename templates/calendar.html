@@ -4,9 +4,21 @@
 
 {% block styles %}
 <style>
+    :root {
+        --primary-red: #630e0e;
+        --secondary-red: #8a1a1a;
+        --accent-red: #b22222;
+        --light-red: #d9534f;
+        --dark-text: #2c3e50;
+        --light-bg: #f8f9fa;
+        --white: #ffffff;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    
     .hero-section {
-        background: linear-gradient(135deg, #630e0e 0%, #8a1a1a 100%);
-        padding: 3rem 1rem;
+        background: linear-gradient(135deg, var(--primary-red) 0%, var(--secondary-red) 100%);
+        padding: 4rem 1rem;
         position: relative;
         overflow: hidden;
     }
@@ -18,146 +30,318 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" opacity="0.05"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="white"/></svg>');
-        background-size: 30px 30px;
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" opacity="0.03"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="white"/></svg>');
+        background-size: 40px 40px;
     }
     
     .club-title {
         font-family: 'Montserrat', sans-serif;
-        font-weight: 700;
-        text-shadow: 3px 3px 6px rgba(221, 224, 13, 0.918);
+        font-weight: 800;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         position: relative;
+        margin-bottom: 2rem;
+    }
+    
+    .club-subtitle {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+        opacity: 0.9;
+        margin-bottom: 3rem;
     }
     
     .next-match-card {
         border: none;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        border-radius: 16px;
+        box-shadow: var(--shadow-hover);
         overflow: hidden;
         position: relative;
         z-index: 1;
-        transition: transform 0.3s ease;
+        transition: all 0.3s ease;
+        background: var(--white);
+        max-width: 800px;
+        margin: 0 auto;
     }
     
     .next-match-card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
     }
     
     .match-header {
-        background: linear-gradient(to right, #b22222, #d9534f);
-        color: white;
-        padding: 1rem;
-    }
-    
-    .team-logo {
-        width: 80px;
-        height: 80px;
-        object-fit: contain;
-        transition: transform 0.3s ease;
-        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-    }
-    
-    .team-logo:hover {
-        transform: scale(1.1);
-    }
-    
-    .vs-text {
-        font-size: 1.8rem;
-        font-weight: 700;
-        color: #630e0e;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    
-    .match-date {
-        background-color: #f8f9fa;
-        border-radius: 20px;
-        padding: 0.5rem 1rem;
-        display: inline-block;
-        font-weight: 600;
-    }
-    
-    .weather-info {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        background-color: rgba(255,255,255,0.9);
-        padding: 0.5rem;
-        border-radius: 20px;
-        margin-top: 1rem;
-    }
-    
-    .calendar-title {
+        background: linear-gradient(to right, var(--accent-red), var(--light-red));
+        color: var(--white);
+        padding: 1.5rem;
         position: relative;
-        display: inline-block;
-        margin-bottom: 2rem;
     }
     
-    .calendar-title::after {
+    .match-header::after {
         content: "";
         position: absolute;
         bottom: -10px;
         left: 50%;
         transform: translateX(-50%);
-        width: 80px;
+        width: 60px;
         height: 3px;
-        background: linear-gradient(to right, #630e0e, #b22222);
+        background: var(--white);
+        opacity: 0.7;
+    }
+    
+    .team-logo {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        transition: all 0.3s ease;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+        padding: 10px;
+        background: var(--white);
+        border-radius: 12px;
+    }
+    
+    .team-logo:hover {
+        transform: scale(1.15) rotate(5deg);
+    }
+    
+    .vs-container {
+        position: relative;
+        padding: 0 1rem;
+    }
+    
+    .vs-text {
+        font-size: 2rem;
+        font-weight: 900;
+        color: var(--accent-red);
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background: var(--light-bg);
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        border: 3px solid var(--accent-red);
+    }
+    
+    .match-date {
+        background: linear-gradient(135deg, var(--primary-red), var(--accent-red));
+        color: var(--white);
+        border-radius: 25px;
+        padding: 0.75rem 2rem;
+        display: inline-flex;
+        align-items: center;
+        font-weight: 600;
+        box-shadow: var(--shadow);
+        margin: 1rem 0;
+    }
+    
+    .weather-info {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        background: var(--light-bg);
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        margin-top: 1rem;
+        border: 1px solid #e9ecef;
+    }
+    
+    .calendar-section {
+        background: var(--light-bg);
+        padding: 4rem 0;
+    }
+    
+    .calendar-title {
+        position: relative;
+        display: inline-block;
+        margin-bottom: 3rem;
+        color: var(--dark-text);
+    }
+    
+    .calendar-title::after {
+        content: "";
+        position: absolute;
+        bottom: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(to right, var(--primary-red), var(--accent-red));
+        border-radius: 2px;
     }
     
     .match-card {
         border: none;
-        border-radius: 10px;
+        border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        box-shadow: var(--shadow);
         transition: all 0.3s ease;
         height: 100%;
+        background: var(--white);
+        position: relative;
+    }
+    
+    .match-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(to bottom, var(--primary-red), var(--accent-red));
     }
     
     .match-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        box-shadow: var(--shadow-hover);
     }
     
     .match-card-body {
-        padding: 1.5rem;
-        background: white;
+        padding: 1.75rem;
     }
     
     .small-team-logo {
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
         object-fit: contain;
+        border-radius: 8px;
+        padding: 4px;
+        background: var(--white);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
     
     .team-name {
         font-weight: 600;
-        color: #333;
+        color: var(--dark-text);
+        font-size: 0.95rem;
     }
     
     .match-time {
-        background-color: #f8f9fa;
-        color: #630e0e;
+        background: linear-gradient(135deg, var(--primary-red), var(--accent-red));
+        color: var(--white);
         font-weight: 600;
-        padding: 0.25rem 0.75rem;
+        padding: 0.5rem 1rem;
         border-radius: 20px;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 1rem 0;
+    }
+    
+    .match-status {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+    
+    .status-upcoming {
+        background: #e3f2fd;
+        color: #1976d2;
+    }
+    
+    .status-live {
+        background: #ffebee;
+        color: #d32f2f;
+        animation: pulse 1.5s infinite;
+    }
+    
+    .status-finished {
+        background: #e8f5e8;
+        color: #2e7d32;
     }
     
     .no-matches {
-        background-color: #f8f9fa;
-        border-radius: 10px;
-        padding: 2rem;
+        background: var(--white);
+        border-radius: 12px;
+        padding: 3rem;
         text-align: center;
+        box-shadow: var(--shadow);
+    }
+    
+    .filter-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+        padding: 0.5rem 1.5rem;
+        border: 2px solid var(--primary-red);
+        background: transparent;
+        color: var(--primary-red);
+        border-radius: 25px;
+        transition: all 0.3s ease;
+        font-weight: 600;
+    }
+    
+    .filter-btn.active,
+    .filter-btn:hover {
+        background: var(--primary-red);
+        color: var(--white);
+        transform: translateY(-2px);
+    }
+    
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.7; }
+        100% { opacity: 1; }
+    }
+    
+    .stadium-info {
+        font-size: 0.85rem;
+        color: #6c757d;
+        margin-top: 0.5rem;
     }
     
     @media (max-width: 768px) {
+        .hero-section {
+            padding: 3rem 1rem;
+        }
+        
+        .team-logo {
+            width: 70px;
+            height: 70px;
+        }
+        
+        .vs-text {
+            font-size: 1.5rem;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .match-header h4 {
+            font-size: 1.1rem;
+        }
+        
+        .filter-buttons {
+            gap: 0.5rem;
+        }
+        
+        .filter-btn {
+            padding: 0.4rem 1rem;
+            font-size: 0.9rem;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .club-title {
+            font-size: 2rem;
+        }
+        
         .team-logo {
             width: 60px;
             height: 60px;
         }
         
-        .vs-text {
-            font-size: 1.5rem;
+        .match-card-body {
+            padding: 1.25rem;
         }
     }
 </style>
@@ -165,104 +349,216 @@
 
 {% block content %}
 {% include "header.html" %}
+
 <!-- Hero Section -->
-<section class="hero-section text-center text-white">
+<section class="hero-section text-white">
     <div class="container position-relative">
-        <h1 class="club-title text-dark display-4 mb-4">F.C. Guardia Sanframondi</h1>
+        <div class="text-center">
+            <h1 class="club-title display-4">F.C. Guardia Sanframondi</h1>
+            <p class="club-subtitle lead fs-4">Calendario Ufficiale Stagione 2025/2026</p>
+        </div>
         
         <!-- Prossimo Match -->
         {% if next_match %}
-        <div class="next-match-card mx-auto" style="max-width: 600px;">
+        <div class="next-match-card">
             <div class="match-header text-center">
-                <h4 class="mb-0"><i class="fas fa-calendar-alt me-2"></i>Prossimo Match</h4>
+                <h4 class="mb-0"><i class="fas fa-fire me-2"></i>PROSSIMA PARTITA</h4>
             </div>
-            <div class="card-body py-4">
+            <div class="card-body py-5">
                 <div class="row align-items-center">
                     <!-- Squadra Casa -->
                     <div class="col-md-5 text-center">
-                        <img src="{{ next_match.team1_logo }}" alt="{{ next_match.team1 }}" class="team-logo mb-2">
-                        <h5 class="team-name mt-2">{{ next_match.team1 }}</h5>
+                        <img src="{{ next_match.team1_logo }}" alt="{{ next_match.team1 }}" class="team-logo mb-3">
+                        <h5 class="team-name fw-bold fs-5">{{ next_match.team1 }}</h5>
+                        {% if next_match.is_home %}
+                        <div class="stadium-info">
+                            <i class="fas fa-map-marker-alt me-1"></i>In casa
+                        </div>
+                        {% endif %}
                     </div>
                     
                     <!-- VS -->
                     <div class="col-md-2 text-center">
-                        <div class="vs-text">VS</div>
+                        <div class="vs-container">
+                            <div class="vs-text">VS</div>
+                        </div>
                     </div>
                     
                     <!-- Squadra Ospite -->
                     <div class="col-md-5 text-center">
-                        <img src="{{ next_match.team2_logo }}" alt="{{ next_match.team2 }}" class="team-logo mb-2">
-                        <h5 class="team-name mt-2">{{ next_match.team2 }}</h5>
+                        <img src="{{ next_match.team2_logo }}" alt="{{ next_match.team2 }}" class="team-logo mb-3">
+                        <h5 class="team-name fw-bold fs-5">{{ next_match.team2 }}</h5>
+                        {% if not next_match.is_home %}
+                        <div class="stadium-info">
+                            <i class="fas fa-map-marker-alt me-1"></i>In trasferta
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
                 
                 <!-- Data e Ora -->
                 <div class="text-center mt-4">
                     <div class="match-date">
-                        <i class="far fa-clock me-2"></i>{{ next_match.data }}
+                        <i class="far fa-calendar me-2"></i>
+                        <span>{{ next_match.data }}</span>
                     </div>
                 </div>
                 
                 <!-- Meteo -->
                 {% if next_match.weather %}
                     {% if next_match.weather.error %}
-                        <div class="weather-info mt-3">
-                            <i class="fas fa-cloud-sun"></i>
-                            <span>Meteo non disponibile</span>
+                        <div class="weather-info">
+                            <i class="fas fa-cloud-sun text-muted"></i>
+                            <span class="text-muted">Meteo non disponibile</span>
                         </div>
                     {% else %}
-                        <div class="weather-info mt-3">
-                            <img src="{{ next_match.weather.icon }}" alt="Icona meteo" width="24">
-                            <span>{{ next_match.weather.description }} ({{ next_match.weather.temperature }}°C)</span>
+                        <div class="weather-info">
+                            <img src="{{ next_match.weather.icon }}" alt="Icona meteo" width="28">
+                            <span class="fw-medium">{{ next_match.weather.description }} ({{ next_match.weather.temperature }}°C)</span>
                         </div>
                     {% endif %}
                 {% else %}
-                    <div class="weather-info mt-3">
-                        <i class="fas fa-cloud-sun"></i>
-                        <span>Meteo non disponibile</span>
+                    <div class="weather-info">
+                        <i class="fas fa-cloud-sun text-muted"></i>
+                        <span class="text-muted">Meteo non disponibile</span>
                     </div>
                 {% endif %}
             </div>
         </div>
         {% else %}
         <div class="no-matches mx-auto" style="max-width: 600px;">
-            <h5><i class="far fa-calendar-times me-2"></i>Nessun match in programma</h5>
+            <div class="text-center py-4">
+                <i class="far fa-calendar-times display-1 text-muted mb-3"></i>
+                <h5 class="text-dark">Nessun match in programma</h5>
+                <p class="text-muted">Torna presto per vedere il prossimo calendario</p>
+            </div>
         </div>
         {% endif %}
     </div>
 </section>
 
 <!-- Calendario Partite -->
-<div class="container py-5">
-    <h2 class="calendar-title text-center">Calendario Partite</h2>
-    
-    <div class="row">
-        {% for match in matches %}
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="match-card h-100">
-                <div class="match-card-body">
-                    <!-- Squadra Casa -->
-                    <div class="d-flex align-items-center mb-3">
-                        <img src="{{ match.team1_logo }}" alt="{{ match.team1 }}" class="small-team-logo">
-                        <span class="team-name ms-3">{{ match.team1 }}</span>
-                    </div>
-                    
-                    <!-- Data e Ora -->
-                    <div class="text-center my-3">
-                        <span class="match-time">
-                            <i class="far fa-clock me-1"></i>{{ match.data }}
+<section class="calendar-section">
+    <div class="container">
+        <h2 class="calendar-title text-center display-5 fw-bold">Calendario Completo</h2>
+        
+        <!-- Filtri -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">Tutte le partite</button>
+            <button class="filter-btn" data-filter="home">In casa</button>
+            <button class="filter-btn" data-filter="away">In trasferta</button>
+            <button class="filter-btn" data-filter="upcoming">Prossime</button>
+        </div>
+        
+        <div class="row" id="matches-container">
+            {% for match in matches %}
+            <div class="col-xl-4 col-lg-6 mb-4 match-item" 
+                 data-home="{% if match.team1 == 'F.C. GUARDIA SANFR' %}home{% else %}away{% endif %}"
+                 data-status="{{ match.status }}">
+                <div class="match-card h-100">
+                    <div class="match-card-body">
+                        <!-- Status Badge -->
+                        <span class="match-status status-{{ match.status }}">
+                            {% if match.status == 'upcoming' %}
+                                <i class="far fa-clock me-1"></i>In programma
+                            {% elif match.status == 'live' %}
+                                <i class="fas fa-play me-1"></i>Live
+                            {% else %}
+                                <i class="far fa-check-circle me-1"></i>Terminata
+                            {% endif %}
                         </span>
-                    </div>
-                    
-                    <!-- Squadra Ospite -->
-                    <div class="d-flex align-items-center">
-                        <img src="{{ match.team2_logo }}" alt="{{ match.team2 }}" class="small-team-logo">
-                        <span class="team-name ms-3">{{ match.team2 }}</span>
+                        
+                        <!-- Squadra Casa -->
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{{ match.team1_logo }}" alt="{{ match.team1 }}" class="small-team-logo">
+                            <div class="ms-3">
+                                <div class="team-name">{{ match.team1 }}</div>
+                                {% if match.team1 == 'F.C. GUARDIA SANFR' %}
+                                    <small class="text-success fw-medium">Casa</small>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Data e Ora -->
+                        <div class="text-center my-3">
+                            <span class="match-time">
+                                <i class="far fa-calendar me-1"></i>{{ match.data }}
+                            </span>
+                        </div>
+                        
+                        <!-- Squadra Ospite -->
+                        <div class="d-flex align-items-center">
+                            <img src="{{ match.team2_logo }}" alt="{{ match.team2 }}" class="small-team-logo">
+                            <div class="ms-3">
+                                <div class="team-name">{{ match.team2 }}</div>
+                                {% if match.team2 == 'F.C. GUARDIA SANFR' %}
+                                    <small class="text-primary fw-medium">Trasferta</small>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
-        {% endfor %}
+        
+        {% if not matches %}
+        <div class="no-matches">
+            <div class="text-center py-5">
+                <i class="far fa-calendar-plus display-1 text-muted mb-3"></i>
+                <h4 class="text-dark mb-3">Nessuna partita trovata</h4>
+                <p class="text-muted">Il calendario delle partite sarà disponibile a breve</p>
+            </div>
+        </div>
+        {% endif %}
     </div>
-</div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Filtri partite
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const matchItems = document.querySelectorAll('.match-item');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Rimuovi classe active da tutti i bottoni
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Aggiungi classe active al bottone cliccato
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                
+                matchItems.forEach(item => {
+                    if (filter === 'all') {
+                        item.style.display = 'block';
+                    } else if (filter === 'home' && item.getAttribute('data-home') === 'home') {
+                        item.style.display = 'block';
+                    } else if (filter === 'away' && item.getAttribute('data-home') === 'away') {
+                        item.style.display = 'block';
+                    } else if (filter === 'upcoming' && item.getAttribute('data-status') === 'upcoming') {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Animazione al caricamento
+        const cards = document.querySelectorAll('.match-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, 100 * index);
+        });
+    });
+</script>
 {% endblock %}
