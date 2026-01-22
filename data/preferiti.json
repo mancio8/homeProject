@@ -38,5 +38,10 @@
         "titolo": "ArciPortainer",
         "immagine": "https://res.cloudinary.com/canonical/image/fetch/f_auto,q_auto,fl_sanitize,c_fill,w_100,h_100/https://api.charmhub.io/api/v1/media/download/charm_cMu7M9K6a65FsKZvrLZOZwyQradwbs7E_icon_5cef79c2d18f67464f39c8f2cf2d7ebb815b0071f04d3ffbb94f49fddd3ab666.png",
         "url": "http://129.152.15.13:9000/#!/2/docker/dashboard"
+    },
+    {
+        "titolo": "Jellyfin",
+        "immagine": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9hELYbRA5IB6-ci3AzpkvOTJ3BAq6-_LmMg&s",
+        "url": "https://jellyfin.vinceasr.duckdns.org/web/#/home.html"
     }
 ]

@@ -1,5 +1,11 @@
 [
     {
+        "title": " Le guerre di Lucas",
+        "author": "Laurent Hopman",
+        "read_date": "2025-06-14",
+        "cover": "http://books.google.com/books/content?id=F1gFEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+    },
+    {
         "title": "Cronache di spogliatoio",
         "author": "Giulio Incagli",
         "read_date": "2025-03-14",
@@ -96,9 +102,9 @@
         "cover": "http://books.google.com/books/content?id=JVKxBgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
     },
     {
-        "title": " Le guerre di Lucas",
-        "author": "Laurent Hopman",
-        "read_date": "2025-06-14",
-        "cover": "http://books.google.com/books/content?id=F1gFEQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        "title": "Bea wolf",
+        "author": "Zach Weinersmith",
+        "read_date": "2026-01-21",
+        "cover": "http://books.google.com/books/content?id=RfWrEAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
     }
 ]
