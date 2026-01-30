@@ -1,22 +1,23 @@
-# Usa l'immagine ufficiale di Python
+# Usa l'immagine Python slim
 FROM python:3.10-slim
 
-# Variabili d'ambiente per ottimizzare Python
+# Variabili ambiente Python
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
-# Imposta la directory di lavoro
+# Imposta la working directory
 WORKDIR /app
 
-# Installa le dipendenze
+# Aggiorna pip e installa le dipendenze Python
 COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
 
-# Copia i file del progetto
+# Copia il progetto
 COPY . /app/
 
-# Espone la porta di Django
+# Esponi porta Django (sviluppo)
 EXPOSE 3000
 
-# Comando per avviare Django
+# Comando per avviare Django in sviluppo
 CMD ["python", "manage.py", "runserver", "0.0.0.0:3000"]

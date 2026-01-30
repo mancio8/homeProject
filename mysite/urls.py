@@ -25,4 +25,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('sardegna', views.sardegna, name='sardegna'),
     path("podcast/", views.podcast_view, name="podcast"),
+    path("campionato/", include("campionato.urls")),
+
 ]

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}I Tuoi Preferiti | F.C. Guardia Sanframondi{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block content %}
+{% include "header.html" %}
+<div class="container my-5">
+
+    <h1 class="mb-4">{{ squadra }} – Ultime {{ stats.stagioni }} stagioni</h1>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header">Statistiche aggregate</div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Partite: {{ stats.giocate }}</li>
+                        <li class="list-group-item">Vittorie: {{ stats.vittorie }}</li>
+                        <li class="list-group-item">Pareggi: {{ stats.pareggi }}</li>
+                        <li class="list-group-item">Sconfitte: {{ stats.sconfitte }}</li>
+                        <li class="list-group-item">Punti: {{ stats.punti }}</li>
+                        <li class="list-group-item">Gol fatti: {{ stats.gol_fatti }}</li>
+                        <li class="list-group-item">Gol subiti: {{ stats.gol_subiti }}</li>
+                        <li class="list-group-item">Differenza reti: {{ stats.diff_reti }}</li>
+                        <li class="list-group-item">Media punti/partita: {{ stats.media_punti }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <canvas id="graficoStagioni"></canvas>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card shadow-sm mb-3">
+                <div class="card-header">Stagioni considerate</div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for s in stagioni %}
+                            <li class="list-group-item">{{ s.stagione }} – {{ s.categoria }} ({{ s.girone }}) – Posizione: {{ s.posizione }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+const ctx = document.getElementById('graficoStagioni').getContext('2d');
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: {{ grafico.labels|safe }},
+        datasets: [{
+            label: 'Posizione in classifica',
+            data: {{ grafico.data|safe }},
+            backgroundColor: {{ grafico.colors|safe }},
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        scales: {
+            x: {
+                reverse: true  // la posizione 1 in cima
+            }
+        }
+    }
+});
+</script>
+
+{% endblock %}

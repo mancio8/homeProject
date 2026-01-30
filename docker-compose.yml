@@ -1,11 +1,10 @@
-version: "3.9"
-
 services:
   web:
     build: .
     ports:
-      - "3000:3000" # Mappa la porta 3000 del container a 8000 della macchina
+      - "3000:3000"   # Porta Django
     volumes:
       - .:/app
     environment:
       - DEBUG=True
+    # Non serve depends_on perché non c'è DB separato

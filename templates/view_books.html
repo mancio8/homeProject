@@ -4,18 +4,18 @@
 
 {% block styles %}
 <style>
-    /* Stili base */
     .library-container {
-        padding: 1rem 0.5rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
     }
-    
+
     .section-title {
-        font-size: 1.5rem;
-        margin-bottom: 1.5rem;
+        font-size: 1.6rem;
+        margin-bottom: 0;
         text-align: center;
         position: relative;
     }
-    
+
     .section-title::after {
         content: "";
         position: absolute;
@@ -26,113 +26,46 @@
         height: 3px;
         background: linear-gradient(to right, #630e0e, #b22222);
     }
-    
-    /* Card aggiungi libro */
-    .add-book-card {
-        border-radius: 10px;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    }
-    
-    .add-book-header {
+
+    .add-book-card .card-header {
         background: linear-gradient(to right, #1a1a1a, #630e0e);
-        color: white;
-        border-radius: 10px 10px 0 0 !important;
-        padding: 1rem;
-        font-size: 1.1rem;
+        color: #fff;
     }
-    
-    /* Form stili */
-    .form-control {
-        font-size: 0.9rem;
-        padding: 0.6rem 0.75rem;
-    }
-    
-    .form-label {
-        font-size: 0.9rem;
-        margin-bottom: 0.3rem;
-    }
-    
-    /* Card libro - Layout verticale */
-    .book-card {
-        border-radius: 10px;
-        margin-bottom: 1rem;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-    }
-    
-    .book-cover-container {
-        padding: 1rem 1rem 0 1rem;
+
+    .book-card .book-cover-container {
+        padding: 1rem 1rem 0;
         text-align: center;
     }
-    
+
     .book-cover {
         width: auto;
-        height: 200px; /* Altezza aumentata */
+        height: 200px;
         max-width: 100%;
         object-fit: contain;
         border-radius: 4px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
-    
+
     .book-body {
-        padding: 1rem;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
     }
-    
+
     .book-title {
         font-size: 1rem;
         font-weight: 600;
-        margin-bottom: 0.3rem;
     }
-    
+
     .book-author {
         font-size: 0.85rem;
-        color: #666;
-        margin-bottom: 0.3rem;
     }
-    
+
     .book-date {
         font-size: 0.8rem;
         color: #630e0e;
         font-weight: 500;
-        margin-bottom: 0.8rem;
     }
-    
-    /* Pulsanti */
-    .btn {
-        font-size: 0.8rem;
-        padding: 0.35rem 0.7rem;
-    }
-    
-    .btn-sm {
-        padding: 0.25rem 0.5rem;
-    }
-    
-    .btn-primary {
-        background: linear-gradient(to right, #630e0e, #b22222);
-        border: none;
-    }
-    
-    /* Barra strumenti */
-    .tools-bar {
-        background: white;
-        padding: 0.8rem;
-        border-radius: 8px;
-        margin-bottom: 1.5rem;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    
-    .input-group-text {
-        font-size: 0.8rem;
-        padding: 0.5rem 0.75rem;
-    }
-    
-    /* Stato vuoto */
+
     .empty-state {
         text-align: center;
         padding: 2rem 1rem;
@@ -140,38 +73,24 @@
         border-radius: 10px;
         margin-top: 1rem;
     }
-    
+
     .empty-state-icon {
         font-size: 2rem;
         color: #adb5bd;
         margin-bottom: 0.8rem;
     }
-    
-    /* Modale */
-    .modal-content {
-        border-radius: 10px;
+
+    .tools-bar {
+        border-radius: 8px;
     }
-    
-    .modal-header {
-        padding: 1rem;
-    }
-    
-    .modal-title {
-        font-size: 1.1rem;
-    }
-    
-    /* Layout colonne */
+
     @media (max-width: 576px) {
         .book-cover {
-            height: 180px; /* Leggermente più piccola su mobile */
+            height: 180px;
         }
-        
-        .book-body {
-            padding: 0.8rem;
-        }
-        
+
         .section-title {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
         }
     }
 </style>
@@ -181,143 +100,162 @@
 {% include "header.html" %}
 
 <div class="container library-container">
-    <!-- Form Aggiungi Libro -->
-    <div class="card add-book-card">
-        <div class="card-header add-book-header">
-            <h5 class="mb-0"><i class="fas fa-plus-circle me-2"></i>Aggiungi Libro</h5>
-        </div>
-        <div class="card-body">
-            <form method="POST" action="{% url 'view_books' %}">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label for="title" class="form-label">Titolo</label>
-                    <input type="text" class="form-control" id="title" name="title" required>
+    <div class="row g-4">
+        <!-- Colonna sinistra: form aggiungi libro -->
+        <div class="col-12 col-lg-4">
+            <div class="card shadow-sm add-book-card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-plus-circle me-2"></i>Aggiungi libro
+                    </h5>
                 </div>
-                <div class="mb-3">
-                    <label for="author" class="form-label">Autore</label>
-                    <input type="text" class="form-control" id="author" name="author" required>
-                </div>
-                <div class="mb-3">
-                    <label for="read_date" class="form-label">Data Lettura</label>
-                    <input type="date" class="form-control" id="read_date" name="read_date" required>
-                </div>
-                <div class="mb-3">
-                    <label for="cover_url" class="form-label">URL Copertina</label>
-                    <input type="url" class="form-control" id="cover_url" name="cover_url" placeholder="Incolla URL immagine verticale">
-                </div>
-                <button type="submit" name="add_book" class="btn btn-primary w-100">
-                    <i class="fas fa-book-medical me-2"></i>Aggiungi
-                </button>
-            </form>
-        </div>
-    </div>
+                <div class="card-body">
+                    <form method="POST" action="{% url 'view_books' %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Titolo</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="author" class="form-label">Autore</label>
+                                <input type="text" class="form-control" id="author" name="author" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="read_date" class="form-label">Data lettura</label>
+                                <input type="date" class="form-control" id="read_date" name="read_date" required>
+                            </div>
+                        </div>
+                        <div class="mt-3 mb-3">
+                            <input type="url" class="form-control" id="cover_url_{{ book.title|slugify }}" name="cover_url"
+                                value="{{ book.cover_url }}" placeholder="Incolla URL immagine verticale">
 
-    <!-- Titolo Sezione -->
-    <h1 class="section-title">La Tua Biblioteca</h1>
-    
-    <!-- Barra Strumenti -->
-    <div class="tools-bar">
-        <div class="row">
-            <div class="col-12 mb-3">
-                <form method="GET" action="{% url 'view_books' %}">
-                    <div class="input-group">
-                        <label class="input-group-text" for="sort-books">Ordina:</label>
-                        <select id="sort-books" name="sort_by" class="form-select" onchange="this.form.submit()">
-                            <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Titolo</option>
-                            <option value="author" {% if sort_by == 'author' %}selected{% endif %}>Autore</option>
-                            <option value="read_date" {% if sort_by == 'read_date' %}selected{% endif %}>Data</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="col-12">
-                <form method="GET" action="{% url 'download_books_json' %}">
-                    <button type="submit" class="btn btn-primary w-100">
-                        <i class="fas fa-file-export me-2"></i>Esporta JSON
-                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Lista Libri -->
-    <div class="row">
-        {% for book in books %}
-        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-            <div class="book-card">
-                <div class="book-cover-container">
-                    <img src="{{ book.cover }}" class="book-cover" alt="Copertina {{ book.title }}">
-                </div>
-                <div class="book-body">
-                    <h5 class="book-title">{{ book.title }}</h5>
-                    <p class="book-author">{{ book.author }}</p>
-                    <p class="book-date">
-                        <i class="far fa-calendar-alt me-2"></i>{{ book.read_date }}
-                    </p>
-                    <div class="d-flex justify-content-between mt-auto">
-                        <!-- Pulsante Modifica -->
-                        <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                data-bs-target="#editModal{{ book.title|slugify }}">
-                            <i class="fas fa-edit me-1"></i>Modifica
+                        </div>
+                        <button type="submit" name="add_book" class="btn btn-primary w-100">
+                            <i class="fas fa-book-medical me-2"></i>Aggiungi
                         </button>
-                        
-                        <!-- Pulsante Elimina -->
-                        <form action="{% url 'delete_book' book.title %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-danger btn-sm"
-                                    onclick="return confirm('Eliminare questo libro?')">
-                                <i class="fas fa-trash-alt me-1"></i>Elimina
-                            </button>
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
-        {% empty %}
-        <div class="empty-state">
-            <div class="empty-state-icon">
-                <i class="fas fa-book-open"></i>
+
+        <!-- Colonna destra: titolo, tools, lista libri -->
+        <div class="col-12 col-lg-8">
+            <!-- Titolo + barra strumenti -->
+            <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-3 gap-3">
+                <h1 class="section-title">La tua biblioteca</h1>
+
+                <div class="card shadow-sm border-0 tools-bar w-100 w-md-auto">
+                    <div class="card-body py-2">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-12 col-sm-7">
+                                <form method="GET" action="{% url 'view_books' %}">
+                                    <div class="input-group input-group-sm">
+                                        <label class="input-group-text" for="sort-books">Ordina</label>
+                                        <select id="sort-books" name="sort_by" class="form-select" onchange="this.form.submit()">
+                                            <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Titolo</option>
+                                            <option value="author" {% if sort_by == 'author' %}selected{% endif %}>Autore</option>
+                                            <option value="read_date" {% if sort_by == 'read_date' %}selected{% endif %}>Data</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-12 col-sm-5">
+                                <form method="GET" action="{% url 'download_books_json' %}">
+                                    <button type="submit" class="btn btn-primary btn-sm w-100">
+                                        <i class="fas fa-file-export me-2"></i>Esporta JSON
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <h5>Nessun libro trovato</h5>
-            <p class="text-muted">Aggiungi il tuo primo libro per iniziare</p>
+
+            <!-- Griglia libri -->
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for book in books %}
+                <div class="col">
+                    <div class="card h-100 book-card">
+                        <div class="book-cover-container">
+                            <img src="{{ book.cover_url }}" class="card-img-top book-cover" alt="Copertina {{ book.title }}">
+                        </div>
+                        <div class="card-body d-flex flex-column book-body">
+                            <h5 class="card-title book-title">{{ book.title }}</h5>
+                            <p class="card-subtitle mb-1 text-muted book-author">{{ book.author }}</p>
+                            <p class="book-date mb-3">
+                                <i class="far fa-calendar-alt me-2"></i>{{ book.read_date }}
+                            </p>
+                            <div class="mt-auto d-flex justify-content-between gap-2">
+                                <!-- Pulsante Modifica -->
+                                <button type="button" class="btn btn-warning btn-sm flex-grow-1"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#editModal{{ book.title|slugify }}">
+                                    <i class="fas fa-edit me-1"></i>Modifica
+                                </button>
+
+                                <!-- Pulsante Elimina -->
+                               <form action="{% url 'delete_book' book.id %}" method="post" class="flex-grow-1">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger btn-sm w-100"
+                                            onclick="return confirm('Eliminare questo libro?')">
+                                        <i class="fas fa-trash-alt me-1"></i>Elimina
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="col">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h5>Nessun libro trovato</h5>
+                        <p class="text-muted">Aggiungi il tuo primo libro per iniziare</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-        {% endfor %}
     </div>
 </div>
 
 <!-- Modali Modifica -->
 {% for book in books %}
 <div class="modal fade" id="editModal{{ book.title|slugify }}" tabindex="-1"
-    aria-labelledby="editModalLabel{{ book.title|slugify }}" aria-hidden="true">
+     aria-labelledby="editModalLabel{{ book.title|slugify }}" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel{{ book.title|slugify }}">
                     <i class="fas fa-edit me-2"></i>Modifica "{{ book.title }}"
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
             </div>
             <div class="modal-body">
                 <form method="post">
                     {% csrf_token %}
-                    <input type="hidden" name="title" value="{{ book.title }}">
+                    <input type="hidden" name="book_id" value="{{ book.id }}">
+
                     <div class="text-center mb-3">
-                        <img src="{{ book.cover }}" style="height: 200px; width: auto;" alt="Copertina">
+                        <img src="{{ book.cover_url }}" style="height: 200px; width: auto;" alt="Copertina">
                     </div>
                     <div class="mb-3">
-                        <label for="author" class="form-label">Autore</label>
-                        <input type="text" class="form-control" id="author" name="author"
-                            value="{{ book.author }}" required>
+                        <label for="author_{{ book.title|slugify }}" class="form-label">Autore</label>
+                        <input type="text" class="form-control" id="author_{{ book.title|slugify }}" name="author"
+                               value="{{ book.author }}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="read_date" class="form-label">Data lettura</label>
-                        <input type="date" class="form-control" id="read_date" name="read_date"
-                            value="{{ book.read_date }}" required>
+                        <label for="read_date_{{ book.title|slugify }}" class="form-label">Data lettura</label>
+                        <input type="date" class="form-control" id="read_date_{{ book.title|slugify }}" name="read_date"
+                               value="{{ book.read_date }}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="cover_url" class="form-label">URL Copertina</label>
-                        <input type="text" class="form-control" id="cover_url" name="cover_url"
-                            value="{{ book.cover }}" placeholder="Incolla URL immagine verticale">
+                        <label for="cover_url_{{ book.title|slugify }}" class="form-label">URL copertina</label>
+                        <input type="url" class="form-control" id="cover_url_{{ book.title|slugify }}" name="cover_url"
+                               value="{{ book.cover_url }}" placeholder="Incolla URL immagine verticale">
                     </div>
                     <button type="submit" name="edit_book" class="btn btn-primary w-100">
                         <i class="fas fa-save me-2"></i>Salva

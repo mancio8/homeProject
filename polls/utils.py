@@ -5,6 +5,9 @@ from io import BytesIO
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
+from .models import Book
+from datetime import datetime
+import requests
 
 
 def carica_json(file_name):
@@ -41,3 +44,33 @@ def scarica_pdf(request, anno):
 def salva_json(file_path, data):
     with open(file_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
+
+
+def get_book_cover(title, author):
+    query = f"{title} {author}"
+    url = f"https://www.googleapis.com/books/v1/volumes?q={query}"
+    response = requests.get(url)
+    data = response.json()
+
+    if 'items' in data:
+        for item in data['items']:
+            if 'imageLinks' in item['volumeInfo']:
+                return item['volumeInfo']['imageLinks']['thumbnail']
+
+    return None
+
+
+def import_books_from_json(json_path="data/books.json"):
+    with open(json_path, "r") as f:
+        books = json.load(f)
+
+    for book in books:
+        read_date = datetime.strptime(book["read_date"], "%Y-%m-%d").date()
+        Book.objects.update_or_create(
+            title=book["title"],
+            defaults={
+                "author": book["author"],
+                "read_date": read_date,
+                "cover_url": book.get("cover", ""),
+            }
+        )

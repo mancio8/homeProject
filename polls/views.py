@@ -13,6 +13,10 @@ from .forms import AggiungiOreForm
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 import os
+from .models import Book
+from .utils import get_book_cover, import_books_from_json
+
+
 
 
 
@@ -346,137 +350,64 @@ def artist_songs_view(request):
         'artist_songs': filtered_songs,
         'query': query,
     })
-
-def get_book_cover(title, author):
-    query = f"{title} {author}"
-    url = f"https://www.googleapis.com/books/v1/volumes?q={query}"
-    response = requests.get(url)
-    data = response.json()
-
-    if 'items' in data:
-        for item in data['items']:
-            if 'imageLinks' in item['volumeInfo']:
-                return item['volumeInfo']['imageLinks']['thumbnail']
-
-    return None
-
-
-
-
-
-
-# Funzione per caricare i libri dal file JSON
-def load_books():
-    try:
-        with open('data/books.json', 'r') as file:
-            return json.load(file)
-    except FileNotFoundError:
-        return []
-
-# Funzione per salvare i libri nel file JSON
-def save_books(books):
-    with open('data/books.json', 'w') as file:
-        json.dump(books, file, indent=4)
-
-# Funzione per aggiungere un libro
-def add_book(title, author, read_date):
-    cover_url = get_book_cover(title, author)
-    return {
-        'title': title,
-        'author': author,
-        'read_date': read_date,
-        'cover': cover_url if cover_url else 'URL non disponibile'
-    }
-
-# Funzione per modificare un libro
-def edit_book(book_to_edit, author, read_date, cover_url):
-    book_to_edit['author'] = author
-    book_to_edit['read_date'] = read_date
-    book_to_edit['cover'] = cover_url if cover_url else book_to_edit['cover']
-    return book_to_edit
-
-def download_books_json(request):
-    books = load_books()
-    return JsonResponse(books, safe=False)
-
+# ✅ Visualizza e aggiungi/modifica libri
 def add_and_view_books(request):
-    books = load_books()
     sort_by = request.GET.get('sort_by', 'title')
+    books = Book.objects.all().order_by(sort_by)
 
-    # Ordinamento dei libri
-    books.sort(key=lambda x: x.get(sort_by, ''))
-
+    # POST: aggiungi o modifica
     if request.method == 'POST':
-        # Aggiungi un libro
+        title = request.POST['title']
+        author = request.POST['author']
+        read_date = request.POST['read_date']
+
+        # Aggiungi libro
         if 'add_book' in request.POST:
-            title = request.POST['title']
-            author = request.POST['author']
-            read_date = request.POST['read_date']
+            cover_url = get_book_cover(title, author)
+            Book.objects.create(
+                title=title,
+                author=author,
+                read_date=read_date,
+                cover_url=cover_url
+            )
 
-            book = add_book(title, author, read_date)
-            books.append(book)
-            save_books(books)
-
-        # Modifica un libro
+        # Modifica libro
         elif 'edit_book' in request.POST:
-            title = request.POST['title']
-            author = request.POST['author']
-            read_date = request.POST['read_date']
-            cover_url = request.POST['cover_url']
+            book_id = request.POST['book_id']
+            book = get_object_or_404(Book, id=book_id)
+            book.title = title
+            book.author = author
+            book.read_date = read_date
+            book.cover_url = request.POST.get('cover_url') or book.cover_url
+            book.save()
 
-            book_to_edit = next((book for book in books if book['title'] == title), None)
-            if book_to_edit:
-                edit_book(book_to_edit, author, read_date, cover_url)
-                save_books(books)
+        return redirect('view_books')
 
-            return redirect('view_books')
+    # GET: controlla se vogliamo modificare un libro
+    edit_id = request.GET.get('edit')
+    edit_book = Book.objects.filter(id=edit_id).first() if edit_id else None
 
-    # Verifica se stiamo cercando di modificare un libro
-    edit_title = request.GET.get('edit')
-    if edit_title:
-        book_to_edit = next((book for book in books if book['title'] == edit_title), None)
-        if book_to_edit:
-            return render(request, 'view_books.html', {'books': books, 'sort_by': sort_by, 'edit_book': book_to_edit})
-
-    return render(request, 'view_books.html', {'books': books, 'sort_by': sort_by})
+    return render(request, 'view_books.html', {
+        'books': books,
+        'sort_by': sort_by,
+        'edit_book': edit_book
+    })
 
 
-def delete_book(request, title):
-    # Carica i libri dal file JSON
-    try:
-        with open('data/books.json', 'r') as file:
-            books = json.load(file)
-    except FileNotFoundError:
-        books = []
-
-    # Trova e rimuovi il libro con il titolo specificato
-    books = [book for book in books if book['title'] != title]
-
-    # Salva il file JSON dopo aver rimosso il libro
-    with open('data/books.json', 'w') as file:
-        json.dump(books, file, indent=4)
-
-    # Reindirizza alla pagina dei libri dopo la rimozione
+# ✅ Elimina libro
+def delete_book(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    book.delete()
     return redirect('view_books')
 
 
+# ✅ Scarica libri in JSON
+def download_books_json(request):
+    books = list(Book.objects.values('title', 'author', 'read_date', 'cover_url'))
+    return JsonResponse(books, safe=False)
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# ✅ Importa da JSON
+def import_books(request, json_path="data/books.json"):
+    import_books_from_json(json_path)
+    return redirect('view_books')

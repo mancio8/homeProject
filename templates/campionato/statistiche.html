@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}I Tuoi Preferiti | F.C. Guardia Sanframondi{% endblock %}
+
+{% block styles %}
+
+{% endblock %}
+
+{% block content %}
+{% include "header.html" %}
+
+<div class="container my-5">
+
+    <h1 class="mb-4">{{ stagione.squadra }} - {{ stagione.stagione }}</h1>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header">Statistiche generali</div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Partite giocate: {{ stats.giocate }}</li>
+                        <li class="list-group-item">Vittorie: {{ stats.vittorie }}</li>
+                        <li class="list-group-item">Pareggi: {{ stats.pareggi }}</li>
+                        <li class="list-group-item">Sconfitte: {{ stats.sconfitte }}</li>
+                        <li class="list-group-item">Punti: {{ stats.punti }}</li>
+                        <li class="list-group-item">Gol fatti: {{ stats.gol_fatti }}</li>
+                        <li class="list-group-item">Gol subiti: {{ stats.gol_subiti }}</li>
+                        <li class="list-group-item">Differenza reti: {{ stats.diff_reti }}</li>
+                        <li class="list-group-item">Media gol a partita: {{ stats.media_gol }}</li>
+                        <li class="list-group-item">Posizione in classifica: {{ stats.posizione }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <canvas id="graficoRisultati"></canvas>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-3">
+                <div class="card-header">Casa</div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Vittorie: {{ stats.casa.V }}</li>
+                        <li class="list-group-item">Pareggi: {{ stats.casa.N }}</li>
+                        <li class="list-group-item">Sconfitte: {{ stats.casa.P }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-3">
+                <div class="card-header">Trasferta</div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Vittorie: {{ stats.trasferta.V }}</li>
+                        <li class="list-group-item">Pareggi: {{ stats.trasferta.N }}</li>
+                        <li class="list-group-item">Sconfitte: {{ stats.trasferta.P }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+const ctx = document.getElementById('graficoRisultati').getContext('2d');
+new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: {{ grafico.labels|safe }},
+        datasets: [{
+            label: 'Risultati',
+            data: {{ grafico.data|safe }},
+            backgroundColor: {{ grafico.colors|safe }},
+            borderWidth: 1
+        }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+</script>
+
+{% endblock %}
