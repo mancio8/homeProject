@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DartMaster Ultimate - 3 Darts Logic</title>
+    <style>
+        :root {
+            --bg: #0f0f0f; --card: #1a1a1a; --primary: #00e676;
+            --secondary: #ff5252; --accent: #2979ff; --text: #ffffff; --muted: #444; --gold: #ffeb3b;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; flex-direction: column; height: 100vh; overflow: hidden; }
+        
+        #setup-screen { padding: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; gap: 15px; }
+        .input-group { width: 100%; max-width: 350px; display: flex; flex-direction: column; gap: 8px; }
+        input, select { padding: 15px; border-radius: 8px; border: 1px solid #333; background: #222; color: white; font-size: 16px; }
+
+        #game-screen { display: none; flex-direction: column; height: 100%; }
+        .header { display: flex; background: var(--card); padding: 10px 0; border-bottom: 2px solid #333; overflow-x: auto; }
+        .player-status { min-width: 100px; text-align: center; opacity: 0.4; padding: 5px; transition: 0.3s; }
+        .player-status.active { opacity: 1; color: var(--primary); transform: scale(1.1); }
+
+        .score-display { flex-grow: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+        .big-num { font-size: 100px; font-weight: bold; line-height: 1; color: var(--primary); }
+        .dart-dots { display: flex; gap: 10px; margin-top: 15px; }
+        .dot { width: 12px; height: 12px; border-radius: 50%; background: #333; border: 1px solid #555; }
+        .dot.filled { background: var(--primary); box-shadow: 0 0 10px var(--primary); }
+
+        .input-preview { background: #000; width: 100%; text-align: center; padding: 10px 0; font-size: 28px; color: var(--accent); min-height: 40px; border-top: 1px solid #333; }
+        .keypad { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 10px; background: var(--card); }
+        button { padding: 18px 10px; font-size: 20px; border: none; border-radius: 8px; background: #333; color: white; font-weight: bold; }
+        .btn-mod { background: var(--accent); }
+        .btn-enter { background: var(--primary); color: #000; grid-column: span 2; }
+        .btn-del { background: var(--secondary); }
+        .active-mod { background: white !important; color: black !important; }
+        
+        .cricket-table { width: 90%; max-width: 400px; margin: auto; border-collapse: collapse; }
+        .cricket-cell { text-align: center; padding: 8px; font-size: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="setup-screen">
+        <h1 style="color: var(--primary)">🎯 DARTMASTER PRO</h1>
+        <div class="input-group">
+            <select id="mode-select" onchange="toggleSetup()">
+                <option value="X01">X01 Classic</option>
+                <option value="KILLER">Killer (Azzera)</option>
+                <option value="CRICKET">Cricket</option>
+                <option value="ATC">Around The Clock</option>
+                <option value="BOB27">Bob's 27</option>
+            </select>
+            <input type="number" id="score-init" value="501">
+            <input type="text" id="names-input" value="Player 1, Player 2">
+            <button onclick="initGame()" style="background: var(--primary); color: black; font-weight: bold; padding: 20px; border-radius: 10px;">GIOCA</button>
+        </div>
+    </div>
+
+    <div id="game-screen">
+        <div class="header" id="players-header"></div>
+        <div class="score-display" id="main-view"></div>
+        
+        <div style="display: flex; justify-content: center; padding-bottom: 10px;">
+            <div class="dart-dots" id="dart-counter">
+                <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+        </div>
+
+        <div class="input-preview" id="preview-val">-</div>
+        <div class="keypad">
+            <button onclick="addDigit('1')">1</button><button onclick="addDigit('2')">2</button><button onclick="addDigit('3')">3</button>
+            <button class="btn-mod" id="m2" onclick="setMult(2)">x2</button>
+            <button onclick="addDigit('4')">4</button><button onclick="addDigit('5')">5</button><button onclick="addDigit('6')">6</button>
+            <button class="btn-mod" id="m3" onclick="setMult(3)">x3</button>
+            <button onclick="addDigit('7')">7</button><button onclick="addDigit('8')">8</button><button onclick="addDigit('9')">9</button>
+            <button class="btn-del" onclick="clearInput()">C</button>
+            <button onclick="addDigit('0')">0</button><button onclick="directBull()">BULL</button>
+            <button class="btn-enter" onclick="confirmMove()">CONFERMA</button>
+            <button onclick="undo()" style="background:#444; font-size: 14px;">UNDO</button>
+            <button onclick="skipTurn()" style="background:#444; font-size: 14px;">PASSA</button>
+            <button onclick="location.reload()" style="background:var(--secondary); font-size: 14px; grid-column: span 2;">EXIT</button>
+        </div>
+    </div>
+
+    <script>
+        let state = { mode: '', players: [], current: 0, buffer: "", mult: 1, targetScore: 501, dartsThrown: 0 };
+
+        function toggleSetup() {
+            const m = document.getElementById('mode-select').value;
+            document.getElementById('score-init').style.display = (m === 'X01' || m === 'KILLER') ? 'block' : 'none';
+        }
+
+        function initGame() {
+            state.mode = document.getElementById('mode-select').value;
+            state.targetScore = parseInt(document.getElementById('score-init').value);
+            const names = document.getElementById('names-input').value.split(',');
+            state.players = names.map(n => ({
+                name: n.trim(),
+                score: (state.mode === 'X01' ? state.targetScore : (state.mode === 'BOB27' ? 27 : 0)),
+                cricket: {20:0, 19:0, 18:0, 17:0, 16:0, 15:0, 25:0},
+                atc: 1, history: []
+            }));
+            document.getElementById('setup-screen').style.display = 'none';
+            document.getElementById('game-screen').style.display = 'flex';
+            updateUI();
+        }
+
+        function addDigit(d) { if(state.buffer.length < 3) state.buffer += d; updateUI(); }
+        function directBull() { state.buffer = "25"; updateUI(); }
+        function setMult(m) { state.mult = (state.mult === m) ? 1 : m; updateUI(); }
+        function clearInput() { state.buffer = ""; state.mult = 1; updateUI(); }
+
+        function confirmMove() {
+            // Se confermo senza scrivere nulla, salto le freccette rimanenti e passo il turno
+            if (state.buffer === "") { skipTurn(); return; }
+
+            const val = parseInt(state.buffer);
+            const p = state.players[state.current];
+            const points = val * state.mult;
+
+            // LOGICA GIOCHI
+            if (state.mode === 'X01') {
+                if (p.score - points >= 0) p.score -= points;
+                if (p.score === 0) { alert(p.name + " VINCE!"); location.reload(); }
+            } else if (state.mode === 'KILLER') {
+                p.score += points;
+                state.players.forEach((other, idx) => {
+                    if (idx !== state.current && other.score === p.score && p.score !== 0) other.score = 0;
+                });
+                if (p.score >= state.targetScore) { alert(p.name + " VINCE!"); location.reload(); }
+            } else if (state.mode === 'CRICKET') {
+                if ([20,19,18,17,16,15,25].includes(val)) {
+                    const opp = state.players[(state.current + 1) % state.players.length];
+                    for(let i=0; i<state.mult; i++) {
+                        if (p.cricket[val] < 3) p.cricket[val]++;
+                        else if (opp && opp.cricket[val] < 3) p.score += val;
+                    }
+                }
+            } else if (state.mode === 'ATC') {
+                if (val === p.atc && state.mult >= 1) p.atc++;
+                if (p.atc > 20) { alert(p.name + " VINCE!"); location.reload(); }
+            }
+
+            // Incremento freccette
+            state.dartsThrown++;
+            clearInput();
+
+            // Se ho tirato 3 frecce, passo il turno
+            if (state.dartsThrown >= 3) {
+                setTimeout(skipTurn, 500); // Piccolo delay per far vedere l'ultimo tiro
+            } else {
+                updateUI();
+            }
+        }
+
+        function skipTurn() {
+            state.dartsThrown = 0;
+            state.current = (state.current + 1) % state.players.length;
+            clearInput();
+            updateUI();
+        }
+
+        function undo() { alert("Undo non disponibile"); }
+
+        function updateUI() {
+            // Aggiorna tasti moltiplicatori
+            document.querySelectorAll('.btn-mod').forEach(b => b.classList.remove('active-mod'));
+            if(state.mult > 1) document.getElementById('m' + state.mult).classList.add('active-mod');
+
+            // Header Giocatori
+            document.getElementById('players-header').innerHTML = state.players.map((p, i) => `
+                <div class="player-status ${i === state.current ? 'active' : ''}">
+                    <div style="font-size:11px">${p.name}</div>
+                    <div style="font-size:18px; font-weight:bold">${p.score}</div>
+                </div>`).join('');
+
+            // Score Centrale
+            const view = document.getElementById('main-view');
+            if (state.mode === 'X01' || state.mode === 'KILLER') {
+                view.innerHTML = `<div class="big-num">${state.players[state.current].score}</div>`;
+            } else if (state.mode === 'CRICKET') {
+                const sym = ["·", "/", "X", "⊗"];
+                view.innerHTML = `<table class="cricket-table">` + [20,19,18,17,16,15,25].map(n => {
+                    const h1 = state.players[0].cricket[n];
+                    const h2 = state.players[1] ? state.players[1].cricket[n] : 0;
+                    return `<tr><td class="cricket-cell" style="color:var(--primary)">${sym[h1]}</td><td class="cricket-cell" style="background:#222; border-radius:5px">${n==25?'BULL':n}</td><td class="cricket-cell" style="color:var(--accent)">${sym[h2]}</td></tr>`;
+                }).join('') + `</table>`;
+            } else if (state.mode === 'ATC') {
+                view.innerHTML = `<div style="color:var(--gold)">Target:</div><div class="big-num">${state.players[state.current].atc}</div>`;
+            }
+
+            // Update Pallini Freccette
+            const dots = document.getElementById('dart-counter').children;
+            for(let i=0; i<3; i++) {
+                dots[i].className = i < (3 - state.dartsThrown) ? "dot filled" : "dot";
+            }
+
+            document.getElementById('preview-val').innerText = (state.mult > 1 ? 'x'+state.mult : '') + ' ' + (state.buffer || '-');
+        }
+    </script>
+</body>
+</html>

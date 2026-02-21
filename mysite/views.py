@@ -5,6 +5,9 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'index.html')
 
+def dart(request):
+    return render(request, 'dart.html')
+
 def sardegna(request):
     alternativi = [
         ("Aggius e Valle della Luna", "Trekking tra rocce granitiche e paesaggi lunari."),

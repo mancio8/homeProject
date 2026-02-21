@@ -23,6 +23,7 @@ urlpatterns = [
     path("polls/", include("polls.urls")),
     path('f1/', include('f1.urls')),
     path('', views.index, name='index'),
+    path('dart', views.dart, name='dart'),
     path('sardegna', views.sardegna, name='sardegna'),
     path("podcast/", views.podcast_view, name="podcast"),
     path("campionato/", include("campionato.urls")),
